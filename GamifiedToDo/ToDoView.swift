@@ -85,8 +85,12 @@ struct BottomToDoView: View {
             HStack{
                 
                 CheckView(title: toDo.title,
+                          dueDate: toDo.dueDateString(),
+                          numberOfCompleteTask: toDo.numberofCompletedCheckList(),
+                          numberOfTotoalTask: toDo.numberOfCheckList,
                           checkColor: toDo.isWithinDays(interval: 3) ? pinkColor : toDo.isWithinDays(interval: 7) ? orangeColor : blueColor)
                     .cornerRadius(cornerRadiusValue)
+                    .padding(.bottom, 5)
             }
         }
     }

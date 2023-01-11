@@ -37,13 +37,14 @@ class Task: Identifiable {
     var difficulty: DifficultyLevel = DifficultyLevel.easy
     var notes: String = ""
     var tag: Tag = Tag.school
-    //var schedule: [Schedule] = []
+    var isComplete: Bool = false
     
-    init(title: String, difficulty: DifficultyLevel, notes: String, tag: Tag) {
+    init(title: String, difficulty: DifficultyLevel, notes: String, tag: Tag, isComplete: Bool) {
         self.title = title
         self.difficulty = difficulty
         self.notes = notes
         self.tag = tag
+        self.isComplete = isComplete
     }
 }
 
@@ -53,10 +54,38 @@ class Todo: Task {
     var reminder: Date = Date.now
     
     init(title: String, difficulty: DifficultyLevel, notes: String, tag: Tag, due_date: Date, checkList: [Task], reminder: Date) {
-        super.init(title: title, difficulty: difficulty, notes: notes, tag: tag)
+        super.init(title: title, difficulty: difficulty, notes: notes, tag: tag,isComplete: false)
         self.due_date = due_date
         self.checkList = checkList
         self.reminder = reminder
+    }
+    
+    override var isComplete: Bool {
+        get {
+            var result = true
+            for task in checkList {
+                result = result && task.isComplete
+            }
+            
+            return result
+        }
+        set {
+            self.isComplete = newValue
+        }
+    }
+    
+    var numberOfCheckList: Int {
+        return checkList.count
+    }
+    
+    func numberofCompletedCheckList() -> Int {
+        var count = 0
+        for task in checkList {
+            if task.isComplete {
+                count += 1
+            }
+        }
+        return count
     }
     
     func isWithinDays(interval: Int) -> Bool {
@@ -67,13 +96,26 @@ class Todo: Task {
             return false
         }
     }
+    
+    func dueDateString () -> String {
+        // Create Date Formatter
+        let dateFormatter = DateFormatter()
+
+        // Set Date Format
+        dateFormatter.dateFormat = "dd/MM/YY"
+
+        // Convert Date to String
+        return dateFormatter.string(from: due_date)
+    }
+    
+    
 }
 
 class Dailies: Task {
     var start_date: Date =  Date.now
     
-    init(title: String, difficulty: DifficultyLevel, notes: String, tag: Tag, start_date: Date) {
-        super.init(title: title, difficulty: difficulty, notes: notes, tag: tag)
+    init(title: String, difficulty: DifficultyLevel, notes: String, tag: Tag, isComplete: Bool, start_date: Date) {
+        super.init(title: title, difficulty: difficulty, notes: notes, tag: tag, isComplete: isComplete)
         self.start_date = start_date
     }
 }

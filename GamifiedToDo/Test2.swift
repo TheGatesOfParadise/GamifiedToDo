@@ -9,20 +9,16 @@ import SwiftUI
 
 struct Test2: View {
     var body: some View {
-        NavigationStack {
-                    List {
-                        Text("Hello, SwiftUI!")
-                    }
-                    .navigationTitle("Navigation Title")
-                    .toolbarBackground(
-                        Color.pink,
-                        for: .navigationBar)
-                    .toolbarBackground(.visible, for: .navigationBar)
+        VStack (alignment: .center, spacing: 0){
+            Text("1")
+            Text("--")
+            Text("4")
+        }
+        .font(.system(size: 10))
+        .bold()
 
-                }
     }
 }
-
 
 
 
