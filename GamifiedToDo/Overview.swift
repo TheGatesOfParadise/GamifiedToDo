@@ -15,64 +15,14 @@ struct Overview: View {
     
     init() {
         Rules.initRules()
-        
-        
-        user = User(name: "Adams",
-                    avatar: Avatar(parts: [AvatarPart(part: .head, category: .basic, index: 1),
-                                           AvatarPart(part: .body, category: .basic, index: 1),
-                                           AvatarPart(part: .bottom, category: .basic, index: 1)
-                                          ]
-                                  ),
-                    award: Award(coin:2),
-                    toDoList: [Todo(title: "Unit6 MVP",
-                                    difficulty: .hard,
-                                    notes: "gamified todos",
-                                    tag: .school,
-                                    due_date: Date.init("2023/02/03 13:35"),
-                                    checkList: [Task(title: "Step1",
-                                                     difficulty: .medium,
-                                                     notes: "finish step1å",
-                                                     tag: .school),
-                                                Task(title: "Step2",
-                                                     difficulty: .medium,
-                                                     notes: "finish step2",
-                                                     tag: .school)
-                                    ],
-                                    reminder: Date.init("2023/01/26 13:35")),
-                               Todo(title: "Unit7 MVP",
-                                    difficulty: .hard,
-                                    notes: "Voiceover",
-                                    tag: .school,
-                                    due_date: Date.init("2023/02/20 14:50"),
-                                    checkList: [Task(title: "Step1",
-                                                     difficulty: .medium,
-                                                     notes: "finish step1å",
-                                                     tag: .school),
-                                                Task(title: "Step2",
-                                                     difficulty: .medium,
-                                                     notes: "finish step2",
-                                                     tag: .school)
-                                    ],
-                                    reminder: Date.init("2023/02/12 14:50"))],
-                    DailiesList: [Dailies(title: "Buy milk",
-                                          difficulty: .easy,
-                                          notes: "whole milk",
-                                          tag: .chores,
-                                          start_date: Date.now),
-                                  Dailies(title: "wash hair",
-                                          difficulty: .easy,
-                                          notes: "",
-                                          tag: .chores,
-                                          start_date: Date.now)
-                    ]
-        )
+        user = User.getASampleUser()
     }
     
     var body: some View {
         ZStack {
             TabView (selection: $selectedTab){
                 Group {
-                    ToDoView(user: $user)
+                    DailiesView(user: $user)
                         .tabItem {
                             Label("Dailies", systemImage: "calendar")
                         }
@@ -205,12 +155,12 @@ struct floatButton: View {
                 }, label: {
                     Text(textSign)
                         .font(.system(.largeTitle))
-                        .frame(width: 80, height: 80)
+                        .frame(width: 60, height: 60)
                         .foregroundColor(Color.white)
-                    //.padding(.bottom, 7)
+                        //.padding(.trailing, 7)
                 })
                 .background( Color.yellow.opacity(0.6))
-                .cornerRadius(40)
+                .cornerRadius(30)
                 //.padding(.bottom, 10)
                 .shadow(color: Color.black.opacity(0.3),
                         radius: 3,

@@ -11,25 +11,30 @@ let shadeAreaWidth = UIScreen.main.bounds.width - 20
 let shadeAreaBackgroundColor = Color.gray.opacity(0.15)
 let cornerRadiusValue = CGFloat(15)
 let blueColor = Color(uiColor: UIColor(rgb: 0x638CEB))
-
+let orangeColor = Color(uiColor: UIColor(rgb: 0xFFCC99))
+let pinkColor = Color(uiColor: UIColor(rgb: 0xFF6666))
 
 struct ToDoView: View {
     @Binding var user: User
     
     var body: some View {
-        VStack (alignment: .leading){
+        VStack (alignment: .center){
             //show avatar
             HeaderView(avatar: user.avatar)
                 .frame(width: shadeAreaWidth)
+                //.border(.red, width: 1)
                 .offset(y:5)
             
             //show award
             MiddleView(award: user.award)
                 .frame(width: shadeAreaWidth)
-           
+                //.border(.green, width: 1)
             
             //list of todos
-            BottomView(toDoList: user.toDoList)
+            BottomToDoView(toDoList: user.toDoList)
+                .frame(width: shadeAreaWidth)
+                //.border(.blue, width: 1)
+            
             Spacer()
             
         }
@@ -52,19 +57,25 @@ struct HeaderView: View {
 struct MiddleView: View {
     var award: Award
     var body: some View {
-        HStack {
-            Text("Coins: \(award.coin)")
-                .frame(width: shadeAreaWidth, height: 70)
-                .padding(.bottom, 22)
-                .background(shadeAreaBackgroundColor)
-                .cornerRadius(cornerRadiusValue)
+        ZStack {
+            HStack {
+                Text("Coins: \(award.coin)")
+                    .frame(width: shadeAreaWidth, height: 70)
+                    //.padding(.bottom, 22)
+                    .background(shadeAreaBackgroundColor)
+                    .cornerRadius(cornerRadiusValue)
+                
+                Spacer()
+            }
             
-            Spacer()
+            Capsule()
+                .stroke(blueColor, lineWidth: 3)
+                .frame(width: shadeAreaWidth, height: 70)
         }
     }
 }
 
-struct BottomView: View {
+struct BottomToDoView: View {
     var toDoList: [Todo]
     @State private var checked = true
     var body: some View {
@@ -74,7 +85,7 @@ struct BottomView: View {
             HStack{
                 
                 CheckView(title: toDo.title,
-                          checkColor: toDo.isWithinDays(interval: 3) ? .pink : toDo.isWithinDays(interval: 7) ? .orange : blueColor)
+                          checkColor: toDo.isWithinDays(interval: 3) ? pinkColor : toDo.isWithinDays(interval: 7) ? orangeColor : blueColor)
                     .cornerRadius(cornerRadiusValue)
             }
         }
@@ -82,63 +93,9 @@ struct BottomView: View {
 }
 
 
-struct ToDoView_Previews: PreviewProvider {
-    @State static var user = User(name: "Adams",
-                                  avatar: Avatar(parts: [AvatarPart(part: .head, category: .basic, index: 1),
-                                                         AvatarPart(part: .body, category: .basic, index: 1),
-                                                         AvatarPart(part: .bottom, category: .basic, index: 1)
-                                                        ]
-                                                ),
-                                  award: Award(coin:2),
-                                  toDoList: [Todo(title: "Unit6 MVP",
-                                                  difficulty: .hard,
-                                                  notes: "gamified todos",
-                                                  tag: .school,
-                                                  due_date: Date.init("2023/02/03 13:35"),
-                                                  checkList: [Task(title: "Step1",
-                                                                   difficulty: .medium,
-                                                                   notes: "finish step1å",
-                                                                   tag: .school),
-                                                              Task(title: "Step2",
-                                                                   difficulty: .medium,
-                                                                   notes: "finish step2",
-                                                                   tag: .school)
-                                                  ],
-                                                  reminder: Date.init("2023/01/26 13:35")),
-                                             Todo(title: "Unit7 MVP",
-                                                  difficulty: .hard,
-                                                  notes: "Voiceover",
-                                                  tag: .school,
-                                                  due_date: Date.init("2023/02/20 14:50"),
-                                                  checkList: [Task(title: "Step1",
-                                                                   difficulty: .medium,
-                                                                   notes: "finish step1å",
-                                                                   tag: .school),
-                                                              Task(title: "Step2",
-                                                                   difficulty: .medium,
-                                                                   notes: "finish step2",
-                                                                   tag: .school)
-                                                  ],
-                                                  reminder: Date.init("2023/02/12 14:50"))],
-                                  DailiesList: [Dailies(title: "Buy milk",
-                                                        difficulty: .easy,
-                                                        notes: "whole milk",
-                                                        tag: .chores,
-                                                        start_date: Date.now),
-                                                Dailies(title: "wash hair",
-                                                        difficulty: .easy,
-                                                        notes: "",
-                                                        tag: .chores,
-                                                        start_date: Date.now)
-                                  ]
-    )
-    
-    static var previews: some View {
-        ToDoView(user:$user)
-    }
-}
 
-
+//use rgb to represent a UIColor
+//https://stackoverflow.com/questions/24263007/how-to-use-hex-color-values
 extension UIColor {
    convenience init(red: Int, green: Int, blue: Int) {
        assert(red >= 0 && red <= 255, "Invalid red component")
@@ -156,3 +113,12 @@ extension UIColor {
        )
    }
 }
+
+struct ToDoView_Previews: PreviewProvider {
+    @State static var user = User.getASampleUser()
+    
+    static var previews: some View {
+        ToDoView(user:$user)
+    }
+}
+

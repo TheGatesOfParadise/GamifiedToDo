@@ -20,6 +20,7 @@
 		FD61BC6E296C8DB2008D7DA1 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD61BC6D296C8DB2008D7DA1 /* Task.swift */; };
 		FD61BC72296D28AC008D7DA1 /* Rules.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD61BC71296D28AC008D7DA1 /* Rules.swift */; };
 		FD61BC74296E10DC008D7DA1 /* CheckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD61BC73296E10DC008D7DA1 /* CheckView.swift */; };
+		FD61BC76296E3E47008D7DA1 /* DailiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD61BC75296E3E47008D7DA1 /* DailiesView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		FD61BC6D296C8DB2008D7DA1 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		FD61BC71296D28AC008D7DA1 /* Rules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rules.swift; sourceTree = "<group>"; };
 		FD61BC73296E10DC008D7DA1 /* CheckView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckView.swift; sourceTree = "<group>"; };
+		FD61BC75296E3E47008D7DA1 /* DailiesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailiesView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +75,7 @@
 				FD61BC60296B57B1008D7DA1 /* ContentView.swift */,
 				FD61BC62296B5808008D7DA1 /* Overview.swift */,
 				FD61BC64296B5E69008D7DA1 /* ToDoView.swift */,
+				FD61BC75296E3E47008D7DA1 /* DailiesView.swift */,
 				FD61BC73296E10DC008D7DA1 /* CheckView.swift */,
 				FD01308D296B554800C4B6B5 /* AvatarSectionView.swift */,
 				FD61BC66296B5FD4008D7DA1 /* Test2.swift */,
@@ -174,6 +177,7 @@
 			files = (
 				FD61BC67296B5FD4008D7DA1 /* Test2.swift in Sources */,
 				FD61BC63296B5808008D7DA1 /* Overview.swift in Sources */,
+				FD61BC76296E3E47008D7DA1 /* DailiesView.swift in Sources */,
 				FD01308E296B554800C4B6B5 /* AvatarSectionView.swift in Sources */,
 				FD61BC74296E10DC008D7DA1 /* CheckView.swift in Sources */,
 				FD61BC65296B5E69008D7DA1 /* ToDoView.swift in Sources */,
