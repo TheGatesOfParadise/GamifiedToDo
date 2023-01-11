@@ -1,19 +1,7 @@
-//
-//  CheckView.swift
-//  unit 4 proj
-//
-//  Created by Scarlett Ruan on 11/7/22.
-//
-///This view display a check next to a text in one line
-///
-///Parameter name: title is a String type, it's get displayed next to the checkbox
-///
-///The code is referenced from this article:
-///https://makeapppie.com/2019/10/16/checkboxes-in-swiftui/
-///
+
 import SwiftUI
 
-struct CheckView: View {
+struct Test1View: View {
     @State var isChecked:Bool = false
     
     var title:String
@@ -25,6 +13,8 @@ struct CheckView: View {
     func toggle(){isChecked = !isChecked}
     
     var body: some View {
+        NavigationView {
+            
             HStack (alignment: .center){
                 Image(systemName: isChecked ? "checkmark.square.fill": "square")
                     .frame(maxHeight: .infinity)
@@ -50,9 +40,9 @@ struct CheckView: View {
                     //this is an item from ToDo List
                     if dueDate != nil {
                         Label(title: { Text(dueDate!)
-                                        .foregroundColor(isChecked ? .gray : .black)
-                                        .font(.system(size: 14))
-                                        },
+                                .foregroundColor(isChecked ? .gray : .black)
+                                .font(.system(size: 14))
+                        },
                               icon: {Image(systemName: "calendar")
                                 .foregroundColor(isChecked ? .gray : .black)
                                 .font(.system(size: 14))
@@ -77,31 +67,19 @@ struct CheckView: View {
             .fixedSize(horizontal: false, vertical: true)
             .cornerRadius(cornerRadiusValue)
             .background(.gray.opacity(0.15))
-    }
-}
-
-struct FractionView: View {
-    var numberator: Int
-    var denominator: Int
-    var body: some View {
-        VStack (alignment: .center, spacing: 0){
-            Text(String(numberator))
-            Text("--")
-            Text(String(denominator))
+            
         }
-        .font(.system(size: 10))
-        .bold()
-
+        
     }
 }
 
-
-struct CheckView_Previews: PreviewProvider {
+struct Test1View_Previews: PreviewProvider {
     static var previews: some View {
-        CheckView(title: "give Ashley's book back. brought the wrong book last time \u{1F600}",
+        Test1View(title: "give Ashley's book back. brought the wrong book last time \u{1F600}",
                   dueDate: "1/19/23",
                   numberOfCompleteTask:1,
                   numberOfTotoalTask: 4,
                   checkColor: .red)
     }
 }
+

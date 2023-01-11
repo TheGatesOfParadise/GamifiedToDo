@@ -18,25 +18,27 @@ struct ToDoView: View {
     @Binding var user: User
     
     var body: some View {
-        VStack (alignment: .center){
-            //show avatar
-            HeaderView(avatar: user.avatar)
-                .frame(width: shadeAreaWidth)
+        NavigationView {
+            VStack (alignment: .center){
+                //show avatar
+                HeaderView(avatar: user.avatar)
+                    .frame(width: shadeAreaWidth)
                 //.border(.red, width: 1)
-                .offset(y:5)
-            
-            //show award
-            MiddleView(award: user.award)
-                .frame(width: shadeAreaWidth)
+                    .offset(y:5)
+                
+                //show award
+                MiddleView(award: user.award)
+                    .frame(width: shadeAreaWidth)
                 //.border(.green, width: 1)
-            
-            //list of todos
-            BottomToDoView(toDoList: user.toDoList)
-                .frame(width: shadeAreaWidth)
+                
+                //list of todos
+                BottomToDoView(toDoList: user.toDoList)
+                    .frame(width: shadeAreaWidth)
                 //.border(.blue, width: 1)
-            
-            Spacer()
-            
+                
+                Spacer()
+                
+            }
         }
     }
 }
