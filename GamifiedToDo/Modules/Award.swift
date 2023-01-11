@@ -52,6 +52,10 @@ struct Avatar {
 struct AwardToAvatarPart {
     var award: Award
     var part: AvatarPart
+    
+    func printRule() {
+        print("Award:\(award.coin) to \(part.imageName)")
+    }
 }
 
 

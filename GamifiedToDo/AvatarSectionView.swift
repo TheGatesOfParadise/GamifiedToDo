@@ -91,7 +91,7 @@ struct AvatarSelectionView: View {
 //Dispalys an Avatar
 //It accepts 1 paramter: Avatar
 //This view assembles the avatar from the Avatar object
-let body_width = 40.0
+let body_width = 25.0
 struct AvatarView: View {
     var avatar: Avatar
     

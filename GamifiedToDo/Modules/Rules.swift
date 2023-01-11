@@ -7,11 +7,11 @@
 
 import Foundation
 
-class Rules {
-    var awardToAvatarPartRules = [AwardToAvatarPart]()
-    let indexes = Array(1...12).map { $0 }
+struct Rules {
+    static var awardToAvatarPartRules = [AwardToAvatarPart]()
+    static let indexes = Array(1...12).map { $0 }
     
-    init() {
+    static func initRules() {
         AvatarCategory.allCases.forEach {
             let categoryName = $0
             AvatarPartType.allCases.forEach {
@@ -22,5 +22,10 @@ class Rules {
                 }
             }
         }
+        
+        awardToAvatarPartRules.forEach{
+            $0.printRule()
+        }
+        
     }
 }
