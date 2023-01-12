@@ -27,7 +27,7 @@ struct ToDoDetailsView: View {
                                   text:$toDo.notes)
                     }
                     
-                    //checklist
+                    //checklist TODO
 
    
                     
@@ -48,7 +48,6 @@ struct ToDoDetailsView: View {
                         HStack{
                             Text(toDo.dueDateString())
                             Spacer()
-                            //ZCalendar(date: $toDo.due_date)
                             
                             //copy start
                             
@@ -66,10 +65,6 @@ struct ToDoDetailsView: View {
                                                   isShowing: $datePopOverPresented,
                                                   localDate: toDo.due_date)
                             }
-                            
-                          //copy end
-                            
-                            
                         }
                     }
   
@@ -86,44 +81,9 @@ struct ToDoDetailsView: View {
                     }
                 }//end of form
             }//end of vstack
-       
     }//end of view
 }//end of struct
 
-
-
-//https://stackoverflow.com/questions/65797437/how-to-make-a-button-or-any-other-element-show-swiftuis-datepicker-popup-on-t
-struct ZCalendar: View {
-    @Binding var date: Date
-    @State var isPickerVisible = false
-    var body: some View {
-        ZStack {
-            Button(action: {
-                isPickerVisible = true
-            }, label: {
-                Image(systemName: "calendar")
-                    .foregroundColor(.black)
-            }).zIndex(1)
-            if isPickerVisible{
-                VStack (alignment:.center){
-                    Button("Done", action: {
-                        isPickerVisible = false
-                    }).padding()
-                    DatePicker("",
-                               selection: $date,
-                               displayedComponents: .date)
-                        .datePickerStyle(GraphicalDatePickerStyle())
-                    
-                    Spacer()
-                }
-                .offset(y: -50)
-                .background(Color(UIColor.secondarySystemBackground))
-                .border(.red, width: 5)
-                .zIndex(2)
-            }
-        }
-    }
-}
 
 
 struct TagCheckBox: View {

@@ -11,25 +11,32 @@ struct DailiesView: View {
     @Binding var user: User
     
     var body: some View {
-        VStack (alignment: .center){
-            //show avatar
-            HeaderView(avatar: user.avatar)
-                .frame(width: shadeAreaWidth)
-            //.border(.red, width: 1)
-                .offset(y:5)
+        NavigationView {
             
-            //show award
-            MiddleView(award: user.award)
-                .frame(width: shadeAreaWidth)
-            //.border(.green, width: 1)
-            
-            //list of todos
-            BottomDailiesView(dailiesList: user.DailiesList)
-                .frame(width: shadeAreaWidth)
-            //.border(.blue, width: 1)
-            
-            Spacer()
-            
+            ZStack {
+                VStack (alignment: .center){
+                    //show avatar
+                    HeaderView(avatar: user.avatar)
+                        .frame(width: shadeAreaWidth)
+                    //.border(.red, width: 1)
+                        .offset(y:5)
+                    
+                    //show award
+                    MiddleView(award: user.award)
+                        .frame(width: shadeAreaWidth)
+                    //.border(.green, width: 1)
+                    
+                    //list of todos
+                    BottomDailiesView(dailiesList: user.DailiesList)
+                        .frame(width: shadeAreaWidth)
+                    //.border(.blue, width: 1)
+                    
+                    Spacer()
+                }
+                
+                AddButtonPopup()
+                
+            }
         }
     }
 }

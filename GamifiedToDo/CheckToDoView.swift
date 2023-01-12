@@ -26,7 +26,7 @@ struct CheckToDoView: View {
     
     var body: some View {
         HStack (alignment: .center){
-            Image(systemName: isChecked ? "checkmark.square.fill": "square")
+            Image(systemName: isChecked ? "checkmark.circle.fill": "circle")
                 .frame(maxHeight: .infinity)
                 .padding()
                 .foregroundColor(.black)
@@ -97,6 +97,6 @@ struct CheckToDoView_Previews: PreviewProvider {
     @State static var user = User.getASampleUser()
     
     static var previews: some View {
-        CheckToDoView(toDo: $user.toDoList[0])
+        CheckToDoView(toDo: $user.toDoList[4])
     }
 }
