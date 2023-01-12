@@ -14,37 +14,26 @@ enum DifficultyLevel: String, CaseIterable, Identifiable {
     case hard
 }
 
-enum Tag: String {
+enum Tag: String, CaseIterable, Identifiable {
+    var id: String { self.rawValue }
     case work
     case school
     case health
     case chores
 }
 
-/*
-enum ScheduleType: String {
-    case due_date
-    case start_date
-}
-
-struct Schedule {
-    var type: ScheduleType
-    var date: Date
-}
-*/
-
 class Task: Identifiable {
-    var title: String = ""
-    var difficulty: DifficultyLevel = DifficultyLevel.easy
-    var notes: String = ""
-    var tag: Tag = Tag.school
+    var title: String
+    var difficulty: DifficultyLevel
+    var notes: String
+    var tags: [Tag]?
     var isComplete: Bool = false
     
-    init(title: String, difficulty: DifficultyLevel, notes: String, tag: Tag, isComplete: Bool) {
+    init(title: String, difficulty: DifficultyLevel, notes: String, tags: [Tag]?, isComplete: Bool) {
         self.title = title
         self.difficulty = difficulty
         self.notes = notes
-        self.tag = tag
+        self.tags = tags
         self.isComplete = isComplete
     }
 }
@@ -54,8 +43,8 @@ class Todo: Task {
     var checkList: [Task] = []
     var reminder: Date = Date.now
     
-    init(title: String, difficulty: DifficultyLevel, notes: String, tag: Tag, due_date: Date, checkList: [Task], reminder: Date) {
-        super.init(title: title, difficulty: difficulty, notes: notes, tag: tag,isComplete: false)
+    init(title: String, difficulty: DifficultyLevel, notes: String, tags: [Tag]?, due_date: Date, checkList: [Task], reminder: Date) {
+        super.init(title: title, difficulty: difficulty, notes: notes, tags: tags,isComplete: false)
         self.due_date = due_date
         self.checkList = checkList
         self.reminder = reminder
@@ -115,8 +104,8 @@ class Todo: Task {
 class Dailies: Task {
     var start_date: Date =  Date.now
     
-    init(title: String, difficulty: DifficultyLevel, notes: String, tag: Tag, isComplete: Bool, start_date: Date) {
-        super.init(title: title, difficulty: difficulty, notes: notes, tag: tag, isComplete: isComplete)
+    init(title: String, difficulty: DifficultyLevel, notes: String, tags: [Tag], isComplete: Bool, start_date: Date) {
+        super.init(title: title, difficulty: difficulty, notes: notes, tags: tags, isComplete: isComplete)
         self.start_date = start_date
     }
 }

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ToDoDetailsView: View {
     @Binding var toDo: Todo
+    @State private var datePopOverPresented = false
     
     var body: some View {
         
@@ -44,20 +45,118 @@ struct ToDoDetailsView: View {
                     
                     //scheduling -  due date
                     Section (header: Text("Due Date")){
-                        Text(toDo.dueDateString())
+                        HStack{
+                            Text(toDo.dueDateString())
+                            Spacer()
+                            //ZCalendar(date: $toDo.due_date)
+                            
+                            //copy start
+                            
+                            //date
+                            Button(action: {
+                                datePopOverPresented = true
+                            },
+                                   label: {
+                               Image(systemName: "calendar")
+                                    .foregroundColor(.black)
+                            })
+                            //date selection popover
+                            .popover(isPresented: $datePopOverPresented) {
+                                DateSelectionView(dateIn: $toDo.due_date,
+                                                  isShowing: $datePopOverPresented,
+                                                  localDate: toDo.due_date)
+                            }
+                            
+                          //copy end
+                            
+                            
+                        }
                     }
-                    
+  
                     //reminder???  necessary
                     
                     //Tags
                     Section (header: Text("Tags")){
-                        Text(toDo.tag.rawValue)
+                        //Text(toDo.tag.rawValue)
+                        VStack (spacing: 0){
+                            ForEach(Tag.allCases) {tag in
+                                TagCheckBox(tags:$toDo.tags, currentTag: tag)
+                            }
+                        }
                     }
                 }//end of form
             }//end of vstack
        
     }//end of view
 }//end of struct
+
+
+
+//https://stackoverflow.com/questions/65797437/how-to-make-a-button-or-any-other-element-show-swiftuis-datepicker-popup-on-t
+struct ZCalendar: View {
+    @Binding var date: Date
+    @State var isPickerVisible = false
+    var body: some View {
+        ZStack {
+            Button(action: {
+                isPickerVisible = true
+            }, label: {
+                Image(systemName: "calendar")
+                    .foregroundColor(.black)
+            }).zIndex(1)
+            if isPickerVisible{
+                VStack (alignment:.center){
+                    Button("Done", action: {
+                        isPickerVisible = false
+                    }).padding()
+                    DatePicker("",
+                               selection: $date,
+                               displayedComponents: .date)
+                        .datePickerStyle(GraphicalDatePickerStyle())
+                    
+                    Spacer()
+                }
+                .offset(y: -50)
+                .background(Color(UIColor.secondarySystemBackground))
+                .border(.red, width: 5)
+                .zIndex(2)
+            }
+        }
+    }
+}
+
+
+struct TagCheckBox: View {
+    @Binding var tags: [Tag]?
+    var currentTag: Tag
+    var body: some View {
+        HStack (alignment: .center){
+            Image(systemName: (tags != nil) && tags!.contains(currentTag) ? "checkmark.square.fill": "square")
+                .frame(maxHeight: .infinity)
+                .padding()
+                .foregroundColor(.black)
+                .onTapGesture {
+                    //adjust tags
+                    if  (tags != nil) && tags!.contains(currentTag) {
+                        let index = tags!.firstIndex { $0 == currentTag }
+                        tags!.remove(at:index!)
+                    }
+                    else {
+                        tags?.append(currentTag)
+                    }
+                }
+            Text(currentTag.rawValue)
+                .padding(.top, 10)
+                .font(.system(size: 18))
+                .foregroundColor(.black)
+                .multilineTextAlignment(.leading)
+            Spacer()
+        }
+        .fixedSize(horizontal: false, vertical: true)
+        //.cornerRadius(cornerRadiusValue)
+        //.background(.gray.opacity(0.15))
+    }
+}
 
 
 struct DifficultyLevelButton: View {
@@ -72,13 +171,9 @@ struct DifficultyLevelButton: View {
                 .frame(width: 60,
                        height: 50)
         }
-        //.border(selectedLevel == image ? Color.green : Color.yellow,
-          //      width: selectedSocialMedia == image ? 5 : 0)
         .padding()
         .onTapGesture {
             selectedLevel = image
-            //print("Tap SelectedMedia's rawValue is \(selectedSocialMedia.rawValue)")
-           // print("Tap current image is \(image.rawValue)")
         }
         
     }

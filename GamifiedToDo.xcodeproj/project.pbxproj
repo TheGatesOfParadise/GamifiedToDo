@@ -25,6 +25,8 @@
 		FD61BC7A296E8A3F008D7DA1 /* ToDoDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD61BC79296E8A3F008D7DA1 /* ToDoDetailsView.swift */; };
 		FD61BC7C296E8BA5008D7DA1 /* Test1.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD61BC7B296E8BA5008D7DA1 /* Test1.swift */; };
 		FD61BC7E296F3E27008D7DA1 /* CheckDailiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD61BC7D296F3E27008D7DA1 /* CheckDailiesView.swift */; };
+		FD61BC80296FAEE5008D7DA1 /* DateSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD61BC7F296FAEE5008D7DA1 /* DateSelectionView.swift */; };
+		FD61BC82296FBC6D008D7DA1 /* Test3.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD61BC81296FBC6D008D7DA1 /* Test3.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +49,8 @@
 		FD61BC79296E8A3F008D7DA1 /* ToDoDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoDetailsView.swift; sourceTree = "<group>"; };
 		FD61BC7B296E8BA5008D7DA1 /* Test1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test1.swift; sourceTree = "<group>"; };
 		FD61BC7D296F3E27008D7DA1 /* CheckDailiesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckDailiesView.swift; sourceTree = "<group>"; };
+		FD61BC7F296FAEE5008D7DA1 /* DateSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSelectionView.swift; sourceTree = "<group>"; };
+		FD61BC81296FBC6D008D7DA1 /* Test3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test3.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,11 +90,13 @@
 				FD61BC64296B5E69008D7DA1 /* ToDoView.swift */,
 				FD61BC73296E10DC008D7DA1 /* CheckToDoView.swift */,
 				FD61BC79296E8A3F008D7DA1 /* ToDoDetailsView.swift */,
+				FD61BC7F296FAEE5008D7DA1 /* DateSelectionView.swift */,
 				FD61BC75296E3E47008D7DA1 /* DailiesView.swift */,
 				FD61BC7D296F3E27008D7DA1 /* CheckDailiesView.swift */,
 				FD01308D296B554800C4B6B5 /* AvatarSectionView.swift */,
 				FD61BC66296B5FD4008D7DA1 /* Test2.swift */,
 				FD61BC7B296E8BA5008D7DA1 /* Test1.swift */,
+				FD61BC81296FBC6D008D7DA1 /* Test3.swift */,
 				FD61BC68296C8D54008D7DA1 /* Modules */,
 				FD01308F296B554900C4B6B5 /* Assets.xcassets */,
 				FD013091296B554900C4B6B5 /* Preview Content */,
@@ -189,6 +195,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FD61BC67296B5FD4008D7DA1 /* Test2.swift in Sources */,
+				FD61BC80296FAEE5008D7DA1 /* DateSelectionView.swift in Sources */,
 				FD61BC63296B5808008D7DA1 /* Overview.swift in Sources */,
 				FD61BC76296E3E47008D7DA1 /* DailiesView.swift in Sources */,
 				FD61BC7C296E8BA5008D7DA1 /* Test1.swift in Sources */,
@@ -197,6 +204,7 @@
 				FD61BC65296B5E69008D7DA1 /* ToDoView.swift in Sources */,
 				FD61BC7A296E8A3F008D7DA1 /* ToDoDetailsView.swift in Sources */,
 				FD01308C296B554800C4B6B5 /* GamifiedToDoApp.swift in Sources */,
+				FD61BC82296FBC6D008D7DA1 /* Test3.swift in Sources */,
 				FD61BC6C296C8DA6008D7DA1 /* Award.swift in Sources */,
 				FD61BC7E296F3E27008D7DA1 /* CheckDailiesView.swift in Sources */,
 				FD61BC61296B57B1008D7DA1 /* ContentView.swift in Sources */,
