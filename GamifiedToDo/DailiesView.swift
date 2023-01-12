@@ -42,9 +42,7 @@ struct BottomDailiesView: View {
         ForEach(dailiesList) { daily in
            
             HStack{
-                
-                CheckView(title: daily.title,
-                          checkColor: daily.difficulty == .hard ? .pink : daily.difficulty == .medium ? .orange : .green)
+                CheckDailiesView(daily: daily)
                     .cornerRadius(cornerRadiusValue)
             }
         }

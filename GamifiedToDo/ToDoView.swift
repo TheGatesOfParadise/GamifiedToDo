@@ -32,12 +32,11 @@ struct ToDoView: View {
                 //.border(.green, width: 1)
                 
                 //list of todos
-                BottomToDoView(toDoList: user.toDoList)
+                BottomToDoView(toDoList: $user.toDoList)
                     .frame(width: shadeAreaWidth)
                 //.border(.blue, width: 1)
                 
                 Spacer()
-                
             }
         }
     }
@@ -78,27 +77,18 @@ struct MiddleView: View {
 }
 
 struct BottomToDoView: View {
-    var toDoList: [Todo]
+    @Binding var toDoList: [Todo]
     @State private var checked = true
     var body: some View {
-        
-        ForEach(toDoList) { toDo in
-           
+        ForEach($toDoList) { toDo in
             HStack{
-                
-                CheckView(title: toDo.title,
-                          dueDate: toDo.dueDateString(),
-                          numberOfCompleteTask: toDo.numberofCompletedCheckList(),
-                          numberOfTotoalTask: toDo.numberOfCheckList,
-                          checkColor: toDo.isWithinDays(interval: 3) ? pinkColor : toDo.isWithinDays(interval: 7) ? orangeColor : blueColor)
+                CheckToDoView(toDo: toDo)
                     .cornerRadius(cornerRadiusValue)
                     .padding(.bottom, 5)
             }
         }
     }
 }
-
-
 
 //use rgb to represent a UIColor
 //https://stackoverflow.com/questions/24263007/how-to-use-hex-color-values

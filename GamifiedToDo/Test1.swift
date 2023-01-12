@@ -10,66 +10,22 @@ struct Test1View: View {
     var numberOfTotoalTask: Int?
     var checkColor: Color
     
+    @State var dLevel: DifficultyLevel = DifficultyLevel.hard
+    
     func toggle(){isChecked = !isChecked}
     
     var body: some View {
-        NavigationView {
-            
-            HStack (alignment: .center){
-                Image(systemName: isChecked ? "checkmark.square.fill": "square")
-                    .frame(maxHeight: .infinity)
-                    .padding()
-                    .foregroundColor(.black)
-                    .background(isChecked ? .green : checkColor)
-                    .onTapGesture {
-                        toggle()
-                    }
+        Form {
+            Section (header: Text("Difficulty Level")){
                 
-                VStack (alignment: .leading){
-                    NavigationLink(
-                        destination: ToDoDetailsView(),
-                        label: {
-                            Text(title)
-                                .padding(.top, 10)
-                                .font(.system(size: 18))
-                                .strikethrough(isChecked)
-                                .foregroundColor(isChecked ? .gray : .black)
-                                .multilineTextAlignment(.leading)
-                        })
-                    
-                    //this is an item from ToDo List
-                    if dueDate != nil {
-                        Label(title: { Text(dueDate!)
-                                .foregroundColor(isChecked ? .gray : .black)
-                                .font(.system(size: 14))
-                        },
-                              icon: {Image(systemName: "calendar")
-                                .foregroundColor(isChecked ? .gray : .black)
-                                .font(.system(size: 14))
-                            
-                        })
-                        .padding(.top, 2)
+                HStack {
+                    ForEach(DifficultyLevel.allCases) { level in
+                        DifficultyLevelButton(selectedLevel: $dLevel,
+                                              image: level)
                     }
                 }
-                .frame(maxHeight: .infinity)
-                .padding(.bottom, 10)
-                
-                Spacer()
-                
-                //display fraction
-                if numberOfCompleteTask != nil && numberOfTotoalTask != nil {
-                    FractionView(numberator: numberOfCompleteTask!, denominator: numberOfTotoalTask!)
-                        .padding(.trailing, 5)
-                }
-                
-                
             }
-            .fixedSize(horizontal: false, vertical: true)
-            .cornerRadius(cornerRadiusValue)
-            .background(.gray.opacity(0.15))
-            
         }
-        
     }
 }
 

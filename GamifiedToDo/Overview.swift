@@ -11,23 +11,22 @@ struct Overview: View {
     
     @State var selectedTab = "Dailies"
     @State var isPopup = false
-    @State var user: User
+    @StateObject var userModel = UserModel(user: User.getASampleUser())
     
     init() {
         Rules.initRules()
-        user = User.getASampleUser()
     }
     
     var body: some View {
         ZStack {
             TabView (selection: $selectedTab){
                 Group {
-                    DailiesView(user: $user)
+                    DailiesView(user: $userModel.user)
                         .tabItem {
                             Label("Dailies", systemImage: "calendar")
                         }
                         .tag("Dailies")
-                    ToDoView(user: $user)
+                    ToDoView(user: $userModel.user)
                         .tabItem {
                             Label("To Do's", systemImage: "checkmark.square.fill")
                         }
@@ -97,36 +96,6 @@ struct PopupView: View {
         ZStack{
             VStack{
                 Text("this is a popup view")
-                /*         VStack (alignment: .leading) {
-                 Text("How can I help you,")
-                 .bold()
-                 .font(.system(size: 25))
-                 Text("James?")
-                 .bold()
-                 .font(.system(size: 25))
-                 .padding(.bottom, 50)
-                 
-                 Text("Remind me to choose new apartment. Maybe take one of the alternatives or call Mary")
-                 }
-                 .padding(.bottom, 80)
-                 .padding(.top, 20)
-                 
-                 Spacer()
-                 
-                 HStack {
-                 Image(systemName: "mic.circle")
-                 .resizable()
-                 .frame(width: 60, height: 60)
-                 .padding(.bottom, 30)
-                 .padding(.trailing, 30)
-                 
-                 if (viewMode == .updated) {
-                 Image(systemName: "keyboard")
-                 .resizable()
-                 .frame(width: 80, height: 40)
-                 .padding(.bottom, 30)
-                 }
-                 }  */
             }
         }
         .opacity(isPopup ? 1 : 0)

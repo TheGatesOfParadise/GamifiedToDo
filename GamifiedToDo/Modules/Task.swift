@@ -7,7 +7,8 @@
 
 import Foundation
 
-enum DifficultyLevel: String {
+enum DifficultyLevel: String, CaseIterable, Identifiable {
+    var id: String { self.rawValue }
     case easy
     case medium
     case hard

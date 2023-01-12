@@ -7,10 +7,14 @@
 
 import Foundation
 
-//TODO: if User needs to be @State or @StateObject
-//in order for User to be a @StateObject, it has to be an ObserverableObject
-//which in turn requires User to be a class not a struct
-struct User/*:ObservableObject */{
+class UserModel:ObservableObject {
+    @Published var user: User
+    init(user:User){
+        self.user = user
+    }
+}
+
+struct User {
     var name: String
     var avatar: Avatar
     var award: Award
@@ -24,8 +28,6 @@ struct User/*:ObservableObject */{
         self.toDoList = toDoList
         self.DailiesList = DailiesList
     }
-    
-    
     
     static func getASampleUser() -> User {
         let currentDate = Date.now
@@ -49,7 +51,7 @@ struct User/*:ObservableObject */{
                     toDoList: [Todo(title: "Unit5 MVP",
                                     difficulty: .hard,
                                     notes: "gamified todos",
-                                    tag: .school, 
+                                    tag: .school,
                                     due_date: twoDaysFromToday!,
                                     checkList: [Task(title: "Step1",
                                                      difficulty: .medium,

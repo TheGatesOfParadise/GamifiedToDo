@@ -19,11 +19,12 @@
 		FD61BC6C296C8DA6008D7DA1 /* Award.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD61BC6B296C8DA6008D7DA1 /* Award.swift */; };
 		FD61BC6E296C8DB2008D7DA1 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD61BC6D296C8DB2008D7DA1 /* Task.swift */; };
 		FD61BC72296D28AC008D7DA1 /* Rules.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD61BC71296D28AC008D7DA1 /* Rules.swift */; };
-		FD61BC74296E10DC008D7DA1 /* CheckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD61BC73296E10DC008D7DA1 /* CheckView.swift */; };
+		FD61BC74296E10DC008D7DA1 /* CheckToDoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD61BC73296E10DC008D7DA1 /* CheckToDoView.swift */; };
 		FD61BC76296E3E47008D7DA1 /* DailiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD61BC75296E3E47008D7DA1 /* DailiesView.swift */; };
 		FD61BC78296E62F1008D7DA1 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = FD61BC77296E62F0008D7DA1 /* README.md */; };
 		FD61BC7A296E8A3F008D7DA1 /* ToDoDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD61BC79296E8A3F008D7DA1 /* ToDoDetailsView.swift */; };
 		FD61BC7C296E8BA5008D7DA1 /* Test1.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD61BC7B296E8BA5008D7DA1 /* Test1.swift */; };
+		FD61BC7E296F3E27008D7DA1 /* CheckDailiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD61BC7D296F3E27008D7DA1 /* CheckDailiesView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,11 +41,12 @@
 		FD61BC6B296C8DA6008D7DA1 /* Award.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Award.swift; sourceTree = "<group>"; };
 		FD61BC6D296C8DB2008D7DA1 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		FD61BC71296D28AC008D7DA1 /* Rules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rules.swift; sourceTree = "<group>"; };
-		FD61BC73296E10DC008D7DA1 /* CheckView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckView.swift; sourceTree = "<group>"; };
+		FD61BC73296E10DC008D7DA1 /* CheckToDoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckToDoView.swift; sourceTree = "<group>"; };
 		FD61BC75296E3E47008D7DA1 /* DailiesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailiesView.swift; sourceTree = "<group>"; };
 		FD61BC77296E62F0008D7DA1 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		FD61BC79296E8A3F008D7DA1 /* ToDoDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoDetailsView.swift; sourceTree = "<group>"; };
 		FD61BC7B296E8BA5008D7DA1 /* Test1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test1.swift; sourceTree = "<group>"; };
+		FD61BC7D296F3E27008D7DA1 /* CheckDailiesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckDailiesView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,9 +84,10 @@
 				FD61BC60296B57B1008D7DA1 /* ContentView.swift */,
 				FD61BC62296B5808008D7DA1 /* Overview.swift */,
 				FD61BC64296B5E69008D7DA1 /* ToDoView.swift */,
+				FD61BC73296E10DC008D7DA1 /* CheckToDoView.swift */,
 				FD61BC79296E8A3F008D7DA1 /* ToDoDetailsView.swift */,
 				FD61BC75296E3E47008D7DA1 /* DailiesView.swift */,
-				FD61BC73296E10DC008D7DA1 /* CheckView.swift */,
+				FD61BC7D296F3E27008D7DA1 /* CheckDailiesView.swift */,
 				FD01308D296B554800C4B6B5 /* AvatarSectionView.swift */,
 				FD61BC66296B5FD4008D7DA1 /* Test2.swift */,
 				FD61BC7B296E8BA5008D7DA1 /* Test1.swift */,
@@ -190,11 +193,12 @@
 				FD61BC76296E3E47008D7DA1 /* DailiesView.swift in Sources */,
 				FD61BC7C296E8BA5008D7DA1 /* Test1.swift in Sources */,
 				FD01308E296B554800C4B6B5 /* AvatarSectionView.swift in Sources */,
-				FD61BC74296E10DC008D7DA1 /* CheckView.swift in Sources */,
+				FD61BC74296E10DC008D7DA1 /* CheckToDoView.swift in Sources */,
 				FD61BC65296B5E69008D7DA1 /* ToDoView.swift in Sources */,
 				FD61BC7A296E8A3F008D7DA1 /* ToDoDetailsView.swift in Sources */,
 				FD01308C296B554800C4B6B5 /* GamifiedToDoApp.swift in Sources */,
 				FD61BC6C296C8DA6008D7DA1 /* Award.swift in Sources */,
+				FD61BC7E296F3E27008D7DA1 /* CheckDailiesView.swift in Sources */,
 				FD61BC61296B57B1008D7DA1 /* ContentView.swift in Sources */,
 				FD61BC6E296C8DB2008D7DA1 /* Task.swift in Sources */,
 				FD61BC6A296C8D98008D7DA1 /* User.swift in Sources */,
