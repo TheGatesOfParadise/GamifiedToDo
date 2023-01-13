@@ -7,80 +7,110 @@
 
 import SwiftUI
 
+let checkListSignSize = 12.0
+
 struct ToDoDetailsView: View {
     @Binding var toDo: Todo
     @State private var datePopOverPresented = false
+    @State var localToDo: Todo
+    
+    init(toDo: Binding<Todo>) {
+        self._toDo = toDo
+        self.datePopOverPresented = false
+        self.localToDo = toDo.wrappedValue
+    }
     
     var body: some View {
-        
+        NavigationView{
             VStack {
                 Form {
-                 
+                    
                     //notes
                     Section (header: Text("Task Title")){
                         TextField("",
-                                  text: $toDo.title)
+                                  text: $localToDo.title)
                     }
                     
                     Section (header: Text("Notes")){
                         TextField("",
-                                  text:$toDo.notes)
+                                  text:$localToDo.notes)
                     }
                     
                     //checklist TODO
-
-   
+                    Section (header: Text("Checklist (Swipe to delete an existing item)")){
+                        CheckListView(checkList: $localToDo.checkList)
+                    }
+                    
                     
                     //difficulty
                     Section (header: Text("Difficulty Level")){
-                        //Text(toDo.difficulty.rawValue)
                         HStack {
                             ForEach(DifficultyLevel.allCases) { level in
-                                DifficultyLevelButton(selectedLevel: $toDo.difficulty,
+                                DifficultyLevelButton(selectedLevel: $localToDo.difficulty,
                                                       image: level)
                             }
                         }
                     }
-
+                    
                     
                     //scheduling -  due date
                     Section (header: Text("Due Date")){
                         HStack{
-                            Text(toDo.dueDateString())
+                            Text(localToDo.dueDateString())
                             Spacer()
-                            
-                            //copy start
                             
                             //date
                             Button(action: {
                                 datePopOverPresented = true
                             },
                                    label: {
-                               Image(systemName: "calendar")
+                                Image(systemName: "calendar")
                                     .foregroundColor(.black)
                             })
                             //date selection popover
                             .popover(isPresented: $datePopOverPresented) {
-                                DateSelectionView(dateIn: $toDo.due_date,
+                                DateSelectionView(dateIn: $localToDo.due_date,
                                                   isShowing: $datePopOverPresented,
-                                                  localDate: toDo.due_date)
+                                                  localDate: localToDo.due_date)
                             }
                         }
                     }
-  
+                    
                     //reminder???  necessary
                     
                     //Tags
                     Section (header: Text("Tags")){
-                        //Text(toDo.tag.rawValue)
                         VStack (spacing: 0){
                             ForEach(Tag.allCases) {tag in
-                                TagCheckBox(tags:$toDo.tags, currentTag: tag)
+                                TagCheckBox(tags:$localToDo.tags, currentTag: tag)
                             }
                         }
                     }
                 }//end of form
             }//end of vstack
+            .toolbar{
+                ToolbarItemGroup(placement: ToolbarItemPlacement.navigationBarTrailing,
+                                 content: {
+                    HStack{
+                        Button(action: {
+                            //delete this todo
+                            //TODO: how to delete this todo without knowing user object
+                        }, label: {
+                            Text("DELETE")
+                                .bold()
+                        })
+                        
+                        Button(action: {
+                            toDo = localToDo
+                        }, label: {
+                            Text("SAVE")
+                                .bold()
+                        })
+                    }
+                    
+                })
+            }
+        }  //end of navigationview
     }//end of view
 }//end of struct
 
@@ -139,126 +169,117 @@ struct DifficultyLevelButton: View {
     }
 }
 
-//////////////////////////////////////////////////////////
-
-            /*beging copy
-
-                    NavigationView {
-                        VStack {
-                            Form {
-                                Section (header: Text("Task Title")){
-                                    Text(
-                                    
-                                }
-                                
-                                Section (header: Text("Name : \(card.firstName) \(card.lastName)")){
-                                    TextField("First Name",
-                                              text: $card.firstName)
-                                    //disable autocorrection
-                                    //Reference: https://stackoverflow.com/questions/25767522/disable-uitextfield-predictive-text
-                                    .disableAutocorrection(true)
-                                    .autocapitalization(.none)
-                                    
-                                    TextField("Last Name",
-                                              text: $card.lastName)
-                                    .disableAutocorrection(true)
-                                    .autocapitalization(.none)
-                                }
-                                
-                                Section (header: Text("Work")){
-                                    TextField("Title",
-                                              text: $card.title)
-                                    .autocapitalization(.none)
-                                    TextField("Company",
-                                              text: $card.company)
-                                    .autocapitalization(.none)
-                                }
-                                
-                                Section (header: Text("Contact: \(card.formattedPhoneNumber)")){
-                                    TextField("Email",
-                                              text: $card.email)
-                                    TextField("Phone Number",
-                                              text: $card.phoneNumber)
-                                }
-                                
-                                Section(header: Text("Social Media")) {
-                                    HStack {
-                                        ForEach(MediaOption.allCases) { option in
-                                            MediaButton(selectedSocialMedia: $card.media,
-                                                        image: option)
-                                        }
-                                    }
-                                    TextField("Social Media ID", text: $card.mediaID)
-                                        .disableAutocorrection(true)
-                                        .autocapitalization(.none)
-                                }
-                                
-                            }
-                            
-                            NavigationLink(
-                                destination: StyleSelectionView(), //TODO: delete comment line
-                                //destination: CardViewYellow(),
-                                label: {
-                                    if (card.isComplete()) {
-                                        BottomButton(text: "Continue", color: Color.blue)
-                                    }
-                                    else {
-                                        BottomButton(text: "Continue", color: Color.gray)
-                                    }
-                                })
-                            .disabled(!card.isComplete())
-                        }
-                        .navigationTitle("Business Card")
-                    }
-                    
-                    //passing object among multiple views using @EnvironmentObject
-                    //reference is https://www.hackingwithswift.com/quick-start/swiftui/how-to-use-environmentobject-to-share-data-between-views
-                    .environmentObject(card)
-                }
-            }
-
-            struct MediaButton: View {
-                @Binding var selectedSocialMedia: MediaOption
-                let image: MediaOption
-                var body: some View {
-                    Button(action: {
-                        
-                    }) {
-                        Image(image.rawValue)
-                            .resizable()
-                            .frame(width: selectedSocialMedia == image ? 34 : 24,
-                                   height: selectedSocialMedia == image ? 34 : 24)
-                    }
-                    .border(selectedSocialMedia == image ? Color.green : Color.yellow,
-                            width: selectedSocialMedia == image ? 5 : 0)
-                    .padding()
+struct CheckListView: View {
+    @Binding var checkList: [Task]
+    @State var localEntry: String = ""
+    var body: some View{
+/*        List {
+            HStack {
+                Image(systemName: "plus")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: checkListSignSize, height: checkListSignSize)
+                    .tint(.blue)
+                    .foregroundColor(.blue)
+                    .padding(.trailing, 8)
                     .onTapGesture {
-                        selectedSocialMedia = image
-                        print("Tap SelectedMedia's rawValue is \(selectedSocialMedia.rawValue)")
-                        print("Tap current image is \(image.rawValue)")
+                        checkList.append(Task(title: $localEntry.wrappedValue,
+                                              difficulty: .easy,
+                                              notes: "",
+                                              tags: [],
+                                              isComplete: false))
                     }
-                    
-                }
-            }
-
-            struct BottomButton: View {
-                let text: String
-                let color: Color
-                var body: some View {
-                    Text(text)
-                        .frame(width: 200,
-                               height: 50,
-                               alignment: .center)
-                        .background(color)
-                        .foregroundColor(.white)
-                        .cornerRadius(8)
-                }
+                TextField("New checklist entry", text: $localEntry)
             }
             
-           end copy */
+            ForEach ($checkList) {checkItem in
+                HStack {
+                    Image(systemName: "multiply")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: checkListSignSize, height: checkListSignSize)
+                        .tint(.blue)
+                        .foregroundColor(.blue)
+                        .padding(.trailing, 8)
+                        .onTapGesture {
+                            print (checkList.count)
+                            //print($0.title)
+                            print(checkItem.title.wrappedValue)
+                            
+                           // checkList = checkList.filter { $0.title != checkItem.title.wrappedValue }
+                            
+                         /*   if let idx = checkList.firstIndex(where: { $0 === checkItem }) {
+                                checkList.remove(at: idx)
+                            }
+                   */
+                           
+                        }
+                    TextField("", text: checkItem.title)
+                }
+            }
 
-
-
+           
+        } */
+        
+        List{
+           // Section(header: Text("New check item")){
+                HStack {
+                    TextField("Enter new item...", text: $localEntry)
+                    
+                    Button(action: {
+                        if !localEntry.isEmpty {
+                            let newItem = Task(title: localEntry,
+                                               difficulty: .easy,
+                                               notes: "",
+                                               tags: [],
+                                               isComplete: false)
+                            //newItem.name = localEntry
+                            //newItem.createdAt = Date()
+                            
+                            do {
+                                //try viewContext.save()
+                                
+                                checkList.append(newItem)
+                                
+                                print("Add")
+                            }
+                            catch {
+                                let nsError = error as NSError
+                                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+                            }
+                            localEntry = ""
+                        }
+                    }, label: {
+                        Text("Add")
+                    })
+                }
+          //  }
+            
+            Section {
+               // ForEach(items) { toDoListItem in
+                ForEach ($checkList) {checkItem in
+                    VStack(alignment: .leading) {
+                        Text(checkItem.title.wrappedValue)
+                    }
+                }
+                .onDelete(perform: { indexSet in
+                    guard let index = indexSet.first else {
+                        return
+                    }
+                    let itemToDelete = $checkList[index]
+                   // viewContext.delete(itemToDelete)
+                    do {
+                       // try viewContext.save()
+                        checkList.remove(at: index)
+                    }
+                    catch {
+                        print(error)
+                    }
+                })
+            }
+        }
+    }
+}
 
 struct ToDoDetailsView_Previews: PreviewProvider {
     @State static var user = User.getASampleUser()

@@ -11,6 +11,7 @@
 		FD01308E296B554800C4B6B5 /* AvatarSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD01308D296B554800C4B6B5 /* AvatarSectionView.swift */; };
 		FD013090296B554900C4B6B5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD01308F296B554900C4B6B5 /* Assets.xcassets */; };
 		FD013093296B554900C4B6B5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD013092296B554900C4B6B5 /* Preview Assets.xcassets */; };
+		FD381B8C2970FB530002D1E7 /* Test4.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD381B8B2970FB530002D1E7 /* Test4.swift */; };
 		FD61BC61296B57B1008D7DA1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD61BC60296B57B1008D7DA1 /* ContentView.swift */; };
 		FD61BC63296B5808008D7DA1 /* Overview.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD61BC62296B5808008D7DA1 /* Overview.swift */; };
 		FD61BC65296B5E69008D7DA1 /* ToDoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD61BC64296B5E69008D7DA1 /* ToDoView.swift */; };
@@ -35,6 +36,7 @@
 		FD01308D296B554800C4B6B5 /* AvatarSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarSectionView.swift; sourceTree = "<group>"; };
 		FD01308F296B554900C4B6B5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FD013092296B554900C4B6B5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		FD381B8B2970FB530002D1E7 /* Test4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test4.swift; sourceTree = "<group>"; };
 		FD61BC60296B57B1008D7DA1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		FD61BC62296B5808008D7DA1 /* Overview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Overview.swift; sourceTree = "<group>"; };
 		FD61BC64296B5E69008D7DA1 /* ToDoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoView.swift; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 				FD61BC66296B5FD4008D7DA1 /* Test2.swift */,
 				FD61BC7B296E8BA5008D7DA1 /* Test1.swift */,
 				FD61BC81296FBC6D008D7DA1 /* Test3.swift */,
+				FD381B8B2970FB530002D1E7 /* Test4.swift */,
 				FD61BC68296C8D54008D7DA1 /* Modules */,
 				FD01308F296B554900C4B6B5 /* Assets.xcassets */,
 				FD013091296B554900C4B6B5 /* Preview Content */,
@@ -200,6 +203,7 @@
 				FD61BC76296E3E47008D7DA1 /* DailiesView.swift in Sources */,
 				FD61BC7C296E8BA5008D7DA1 /* Test1.swift in Sources */,
 				FD01308E296B554800C4B6B5 /* AvatarSectionView.swift in Sources */,
+				FD381B8C2970FB530002D1E7 /* Test4.swift in Sources */,
 				FD61BC74296E10DC008D7DA1 /* CheckToDoView.swift in Sources */,
 				FD61BC65296B5E69008D7DA1 /* ToDoView.swift in Sources */,
 				FD61BC7A296E8A3F008D7DA1 /* ToDoDetailsView.swift in Sources */,

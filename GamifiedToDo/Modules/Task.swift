@@ -92,7 +92,7 @@ class Todo: Task {
         let dateFormatter = DateFormatter()
 
         // Set Date Format
-        dateFormatter.dateFormat = "dd/MM/YY"
+        dateFormatter.dateFormat = "MMM/dd/YYYY"
 
         // Convert Date to String
         return dateFormatter.string(from: due_date)
