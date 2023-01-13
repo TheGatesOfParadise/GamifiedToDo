@@ -16,7 +16,7 @@ struct DailiesView: View {
             ZStack {
                 VStack (alignment: .center){
                     //show avatar
-                    HeaderView(avatar: user.avatar)
+                    HeaderView(user: user)
                         .frame(width: shadeAreaWidth)
                     //.border(.red, width: 1)
                         .offset(y:5)

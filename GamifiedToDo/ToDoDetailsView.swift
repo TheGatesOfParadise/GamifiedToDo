@@ -172,55 +172,7 @@ struct DifficultyLevelButton: View {
 struct CheckListView: View {
     @Binding var checkList: [Task]
     @State var localEntry: String = ""
-    var body: some View{
-/*        List {
-            HStack {
-                Image(systemName: "plus")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: checkListSignSize, height: checkListSignSize)
-                    .tint(.blue)
-                    .foregroundColor(.blue)
-                    .padding(.trailing, 8)
-                    .onTapGesture {
-                        checkList.append(Task(title: $localEntry.wrappedValue,
-                                              difficulty: .easy,
-                                              notes: "",
-                                              tags: [],
-                                              isComplete: false))
-                    }
-                TextField("New checklist entry", text: $localEntry)
-            }
-            
-            ForEach ($checkList) {checkItem in
-                HStack {
-                    Image(systemName: "multiply")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: checkListSignSize, height: checkListSignSize)
-                        .tint(.blue)
-                        .foregroundColor(.blue)
-                        .padding(.trailing, 8)
-                        .onTapGesture {
-                            print (checkList.count)
-                            //print($0.title)
-                            print(checkItem.title.wrappedValue)
-                            
-                           // checkList = checkList.filter { $0.title != checkItem.title.wrappedValue }
-                            
-                         /*   if let idx = checkList.firstIndex(where: { $0 === checkItem }) {
-                                checkList.remove(at: idx)
-                            }
-                   */
-                           
-                        }
-                    TextField("", text: checkItem.title)
-                }
-            }
-
-           
-        } */
-        
+    var body: some View{        
         List{
            // Section(header: Text("New check item")){
                 HStack {

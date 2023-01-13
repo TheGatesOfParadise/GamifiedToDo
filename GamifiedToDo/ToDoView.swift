@@ -19,7 +19,7 @@ struct ToDoView: View {
             ZStack{
                 VStack (alignment: .center){
                     //show avatar
-                    HeaderView(avatar: user.avatar)
+                    HeaderView(user: user)
                         .frame(width: shadeAreaWidth)
                     //.border(.red, width: 1)
                         .offset(y:5)
@@ -45,13 +45,18 @@ struct ToDoView: View {
 }
 
 struct HeaderView: View {
-    var avatar: Avatar
+    var user: User
     var body: some View {
         HStack {
-            AvatarView(avatar: avatar)
+            AvatarView(avatar: user.avatar)
                 .frame(width:80, height:80)
                 .background(.yellow.opacity(0.2))
             
+            VStack (alignment: .leading, spacing: 10){
+                Text("\(Date().greetings()) \(user.name)!")
+                Text(Date().today())
+                    .font(.system(size: 10))
+            }
             Spacer()
         }
     }
