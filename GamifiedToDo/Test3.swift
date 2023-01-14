@@ -8,44 +8,88 @@
 import SwiftUI
 
 struct Test3: View {
-    @Binding var toDo: Todo
-    @State private var datePopOverPresented = false
+    @State var percent: CGFloat = 0.35
+    
     var body: some View {
-        Form{
-            Section (header: Text("Due Date")){
-                HStack{
-                    Text(toDo.dueDateString())
-                    Spacer()
-                    //ZCalendar(date: $toDo.due_date)
+        NavigationView {
+            VStack{
+                ZStack {
+                    Color(UIColor(red:11/255.0,
+                                  green: 15/255.0,
+                                  blue: 128/255.0,
+                                  alpha: 1))
                     
-                    //copy start
-                    
-                    //date
+                    ZStack {
+                        //track circle
+                        Circle()
+                            .stroke(.white.opacity(0.3),
+                                    style: StrokeStyle(lineWidth: 30))
+                        
+                        //Andimation circle
+                        Circle()
+                            .trim(from:0, to: percent)
+                            .stroke(.yellow,
+                                    style: StrokeStyle(lineWidth: 30))
+                            .rotationEffect(.init(degrees: -90))
+                            .animation(Animation.linear(duration:0.8), value: percent)
+                        
+                        
+                        Text("\(Int(self.percent * 100.0))%")
+                            .foregroundColor(.white)
+                            .font(.system(size:52))
+                        
+                    }.padding()
+                }
+
+                HStack (spacing: 10){
                     Button(action: {
-                        datePopOverPresented = true
+                        guard percent < 1.0 else { return }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + TimeInterval(5/15), execute: {
+                            self.percent += 10/100
+                        })
                     },
                            label: {
-                        Image(systemName: "calendar")
+                        Text("10")
+                            .frame(width: 60, height: 80)
+                            .border(.red, width: 5)
                     })
-                    //date selection popover
-                    .popover(isPresented: $datePopOverPresented) {
-                        DateSelectionView(dateIn: $toDo.due_date,
-                                          isShowing: $datePopOverPresented,
-                                          localDate: toDo.due_date)
-                    }
                     
-                    //copy end
+                    Button(action: {
+                        guard percent < 1.0 else { return }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + TimeInterval(5/15), execute: {
+                            self.percent += 20/100
+                        })
+                        
+                    },
+                           label: {
+                        Text("20")
+                            .frame(width: 60, height: 80)
+                            .border(.green, width: 5)
+                    })
                     
-                    
+                    Button(action: {
+                        guard percent < 1.0 else { return }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + TimeInterval(5/15), execute: {
+                            self.percent += 15/100
+                        })
+                    },
+                           label: {
+                        Text("15")
+                            .frame(width: 60, height: 80)
+                            .border(.blue, width: 5)
+                    })
                 }
+                Spacer()
             }
         }
     }
 }
 
+
+
 struct Test3_Previews: PreviewProvider {
     @State static var user = User.getASampleUser()
     static var previews: some View {
-        Test3(toDo: $user.toDoList[0])
+        Test3()
     }
 }

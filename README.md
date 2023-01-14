@@ -1,6 +1,9 @@
 # GamifiedToDo
 
 TODOs:
+
+sort task
+
 1. tododetails screen, check list 
 3. details page needs to have a local copy to handle cancel
 

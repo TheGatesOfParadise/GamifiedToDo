@@ -65,21 +65,26 @@ struct HeaderView: View {
 struct MiddleView: View {
     var award: Award
     var body: some View {
-        ZStack {
-            HStack {
-                Text("Coins: \(award.coin)")
-                    .frame(width: shadeAreaWidth, height: 70)
+     //   ZStack {
+           // VStack (spacing: 0){
+                HStack {
+               /*     Text("Coins: \(award.coin)")
+                        .frame(width: shadeAreaWidth, height: 70)
                     //.padding(.bottom, 22)
-                    .background(shadeAreaBackgroundColor)
-                    .cornerRadius(cornerRadiusValue)
-                
-                Spacer()
-            }
+                        .background(shadeAreaBackgroundColor)
+                        //.cornerRadius(cornerRadiusValue)
+                  */
+                    
+                    StatusCircle(percent: 0.35)
+                       // .frame(height: 80)
+                        //.offset(x:-150)
+                }
+           // }
             
-            Capsule()
+          /*  Capsule()
                 .stroke(blueColor, lineWidth: 3)
-                .frame(width: shadeAreaWidth, height: 70)
-        }
+                .frame(width: shadeAreaWidth, height: 70) */
+        //}
     }
 }
 
@@ -117,6 +122,41 @@ extension UIColor {
    }
 }
 
+struct StatusCircle : View {
+    @State var percent: CGFloat
+    var body: some View {
+        VStack{
+            ZStack {
+                Color(UIColor(red:11/255.0,
+                              green: 15/255.0,
+                              blue: 128/255.0,
+                              alpha: 1))
+                
+                ZStack {
+                    //track circle
+                    Circle()
+                        .stroke(.white.opacity(0.3),
+                                style: StrokeStyle(lineWidth: 30))
+                    
+                    //Andimation circle
+                    Circle()
+                        .trim(from:0, to: percent)
+                        .stroke(.yellow,
+                                style: StrokeStyle(lineWidth: 30))
+                        .rotationEffect(.init(degrees: -90))
+                        .animation(Animation.linear(duration:0.8), value: percent)
+                    
+                    
+                    Text("\(Int(self.percent * 100.0))%")
+                        .foregroundColor(.white)
+                        .font(.system(size:52))
+                    
+                }.padding()
+            }
+        }
+    }
+}
+
 struct ToDoView_Previews: PreviewProvider {
     @State static var user = User.getASampleUser()
     
@@ -124,8 +164,8 @@ struct ToDoView_Previews: PreviewProvider {
         ToDoView(user:$user)
     }
 }
-
-
+//////////////////////////////////////////////////////////////////////////////////////////
+//beging of floating add  button
 struct AddButtonPopup: View {
     @State var isPopup: Bool = false
     var body: some View {
@@ -227,3 +267,5 @@ struct floatButton: View {
         }
     }
 }
+//end of floating add button
+//////////////////////////////////////////////////////////////////////////////////////////
