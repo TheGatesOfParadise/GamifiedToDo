@@ -18,12 +18,14 @@ struct DailiesView: View {
                     //show avatar
                     HeaderView(user: user)
                         .frame(width: shadeAreaWidth)
+                       //.padding(.bottom, 10)
                     //.border(.red, width: 1)
                         .offset(y:5)
                     
                     //show award
-                    MiddleView(award: user.award)
-                        .frame(width: shadeAreaWidth)
+                    MiddleView(user: user)
+                        .frame(width: shadeAreaWidth, height: 70)
+                        //.padding(.bottom, 10)
                     //.border(.green, width: 1)
                     
                     //list of todos

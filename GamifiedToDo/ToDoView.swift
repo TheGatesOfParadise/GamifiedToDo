@@ -9,6 +9,8 @@ let cornerRadiusValue = CGFloat(15)
 let blueColor = Color(uiColor: UIColor(rgb: 0x638CEB))
 let orangeColor = Color(uiColor: UIColor(rgb: 0xFFCC99))
 let pinkColor = Color(uiColor: UIColor(rgb: 0xFF6666))
+let statusCircleHeight = 45.0
+let middleViewBackgroundColor = UIColor(red:11/255.0, green: 15/255.0, blue: 128/255.0, alpha: 1)
 
 struct ToDoView: View {
     @Binding var user: User
@@ -21,12 +23,14 @@ struct ToDoView: View {
                     //show avatar
                     HeaderView(user: user)
                         .frame(width: shadeAreaWidth)
+                        //.padding(.bottom, 10)
                     //.border(.red, width: 1)
                         .offset(y:5)
                     
                     //show award
-                    MiddleView(award: user.award)
-                        .frame(width: shadeAreaWidth)
+                    MiddleView(user: user)
+                        .frame(width: shadeAreaWidth, height: 70)
+                        //.padding(.bottom, 10)
                     //.border(.green, width: 1)
                     
                     //list of todos
@@ -63,28 +67,59 @@ struct HeaderView: View {
 }
 
 struct MiddleView: View {
-    var award: Award
+    var user: User
+    var percent: CGFloat = 0.35
     var body: some View {
-     //   ZStack {
-           // VStack (spacing: 0){
+            ZStack {
+                Color(middleViewBackgroundColor)
+                
                 HStack {
-               /*     Text("Coins: \(award.coin)")
-                        .frame(width: shadeAreaWidth, height: 70)
-                    //.padding(.bottom, 22)
-                        .background(shadeAreaBackgroundColor)
-                        //.cornerRadius(cornerRadiusValue)
-                  */
+                    HStack (spacing:0){
+                        Text("Daily tasks completion")
+                            .foregroundColor(.white)
+                            .font(.system(size:12))
+                            .padding()
+                        ZStack {
+                            //track circle
+                            Circle()
+                                .stroke(.white.opacity(0.3),
+                                        style: StrokeStyle(lineWidth: 10))
+                                .frame(width: statusCircleHeight, height: statusCircleHeight)
+                            
+                            //Andimation circle
+                            Circle()
+                                .trim(from:0, to: percent)
+                                .stroke(.yellow,
+                                        style: StrokeStyle(lineWidth: 10))
+                                .rotationEffect(.init(degrees: -90))
+                                .animation(Animation.linear(duration:0.8), value: percent)
+                                .frame(width: statusCircleHeight, height: statusCircleHeight)
+                            
+                            
+                            Text("\(Int(self.percent * 100.0))%")
+                                .foregroundColor(.white)
+                                .font(.system(size:15))
+                            
+                        }
+                        //.padding()
+                    }
                     
-                    StatusCircle(percent: 0.35)
-                       // .frame(height: 80)
-                        //.offset(x:-150)
+                    Spacer()
+                    
+                    HStack (spacing: 0) {
+                        Image("Coin")
+                            .resizable()
+                            .frame(width: 25, height: 25)
+                        
+                        Text("15")
+                            .foregroundColor(.white)
+                            .font(.system(size:18))
+                            .padding(.trailing, 10)
+                            .padding(.leading, 5)
+                    }
                 }
-           // }
-            
-          /*  Capsule()
-                .stroke(blueColor, lineWidth: 3)
-                .frame(width: shadeAreaWidth, height: 70) */
-        //}
+               
+        }
     }
 }
 

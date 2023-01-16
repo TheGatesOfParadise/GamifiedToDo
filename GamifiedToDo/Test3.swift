@@ -24,6 +24,7 @@ struct Test3: View {
                         Circle()
                             .stroke(.white.opacity(0.3),
                                     style: StrokeStyle(lineWidth: 30))
+                            .frame(width: 200, height: 200)
                         
                         //Andimation circle
                         Circle()
@@ -32,11 +33,13 @@ struct Test3: View {
                                     style: StrokeStyle(lineWidth: 30))
                             .rotationEffect(.init(degrees: -90))
                             .animation(Animation.linear(duration:0.8), value: percent)
+                            .frame(width: 200, height: 200)
                         
                         
                         Text("\(Int(self.percent * 100.0))%")
                             .foregroundColor(.white)
                             .font(.system(size:52))
+                            
                         
                     }.padding()
                 }
