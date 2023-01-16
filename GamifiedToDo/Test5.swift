@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct Test5: View {
-    @StateObject var toDo: Todo
+    @Binding var toDo: Todo
     @StateObject var card: Card
+    @State var hiddenTrigger = false
     var body: some View {
         
         Form{
@@ -31,6 +32,7 @@ struct Test5: View {
                         .padding()
                         .onTapGesture {
                             toDo.difficulty = level
+                            hiddenTrigger.toggle()
                         }
                     }
                 }
@@ -124,6 +126,6 @@ struct Test5_Previews: PreviewProvider {
     @StateObject static var user = User.getASampleUser()
     static var previews: some View {
         //Test5(toDo: $user.toDoList[0])
-        Test5(toDo: user.toDoList[0], card: Card())
+        Test5(toDo: $user.toDoList[0], card: Card())
     }
 }

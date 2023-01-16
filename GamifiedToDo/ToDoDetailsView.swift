@@ -13,6 +13,7 @@ struct ToDoDetailsView: View {
     @Binding var toDo: Todo
     @State private var datePopOverPresented = false
     @State var localToDo: Todo
+    @State var hiddenTrigger = false
     
     init(toDo: Binding<Todo>) {
         self._toDo = toDo
@@ -46,8 +47,22 @@ struct ToDoDetailsView: View {
                     Section (header: Text("Difficulty Level")){
                         HStack {
                             ForEach(DifficultyLevel.allCases) { level in
-                                DifficultyLevelButton(selectedLevel: $localToDo.difficulty,
-                                                      image: level)
+                                /*DifficultyLevelButton(selectedLevel: $localToDo.difficulty,
+                                 image: level)  */
+                                
+                                Button(action: {
+                                    
+                                }) {
+                                    Image(localToDo.difficulty == level ? "\(level.rawValue)_filled": level.rawValue)
+                                        .resizable()
+                                        .frame(width: 60,
+                                               height: 50)
+                                }
+                                .padding()
+                                .onTapGesture {
+                                    localToDo.difficulty = level
+                                    hiddenTrigger.toggle()
+                                }
                             }
                         }
                     }
@@ -82,7 +97,32 @@ struct ToDoDetailsView: View {
                     Section (header: Text("Tags")){
                         VStack (spacing: 0){
                             ForEach(Tag.allCases) {tag in
-                                TagCheckBox(tags:$localToDo.tags, currentTag: tag)
+                               // TagCheckBox(tags:$localToDo.tags, currentTag: tag)
+                                HStack (alignment: .center){
+                                    Image(systemName: (localToDo.tags != nil) && localToDo.tags!.contains(tag) ? "checkmark.square.fill": "square")
+                                        .frame(maxHeight: .infinity)
+                                        .padding()
+                                        .foregroundColor(.black)
+                                        .onTapGesture {
+                                            //adjust tags
+                                            if  (localToDo.tags != nil) && localToDo.tags!.contains(tag) {
+                                                let index = localToDo.tags!.firstIndex { $0 == tag }
+                                                localToDo.tags!.remove(at:index!)
+                                            }
+                                            else {
+                                                localToDo.tags?.append(tag)
+                                            }
+                                            
+                                            hiddenTrigger.toggle()
+                                        }
+                                    Text(tag.rawValue)
+                                        .padding(.top, 10)
+                                        .font(.system(size: 18))
+                                        .foregroundColor(.black)
+                                        .multilineTextAlignment(.leading)
+                                    Spacer()
+                                }
+                                .fixedSize(horizontal: false, vertical: true)
                             }
                         }
                     }
