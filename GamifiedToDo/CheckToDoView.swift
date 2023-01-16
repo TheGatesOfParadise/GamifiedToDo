@@ -94,7 +94,7 @@ struct FractionView: View {
 
 
 struct CheckToDoView_Previews: PreviewProvider {
-    @State static var user = User.getASampleUser()
+    @StateObject static var user = User.getASampleUser()
     
     static var previews: some View {
         CheckToDoView(toDo: $user.toDoList[4])

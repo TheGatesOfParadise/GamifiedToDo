@@ -148,26 +148,7 @@ struct TagCheckBox: View {
     }
 }
 
-
-struct DifficultyLevelButton: View {
-    @Binding var selectedLevel: DifficultyLevel
-    let image: DifficultyLevel
-    var body: some View {
-        Button(action: {
-            
-        }) {
-            Image(selectedLevel == image ? "\(image.rawValue)_filled": image.rawValue)
-                .resizable()
-                .frame(width: 60,
-                       height: 50)
-        }
-        .padding()
-        .onTapGesture {
-            selectedLevel = image
-        }
-        
-    }
-}
+//IVY here
 
 struct CheckListView: View {
     @Binding var checkList: [Task]
@@ -234,7 +215,7 @@ struct CheckListView: View {
 }
 
 struct ToDoDetailsView_Previews: PreviewProvider {
-    @State static var user = User.getASampleUser()
+    @StateObject static var user = User.getASampleUser()
     static var previews: some View {
         ToDoDetailsView(toDo: $user.toDoList[0])
     }

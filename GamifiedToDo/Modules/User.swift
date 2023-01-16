@@ -14,12 +14,12 @@ class UserModel:ObservableObject {
     }
 }
 
-struct User {
-    var name: String
-    var avatar: Avatar
-    var award: Award
-    var toDoList: [Todo]
-    var DailiesList: [Dailies]
+class User :ObservableObject  {
+    @Published var name: String
+    @Published var avatar: Avatar
+    @Published var award: Award
+    @Published var toDoList: [Todo]
+    @Published var DailiesList: [Dailies]
     
     init(name: String, avatar: Avatar, award: Award, toDoList: [Todo], DailiesList: [Dailies]) {
         self.name = name

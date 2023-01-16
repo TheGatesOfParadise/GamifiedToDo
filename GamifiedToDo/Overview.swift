@@ -10,9 +10,10 @@ import SwiftUI
 struct Overview: View {
     
     @State var selectedTab = "Dailies"
-    @StateObject var userModel = UserModel(user: User.getASampleUser())
+    @EnvironmentObject var userModel : UserModel
     
     init() {
+        //TODO:  if Rules should be environment object
         Rules.initRules()
     }
     
@@ -20,12 +21,12 @@ struct Overview: View {
         ZStack {
             TabView (selection: $selectedTab){
                 Group {
-                    DailiesView(user: $userModel.user)
+                    DailiesView()
                         .tabItem {
                             Label("Dailies", systemImage: "calendar")
                         }
                         .tag("Dailies")
-                    ToDoView(user: $userModel.user)
+                    ToDoView()
                         .tabItem {
                             Label("To Do's", systemImage: "checkmark.square.fill")
                         }
@@ -45,6 +46,6 @@ struct Overview: View {
 
 struct Overview_Previews: PreviewProvider {
     static var previews: some View {
-        Overview()
+        Overview().environmentObject(UserModel(user: User.getASampleUser()))
     }
 }

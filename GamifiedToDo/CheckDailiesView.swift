@@ -15,13 +15,13 @@ import SwiftUI
 
 struct CheckDailiesView: View {
     @State var isChecked:Bool = false
-    var daily: Dailies
+    @Binding var daily: Dailies
     
     let checkColor:Color
     
-    init(daily: Dailies) {
-        self.daily = daily
-        checkColor = daily.difficulty == .hard ? .pink : daily.difficulty == .medium ? .orange : .green
+    init(daily: Binding<Dailies>) {
+        self._daily = daily
+        checkColor = daily.difficulty.wrappedValue == .hard ? .pink : daily.difficulty.wrappedValue == .medium ? .orange : .green
     }
     
     func toggle(){isChecked = !isChecked}
@@ -39,7 +39,7 @@ struct CheckDailiesView: View {
             
             VStack (alignment: .leading){
                 NavigationLink(
-                    destination: ContentView(),
+                    destination: ContentView(),//TODO: need DailyDetailsView
                     label: {
                         Text(daily.title)
                             .padding(.top, 10)
@@ -64,6 +64,6 @@ struct CheckDailiesView_Previews: PreviewProvider {
     @State static var user = User.getASampleUser()
     
     static var previews: some View {
-        CheckDailiesView(daily: user.DailiesList[0])
+        CheckDailiesView(daily: $user.DailiesList[0])
     }
 }

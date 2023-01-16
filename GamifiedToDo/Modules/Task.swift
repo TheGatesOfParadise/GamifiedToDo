@@ -22,9 +22,9 @@ enum Tag: String, CaseIterable, Identifiable {
     case chores
 }
 
-class Task: Identifiable {
+class Task: Identifiable, ObservableObject {
     var title: String
-    var difficulty: DifficultyLevel
+    @Published var difficulty: DifficultyLevel
     var notes: String
     var tags: [Tag]?
     var isComplete: Bool = false

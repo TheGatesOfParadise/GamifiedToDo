@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct DailiesView: View {
-    @Binding var user: User
+    @EnvironmentObject var userModel : UserModel
     
     var body: some View {
         NavigationView {
@@ -16,20 +16,20 @@ struct DailiesView: View {
             ZStack {
                 VStack (alignment: .center){
                     //show avatar
-                    HeaderView(user: user)
+                    HeaderView()
                         .frame(width: shadeAreaWidth)
                        //.padding(.bottom, 10)
                     //.border(.red, width: 1)
                         .offset(y:5)
                     
                     //show award
-                    MiddleView(user: user)
+                    MiddleView()
                         .frame(width: shadeAreaWidth, height: 70)
                         //.padding(.bottom, 10)
                     //.border(.green, width: 1)
                     
                     //list of todos
-                    BottomDailiesView(dailiesList: user.DailiesList)
+                    BottomDailiesView()
                         .frame(width: shadeAreaWidth)
                     //.border(.blue, width: 1)
                     
@@ -44,11 +44,11 @@ struct DailiesView: View {
 }
 
 struct BottomDailiesView: View {
-    var dailiesList: [Dailies]
+    @EnvironmentObject var userModel : UserModel
     @State private var checked = true
     var body: some View {
         
-        ForEach(dailiesList) { daily in
+        ForEach($userModel.user.DailiesList) { daily in
            
             HStack{
                 CheckDailiesView(daily: daily)
@@ -60,9 +60,8 @@ struct BottomDailiesView: View {
 
 
 struct DailiesView_Previews: PreviewProvider {
-    @State static var user = User.getASampleUser()
     
     static var previews: some View {
-        DailiesView(user:$user)
+        DailiesView().environmentObject(UserModel(user: User.getASampleUser()))
     }
 }

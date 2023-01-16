@@ -13,28 +13,27 @@ let statusCircleHeight = 45.0
 let middleViewBackgroundColor = UIColor(red:11/255.0, green: 15/255.0, blue: 128/255.0, alpha: 1)
 
 struct ToDoView: View {
-    @Binding var user: User
-    //@State var isPopup = false
+    @EnvironmentObject var userModel : UserModel
     
     var body: some View {
         NavigationView {
             ZStack{
                 VStack (alignment: .center){
                     //show avatar
-                    HeaderView(user: user)
+                    HeaderView()
                         .frame(width: shadeAreaWidth)
                         //.padding(.bottom, 10)
                     //.border(.red, width: 1)
                         .offset(y:5)
                     
                     //show award
-                    MiddleView(user: user)
+                    MiddleView()
                         .frame(width: shadeAreaWidth, height: 70)
                         //.padding(.bottom, 10)
                     //.border(.green, width: 1)
                     
                     //list of todos
-                    BottomToDoView(toDoList: $user.toDoList)
+                    BottomToDoView()
                         .frame(width: shadeAreaWidth)
                     //.border(.blue, width: 1)
                     
@@ -49,15 +48,15 @@ struct ToDoView: View {
 }
 
 struct HeaderView: View {
-    var user: User
+    @EnvironmentObject var userModel : UserModel
     var body: some View {
         HStack {
-            AvatarView(avatar: user.avatar)
+            AvatarView(avatar: userModel.user.avatar)
                 .frame(width:80, height:80)
                 .background(.yellow.opacity(0.2))
             
             VStack (alignment: .leading, spacing: 10){
-                Text("\(Date().greetings()) \(user.name)!")
+                Text("\(Date().greetings()) \(userModel.user.name)!")
                 Text(Date().today())
                     .font(.system(size: 10))
             }
@@ -67,7 +66,7 @@ struct HeaderView: View {
 }
 
 struct MiddleView: View {
-    var user: User
+    @EnvironmentObject var userModel : UserModel
     var percent: CGFloat = 0.35
     var body: some View {
             ZStack {
@@ -124,10 +123,10 @@ struct MiddleView: View {
 }
 
 struct BottomToDoView: View {
-    @Binding var toDoList: [Todo]
+    @EnvironmentObject var userModel : UserModel
     @State private var checked = true
     var body: some View {
-        ForEach($toDoList) { toDo in
+        ForEach($userModel.user.toDoList) { toDo in
             HStack{
                 CheckToDoView(toDo: toDo)
                     .cornerRadius(cornerRadiusValue)
@@ -157,6 +156,7 @@ extension UIColor {
    }
 }
 
+//TODO: status is not calculated
 struct StatusCircle : View {
     @State var percent: CGFloat
     var body: some View {
@@ -193,10 +193,9 @@ struct StatusCircle : View {
 }
 
 struct ToDoView_Previews: PreviewProvider {
-    @State static var user = User.getASampleUser()
     
     static var previews: some View {
-        ToDoView(user:$user)
+        ToDoView().environmentObject(UserModel(user: User.getASampleUser()))
     }
 }
 //////////////////////////////////////////////////////////////////////////////////////////
