@@ -8,14 +8,7 @@
 import SwiftUI
 
 struct Test5: View {
-    var toDo: Todo
-   // @State var localToDo: Todo
-    
-  /*  init(toDo: Binding<Todo>) {
-        self._toDo = toDo
-        self.localToDo = toDo.wrappedValue
-    } */
-    
+    @StateObject var toDo: Todo
     @StateObject var card: Card
     var body: some View {
         
@@ -24,8 +17,21 @@ struct Test5: View {
             Section (header: Text("Difficulty Level")){
                 HStack {
                     ForEach(DifficultyLevel.allCases) { level in
-                        DifficultyLevelButton(selectedLevel: toDo.difficulty,
-                                              image: level)
+                       /* DifficultyLevelButton(selectedLevel: $toDo.difficulty,
+                                              image: level) */
+                        
+                        Button(action: {
+                           
+                        }) {
+                            Image(toDo.difficulty == level ? "\(level.rawValue)_filled": level.rawValue)
+                                .resizable()
+                                .frame(width: 60,
+                                       height: 50)
+                        }
+                        .padding()
+                        .onTapGesture {
+                            toDo.difficulty = level
+                        }
                     }
                 }
             }

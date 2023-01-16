@@ -1,10 +1,3 @@
-//
-//  Unit6First.swift
-//  GamifiedToDo
-//
-//  Created by Mom macbook air on 1/16/23.
-//
-
 import SwiftUI
 
 //ObservableObject is a reference type
@@ -22,6 +15,10 @@ struct Unit6First: View {
     var body: some View {
         NavigationView{
             VStack {
+                //use of id: field
+                //The second reason is using a List or ForEach on primitive types that don’t conform to the Identifiable protocol, such as an array of strings or integers. In this situation, you should use id: \.self as the second parameter to your List or ForEach, like this:
+                
+                //https://www.hackingwithswift.com/quick-start/swiftui/how-to-fix-initializer-init-rowcontent-requires-that-sometype-conform-to-identifiable
                 ForEach(model.aList, id: \.self) {num in
                     Text(String(num))
                 }
@@ -35,7 +32,6 @@ struct Unit6First: View {
         }
     }
 }
-
 
 //dismiss current view and go back to previous screen
 //https://stackoverflow.com/questions/56492965/swiftui-is-there-a-popviewcontroller-equivalent-in-swiftui

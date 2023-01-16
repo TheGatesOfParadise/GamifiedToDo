@@ -38,7 +38,7 @@ class Task: Identifiable, ObservableObject {
     }
 }
 
-class Todo: Task {
+class Todo: Task{
     var due_date: Date = Date.now + 7
     var checkList: [Task] = []
     var reminder: Date = Date.now
