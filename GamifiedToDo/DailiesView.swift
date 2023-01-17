@@ -48,7 +48,7 @@ struct BottomDailiesView: View {
     @State private var checked = true
     var body: some View {
         
-        ForEach($userModel.user.DailiesList) { daily in
+        ForEach($userModel.user.dailiesList) { daily in
            
             HStack{
                 CheckDailiesView(daily: daily)
@@ -62,6 +62,6 @@ struct BottomDailiesView: View {
 struct DailiesView_Previews: PreviewProvider {
     
     static var previews: some View {
-        DailiesView().environmentObject(UserModel(user: User.getASampleUser()))
+        DailiesView().environmentObject(UserModel(user: User.getASampleUser(), rules: Rules()))
     }
 }

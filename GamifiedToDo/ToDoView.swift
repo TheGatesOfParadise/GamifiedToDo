@@ -67,7 +67,6 @@ struct HeaderView: View {
 
 struct MiddleView: View {
     @EnvironmentObject var userModel : UserModel
-    var percent: CGFloat = 0.35
     var body: some View {
             ZStack {
                 Color(middleViewBackgroundColor)
@@ -87,17 +86,17 @@ struct MiddleView: View {
                             
                             //Andimation circle
                             Circle()
-                                .trim(from:0, to: percent)
+                                .trim(from:0, to: userModel.userDailiesCompletionStatus)
                                 .stroke(.yellow,
                                         style: StrokeStyle(lineWidth: 10))
                                 .rotationEffect(.init(degrees: -90))
-                                .animation(Animation.linear(duration:0.8), value: percent)
+                                .animation(Animation.linear(duration:0.8), value: userModel.userDailiesCompletionStatus)
                                 .frame(width: statusCircleHeight, height: statusCircleHeight)
                             
-                            
-                            Text("\(Int(self.percent * 100.0))%")
+                           
+                            Text( String(format: "%.1f", userModel.userDailiesCompletionStatus * 100))
                                 .foregroundColor(.white)
-                                .font(.system(size:15))
+                                .font(.system(size:14))
                             
                         }
                         //.padding()
@@ -110,7 +109,8 @@ struct MiddleView: View {
                             .resizable()
                             .frame(width: 25, height: 25)
                         
-                        Text("15")
+                       
+                        Text(String(format: "coin %i", userModel.userTotalCoin))
                             .foregroundColor(.white)
                             .font(.system(size:18))
                             .padding(.trailing, 10)
@@ -195,7 +195,7 @@ struct StatusCircle : View {
 struct ToDoView_Previews: PreviewProvider {
     
     static var previews: some View {
-        ToDoView().environmentObject(UserModel(user: User.getASampleUser()))
+        ToDoView().environmentObject(UserModel(user: User.getASampleUser(), rules: Rules()))
     }
 }
 //////////////////////////////////////////////////////////////////////////////////////////

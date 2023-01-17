@@ -14,7 +14,7 @@
 import SwiftUI
 
 struct CheckDailiesView: View {
-    @State var isChecked:Bool = false
+    @State var hiddenFlag:Bool = false
     @Binding var daily: Dailies
     
     let checkColor:Color
@@ -23,18 +23,17 @@ struct CheckDailiesView: View {
         self._daily = daily
         checkColor = daily.difficulty.wrappedValue == .hard ? .pink : daily.difficulty.wrappedValue == .medium ? .orange : .green
     }
-    
-    func toggle(){isChecked = !isChecked}
-    
+        
     var body: some View {
         HStack (alignment: .center){
-            Image(systemName: isChecked ? "checkmark.square.fill": "square")
+            Image(systemName: daily.isComplete ? "checkmark.square.fill": "square")
                 .frame(maxHeight: .infinity)
                 .padding()
                 .foregroundColor(.black)
-                .background(isChecked ? .green : checkColor)
+                .background(daily.isComplete ? .green : checkColor)
                 .onTapGesture {
-                    toggle()
+                    daily.isComplete.toggle()
+                    hiddenFlag.toggle()
                 }
             
             VStack (alignment: .leading){
@@ -44,8 +43,8 @@ struct CheckDailiesView: View {
                         Text(daily.title)
                             .padding(.top, 10)
                             .font(.system(size: 18))
-                            .strikethrough(isChecked)
-                            .foregroundColor(isChecked ? .gray : .black)
+                            .strikethrough(daily.isComplete)
+                            .foregroundColor(daily.isComplete ? .gray : .black)
                             .multilineTextAlignment(.leading)
                     })
             }
@@ -64,6 +63,6 @@ struct CheckDailiesView_Previews: PreviewProvider {
     @State static var user = User.getASampleUser()
     
     static var previews: some View {
-        CheckDailiesView(daily: $user.DailiesList[0])
+        CheckDailiesView(daily: $user.dailiesList[0])
     }
 }

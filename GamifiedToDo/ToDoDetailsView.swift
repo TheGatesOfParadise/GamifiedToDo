@@ -39,7 +39,7 @@ struct ToDoDetailsView: View {
                     
                     //checklist TODO
                     Section (header: Text("Checklist (Swipe to delete an existing item)")){
-                        CheckListView(checkList: $localToDo.checkList)
+                        CheckListView(checkList: $localToDo.checkList, hiddenFlag: $hiddenTrigger)
                     }
                     
                     
@@ -155,44 +155,10 @@ struct ToDoDetailsView: View {
 }//end of struct
 
 
-
-struct TagCheckBox: View {
-    @Binding var tags: [Tag]?
-    var currentTag: Tag
-    var body: some View {
-        HStack (alignment: .center){
-            Image(systemName: (tags != nil) && tags!.contains(currentTag) ? "checkmark.square.fill": "square")
-                .frame(maxHeight: .infinity)
-                .padding()
-                .foregroundColor(.black)
-                .onTapGesture {
-                    //adjust tags
-                    if  (tags != nil) && tags!.contains(currentTag) {
-                        let index = tags!.firstIndex { $0 == currentTag }
-                        tags!.remove(at:index!)
-                    }
-                    else {
-                        tags?.append(currentTag)
-                    }
-                }
-            Text(currentTag.rawValue)
-                .padding(.top, 10)
-                .font(.system(size: 18))
-                .foregroundColor(.black)
-                .multilineTextAlignment(.leading)
-            Spacer()
-        }
-        .fixedSize(horizontal: false, vertical: true)
-        //.cornerRadius(cornerRadiusValue)
-        //.background(.gray.opacity(0.15))
-    }
-}
-
-//IVY here
-
 struct CheckListView: View {
     @Binding var checkList: [Task]
     @State var localEntry: String = ""
+   @Binding var hiddenFlag: Bool
     var body: some View{        
         List{
            // Section(header: Text("New check item")){
@@ -232,7 +198,16 @@ struct CheckListView: View {
                // ForEach(items) { toDoListItem in
                 ForEach ($checkList) {checkItem in
                     VStack(alignment: .leading) {
-                        Text(checkItem.title.wrappedValue)
+                        //Text(checkItem.title.wrappedValue)
+                        Label(title: {Text(checkItem.title.wrappedValue)},
+                              icon: { Image(systemName: checkItem.isComplete.wrappedValue ? "checkmark.square.fill" : "square")
+                            
+                        })
+                        .onTapGesture {
+                           checkItem.isComplete.wrappedValue.toggle()
+                            hiddenFlag.toggle()
+                        }
+                        
                     }
                 }
                 .onDelete(perform: { indexSet in
@@ -249,6 +224,7 @@ struct CheckListView: View {
                         print(error)
                     }
                 })
+
             }
         }
     }

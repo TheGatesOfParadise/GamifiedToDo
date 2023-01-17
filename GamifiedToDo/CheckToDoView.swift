@@ -14,11 +14,8 @@
 import SwiftUI
 
 struct CheckToDoView: View {
-    @State var isChecked:Bool = false
+    @State var hiddenFlag:Bool = false
     @Binding var toDo: Todo
-    
-
-    func toggle(){isChecked = !isChecked}
     
     func checkColor() -> Color {
         return  toDo.isWithinDays(interval: 3) ? pinkColor : toDo.isWithinDays(interval: 7) ? orangeColor : blueColor
@@ -26,13 +23,14 @@ struct CheckToDoView: View {
     
     var body: some View {
         HStack (alignment: .center){
-            Image(systemName: isChecked ? "checkmark.circle.fill": "circle")
+            Image(systemName: toDo.isComplete ? "checkmark.circle.fill": "circle")
                 .frame(maxHeight: .infinity)
                 .padding()
                 .foregroundColor(.black)
-                .background(isChecked ? .green : checkColor())
+                .background(toDo.isComplete  ? .green : checkColor())
                 .onTapGesture {
-                    toggle()
+                    toDo.isComplete.toggle()
+                    hiddenFlag.toggle()
                 }
             
             VStack (alignment: .leading){
@@ -42,17 +40,17 @@ struct CheckToDoView: View {
                         Text(toDo.title)
                             .padding(.top, 10)
                             .font(.system(size: 18))
-                            .strikethrough(isChecked)
-                            .foregroundColor(isChecked ? .gray : .black)
+                            .strikethrough(toDo.isComplete )
+                            .foregroundColor(toDo.isComplete  ? .gray : .black)
                             .multilineTextAlignment(.leading)
                     })
                 
                 Label(title: { Text(toDo.dueDateString())
-                        .foregroundColor(isChecked ? .gray : .black)
+                        .foregroundColor(toDo.isComplete  ? .gray : .black)
                         .font(.system(size: 14))
                             },
                       icon: {Image(systemName: "calendar")
-                        .foregroundColor(isChecked ? .gray : .black)
+                        .foregroundColor(toDo.isComplete ? .gray : .black)
                         .font(.system(size: 14))
                     
                 })

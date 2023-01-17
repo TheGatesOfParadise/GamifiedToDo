@@ -12,6 +12,7 @@ struct GamifiedToDoApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                //.environmentObject(UserModel(user: User.getASampleUser(), rules: Rules()))
         }
     }
 }

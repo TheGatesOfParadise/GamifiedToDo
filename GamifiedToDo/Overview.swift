@@ -11,12 +11,7 @@ struct Overview: View {
     
     @State var selectedTab = "Dailies"
     @EnvironmentObject var userModel : UserModel
-    
-    init() {
-        //TODO:  if Rules should be environment object
-        Rules.initRules()
-    }
-    
+        
     var body: some View {
         ZStack {
             TabView (selection: $selectedTab){
@@ -46,6 +41,6 @@ struct Overview: View {
 
 struct Overview_Previews: PreviewProvider {
     static var previews: some View {
-        Overview().environmentObject(UserModel(user: User.getASampleUser()))
+        Overview().environmentObject(UserModel(user: User.getASampleUser(), rules: Rules()))
     }
 }

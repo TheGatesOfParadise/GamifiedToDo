@@ -23,11 +23,11 @@ enum Tag: String, CaseIterable, Identifiable {
 }
 
 class Task: Identifiable, ObservableObject {
-    var title: String
+    @Published var title: String
     @Published var difficulty: DifficultyLevel
-    var notes: String
-    var tags: [Tag]?
-    var isComplete: Bool = false
+    @Published var notes: String
+    @Published var tags: [Tag]?
+    @Published var isComplete: Bool = false
     
     init(title: String, difficulty: DifficultyLevel, notes: String, tags: [Tag]?, isComplete: Bool) {
         self.title = title
@@ -39,9 +39,9 @@ class Task: Identifiable, ObservableObject {
 }
 
 class Todo: Task{
-    var due_date: Date = Date.now + 7
-    var checkList: [Task] = []
-    var reminder: Date = Date.now
+    @Published var due_date: Date = Date.now + 7
+    @Published var checkList: [Task] = []
+    @Published var reminder: Date = Date.now
     
     init(title: String, difficulty: DifficultyLevel, notes: String, tags: [Tag]?, due_date: Date, checkList: [Task], reminder: Date) {
         super.init(title: title, difficulty: difficulty, notes: notes, tags: tags,isComplete: false)
@@ -50,7 +50,7 @@ class Todo: Task{
         self.reminder = reminder
     }
     
-    override var isComplete: Bool {
+/*    override var isComplete: Bool {
         get {
             var result = true
             for task in checkList {
@@ -61,8 +61,9 @@ class Todo: Task{
         }
         set {
             self.isComplete = newValue
-        }
+        }*
     }
+ */
     
     var numberOfCheckList: Int {
         return checkList.count
@@ -102,7 +103,7 @@ class Todo: Task{
 }
 
 class Dailies: Task {
-    var start_date: Date =  Date.now
+    @Published var start_date: Date =  Date.now
     
     init(title: String, difficulty: DifficultyLevel, notes: String, tags: [Tag], isComplete: Bool, start_date: Date) {
         super.init(title: title, difficulty: difficulty, notes: notes, tags: tags, isComplete: isComplete)

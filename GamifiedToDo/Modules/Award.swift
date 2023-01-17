@@ -18,11 +18,6 @@ struct TaskToAward {
     var difficulty: DifficultyLevel
 }
 
-let taskToAwardRules: [TaskToAward] = [
-    TaskToAward(award: Award(coin:1), difficulty: .easy),
-    TaskToAward(award: Award(coin:3), difficulty: .medium),
-    TaskToAward(award: Award(coin:5), difficulty: .hard)
-]
 
 enum AvatarPartType: String, CaseIterable {
     case head = "Head"
@@ -57,58 +52,6 @@ struct AwardToAvatarPart {
         print("Award:\(award.coin) to \(part.imageName)")
     }
 }
-
-
-/*
-= [
-    AwardToAvatarPart(award: Award(coin:1), part: AvatarPart(name: .head, category: .basic, index: 1)),
-    AwardToAvatarPart(award: Award(coin:1), part: AvatarPart(name: .head, category: .basic, index: 2)),
-    
-    AwardToAvatarPart(award: Award(coin:1), part: AvatarPart(name: .body, category: .basic, index: 1)),
-    AwardToAvatarPart(award: Award(coin:1), part: AvatarPart(name: .body, category: .basic, index: 2)),
-    
-    AwardToAvatarPart(award: Award(coin:1), part: AvatarPart(name: .bottom, category: .basic, index: 1)),
-    AwardToAvatarPart(award: Award(coin:1), part: AvatarPart(name: .bottom, category: .basic, index: 2)),
-    
-    
-    AwardToAvatarPart(award: Award(coin:2), part: AvatarPart(name: .head, category: .animal, index: 1)),
-    AwardToAvatarPart(award: Award(coin:2), part: AvatarPart(name: .head, category: .animal, index: 2)),
-    
-    AwardToAvatarPart(award: Award(coin:2), part: AvatarPart(name: .body, category: .animal, index: 1)),
-    AwardToAvatarPart(award: Award(coin:2), part: AvatarPart(name: .body, category: .animal, index: 2)),
-    
-    AwardToAvatarPart(award: Award(coin:3), part: AvatarPart(name: .bottom, category: .animal, index: 1)),
-    AwardToAvatarPart(award: Award(coin:3), part: AvatarPart(name: .bottom, category: .animal, index: 2)),
-    
-    AwardToAvatarPart(award: Award(coin:3), part: AvatarPart(name: .head, category: .castle, index: 1)),
-    AwardToAvatarPart(award: Award(coin:3), part: AvatarPart(name: .head, category: .castle, index: 2)),
-    
-    AwardToAvatarPart(award: Award(coin:3), part: AvatarPart(name: .body, category: .castle, index: 1)),
-    AwardToAvatarPart(award: Award(coin:3), part: AvatarPart(name: .body, category: .castle, index: 2)),
-    
-    AwardToAvatarPart(award: Award(coin:3), part: AvatarPart(name: .bottom, category: .castle, index: 1)),
-    AwardToAvatarPart(award: Award(coin:3), part: AvatarPart(name: .bottom, category: .castle, index: 2)),
-]
-
-//
-struct Model {
-       let imageName: String
-       let height: CGFloat
-   }
-   
-    var models = [Model]()
-
-       let images = Array(1...9).map { "image\($0)" }
-
-/
-models = images.compactMap {
-           return  Model.init(
-               imageName: $0,
-               height: CGFloat.random(in: 200...400)
-           )
-       }
-//
- */
 
 var avatarCategories = [
     "Basic", "Animal", "Castle"
