@@ -16,6 +16,7 @@ import SwiftUI
 struct CheckDailiesView: View {
     @State var hiddenFlag:Bool = false
     @Binding var daily: Dailies
+    @EnvironmentObject var userModel: UserModel
     
     let checkColor:Color
     
@@ -33,6 +34,10 @@ struct CheckDailiesView: View {
                 .background(daily.isComplete ? .green : checkColor)
                 .onTapGesture {
                     daily.isComplete.toggle()
+                    
+                    //force a view to update comes from this post:
+                    //https://stackoverflow.com/questions/56561630/swiftui-forcing-an-update
+                    userModel.updateView()
                     hiddenFlag.toggle()
                 }
             

@@ -1,56 +1,68 @@
-//
-//  Rules.swift
-//  GamifiedToDo
-//
-//  Created by Mom macbook air on 1/10/23.
-//
 
 import Foundation
+import SwiftUI
+
+let basicLevelCoins = 30
+let silverLevelCoins = 100
+let goldLevelCoins = 200
+let plantinumLevelCoins = 500
+
+let indexes = Array(1...12).map { $0 }
 
 struct Rules {
-    static var awardToAvatarPartRules : [AwardToAvatarPart] {
-        var localRules = [AwardToAvatarPart]()
-        AvatarCategory.allCases.forEach {
-            let categoryName = $0
+    static var awardToAvatarPartRules = [AvatarPart: Award]()
+
+    static var taskToAwardRules = [DifficultyLevel: Award]()
+    
+    init() {
+        //all basic avatar part needs basicLevelCoins
+        indexes.forEach {num in
             AvatarPartType.allCases.forEach {
                 let partName = $0
-                localRules += indexes.compactMap {
-                    return AwardToAvatarPart(award: Award(coin:categoryName == .basic ? 1: categoryName == .animal ? 2 : 3),
-                                             part: AvatarPart(part: partName, category: categoryName, index: $0))
+                Rules.awardToAvatarPartRules[AvatarPart(part: partName, category: .basic, index: num)] = Award(coin:basicLevelCoins)
+            }
+        }
+        
+        //all animal avatar part needs silverLevelCoins
+        indexes.forEach {num in
+            AvatarPartType.allCases.forEach {
+                let partName = $0
+                Rules.awardToAvatarPartRules[AvatarPart(part: partName, category: .animal, index: num)] = Award(coin:silverLevelCoins)
+            }
+        }
+        
+        //castle avatar part needs silverLevelCoins (1..6) or plantinumLevelCoins (7..12)
+        indexes.forEach {num in
+            AvatarPartType.allCases.forEach {
+                let partName = $0
+                if num < 7 {
+                    Rules.awardToAvatarPartRules[AvatarPart(part: partName, category: .castle, index: num)] = Award(coin:goldLevelCoins)
+                }
+                else {
+                    Rules.awardToAvatarPartRules[AvatarPart(part: partName, category: .castle, index: num)] = Award(coin:plantinumLevelCoins)
                 }
             }
         }
-       
-        localRules.forEach{
-            $0.printRule()
-        }
-    
-        return localRules
+        
+        //fill in taskToAwardRules
+        Rules.taskToAwardRules[.easy] = Award(coin:1)
+        Rules.taskToAwardRules[.medium] = Award(coin:3)
+        Rules.taskToAwardRules[.hard] = Award(coin:5)
     }
     
-    static private let indexes = Array(1...12).map { $0 }
-    static let taskToAwardRules: [DifficultyLevel: Award] = [ .easy : Award(coin:1),
-                                                              .medium : Award(coin:3),
-                                                              .hard : Award(coin:5)]
-    
-    static func initRules() -> [AwardToAvatarPart] {
-        var localRules = [AwardToAvatarPart]()
-        AvatarCategory.allCases.forEach {
-            let categoryName = $0
-            AvatarPartType.allCases.forEach {
-                let partName = $0
-                localRules += indexes.compactMap {
-                    return AwardToAvatarPart(award: Award(coin:categoryName == .basic ? 1: categoryName == .animal ? 2 : 3),
-                                             part: AvatarPart(part: partName, category: categoryName, index: $0))
-                }
-            }
+    static func printRules() -> Void {
+        
+        print("taskToAwardRules")
+        for (key,value) in Rules.taskToAwardRules {
+            print("\(key) = \(value)")
         }
         
-        awardToAvatarPartRules.forEach{
-            $0.printRule()
+        print("awardToAvatarPartRules")
+        for (key,value) in Rules.awardToAvatarPartRules {
+            print("\(key) = \(value)")
         }
         
-        return localRules
+
     }
     
 }

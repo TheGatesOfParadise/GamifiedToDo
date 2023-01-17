@@ -12,6 +12,7 @@
 import SwiftUI
 
 struct AvatarSelectionView: View {
+    @EnvironmentObject var userModel : UserModel
     @State var selectedCategory: AvatarCategory = AvatarCategory.basic
     @State var selectedPart: AvatarPartType = AvatarPartType.head
     @State var currentAvatar =  Avatar(parts: [AvatarPart(part: .head, category: .basic, index: 1),
@@ -93,19 +94,35 @@ struct AvatarSelectionView: View {
 //This view assembles the avatar from the Avatar object
 let body_width = 25.0
 struct AvatarView: View {
+    @EnvironmentObject var userModel : UserModel
     var avatar: Avatar
     
     var body: some View {
-        VStack (spacing: 0){
-            Image(avatar.parts[0].imageName)
+        HStack{
+            VStack (spacing: 0){
+                Image(avatar.parts[0].imageName)
+                    .resizable()
+                    .frame(width:body_width, height: body_width)
+                Image(avatar.parts[1].imageName)
+                    .resizable()
+                    .frame(width:body_width, height: body_width)
+                Image(avatar.parts[2].imageName)
+                    .resizable()
+                    .frame(width:body_width, height: body_width)
+            }
+            .padding(.leading, 30)
+            
+            Spacer()
+            
+            Image("Coin")
                 .resizable()
-                .frame(width:body_width, height: body_width)
-            Image(avatar.parts[1].imageName)
-                .resizable()
-                .frame(width:body_width, height: body_width)
-            Image(avatar.parts[2].imageName)
-                .resizable()
-                .frame(width:body_width, height: body_width)
+                .frame(width: 25, height: 25)
+            
+            Text(String(format: "coin %i", userModel.userTotalCoin))
+                .bold()
+                .font(.system(size:18))
+                .padding(.trailing, 10)
+                .padding(.leading, 5)
         }
     }
 }
@@ -115,7 +132,7 @@ struct AvatarView: View {
 
 struct AvatarSelectionView_Previews: PreviewProvider {
     static var previews: some View {
-        AvatarSelectionView()
+        AvatarSelectionView().environmentObject(UserModel(user: User.getASampleUser(), rules: Rules()))
     }
 }
 

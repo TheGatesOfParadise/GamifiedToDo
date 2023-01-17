@@ -18,3 +18,9 @@ sort task
 
 3. logic to mark a todo item complete,  if checklist is not complete, but mark it as complete, is it allowed, award?
 4. in Daily view,  add a few calendar day circles?   add next few days or add entire calendar
+
+
+================
+
+1.  add function for daily and todo
+2. 

@@ -1,15 +1,10 @@
-//
-//  Overview.swift
-//  GamifiedToDo
-//
-//  Created by Mom macbook air on 1/8/23.
-//
+///TODO: todo/daily item color should be different from complete color
 
 import SwiftUI
 
 struct Overview: View {
     
-    @State var selectedTab = "Dailies"
+    @State var selectedTab = "TODos"
     @EnvironmentObject var userModel : UserModel
         
     var body: some View {

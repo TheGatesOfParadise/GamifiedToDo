@@ -31,7 +31,7 @@ enum AvatarCategory: String, CaseIterable {
     case castle = "Castle"
 }
 
-struct AvatarPart {
+struct AvatarPart: Hashable {
     var part: AvatarPartType
     var category: AvatarCategory
     var index: Int

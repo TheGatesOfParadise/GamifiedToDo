@@ -14,6 +14,7 @@
 import SwiftUI
 
 struct CheckToDoView: View {
+    @EnvironmentObject var userModel : UserModel
     @State var hiddenFlag:Bool = false
     @Binding var toDo: Todo
     
@@ -30,6 +31,10 @@ struct CheckToDoView: View {
                 .background(toDo.isComplete  ? .green : checkColor())
                 .onTapGesture {
                     toDo.isComplete.toggle()
+                    
+                    //force a view to update comes from this post:
+                    //https://stackoverflow.com/questions/56561630/swiftui-forcing-an-update
+                    userModel.updateView()
                     hiddenFlag.toggle()
                 }
             

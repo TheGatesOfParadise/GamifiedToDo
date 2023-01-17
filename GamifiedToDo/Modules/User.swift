@@ -62,6 +62,12 @@ class UserModel:ObservableObject {
         self.rules = rules
     }
     
+    //force a view to update comes from this post:
+    //https://stackoverflow.com/questions/56561630/swiftui-forcing-an-update
+    func updateView(){
+        self.objectWillChange.send()
+    }
+    
 }
 
 class User :ObservableObject  {

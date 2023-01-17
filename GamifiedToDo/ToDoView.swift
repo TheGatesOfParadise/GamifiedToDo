@@ -124,7 +124,6 @@ struct MiddleView: View {
 
 struct BottomToDoView: View {
     @EnvironmentObject var userModel : UserModel
-    @State private var checked = true
     var body: some View {
         ForEach($userModel.user.toDoList) { toDo in
             HStack{

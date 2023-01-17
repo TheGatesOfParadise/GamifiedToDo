@@ -36,6 +36,10 @@ struct Test7: View {
         let group = GroupOfTallies()
         group.elements.append(contentsOf: [Tallies(), Tallies()])
         self.group = group
+          
+        let rules = Rules()
+          Rules.printRules()
+        
       }
 
       var body: some View {
