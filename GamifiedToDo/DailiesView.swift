@@ -16,7 +16,7 @@ struct DailiesView: View {
             ZStack {
                 VStack (alignment: .center){
                     //show avatar
-                    HeaderView()
+                    HeaderDailiesView()
                         .frame(width: shadeAreaWidth)
                        //.padding(.bottom, 10)
                     //.border(.red, width: 1)
@@ -39,6 +39,44 @@ struct DailiesView: View {
                // AddButtonPopup()
                 
             }
+        }
+    }
+}
+
+struct HeaderDailiesView: View {
+    @EnvironmentObject var userModel : UserModel
+    
+    var body: some View {
+        HStack {
+            AvatarView(avatar: userModel.user.avatar)
+                .frame(width:80, height:80)
+                .background(.yellow.opacity(0.2))
+            
+            VStack (alignment: .leading, spacing: 10){
+                Text("\(Date().greetings()) \(userModel.user.name)!")
+                Text(Date().today())
+                    .font(.system(size: 10))
+            }
+            
+            Spacer()
+            
+            //add button
+            NavigationLink(destination: {
+                DailiesDetailsView(daily: $userModel.user.dailiesList[0], type: .New)
+            }, label: {
+                Text("+")
+                    .font(.system(.largeTitle))
+                    .frame(width: 60, height: 60)
+                    .foregroundColor(Color.white)
+            })
+            .background( Color.yellow.opacity(0.6))
+            .cornerRadius(30)
+            .shadow(color: Color.black.opacity(0.3),
+                    radius: 3,
+                    x: 3,
+                    y: 3)
+            
+            
         }
     }
 }

@@ -144,7 +144,7 @@ struct ToDoDetailsView: View {
                                 //delete this todo
                                 //TODO: how to delete this todo without knowing user object
                                 
-                                userModel.removToDo(whichIs: localToDo)
+                                userModel.removeToDo(whichIs: localToDo)
                             }, label: {
                                 Text("DELETE")
                                     .bold()
@@ -254,7 +254,6 @@ struct CheckListView: View {
 
 struct ToDoDetailsView_Previews: PreviewProvider {
     @StateObject static var user = User.getASampleUser()
-   @State   static var toDo = Todo.getAnEmptyToDo()
     static var previews: some View {
         ToDoDetailsView(toDo: $user.toDoList[0],type: .Edit)
         //ToDoDetailsView(toDo: $toDo, type: .New)

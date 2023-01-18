@@ -96,6 +96,10 @@ class Dailies: Task {
         super.init(title: title, difficulty: difficulty, notes: notes, tags: tags, isComplete: isComplete)
         self.start_date = start_date
     }
+    
+    static func getAnEmptyDaily() -> Dailies {
+        Dailies(title: "", difficulty: .easy, notes: "", tags: [Tag](), isComplete: false, start_date: Date.now)
+    }
 }
 
 extension Date {

@@ -43,7 +43,7 @@ struct CheckDailiesView: View {
             
             VStack (alignment: .leading){
                 NavigationLink(
-                    destination: ContentView(),//TODO: need DailyDetailsView
+                    destination:  DailiesDetailsView(daily: $daily, type: .Edit),
                     label: {
                         Text(daily.title)
                             .padding(.top, 10)

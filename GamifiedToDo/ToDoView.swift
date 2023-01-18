@@ -19,7 +19,7 @@ struct ToDoView: View {
         NavigationView {
             VStack (alignment: .center){
                 //show avatar
-                HeaderView()
+                HeaderToDoView()
                     .frame(width: shadeAreaWidth)
                 //.padding(.bottom, 10)
                 //.border(.red, width: 1)
@@ -42,7 +42,7 @@ struct ToDoView: View {
     }
 }
 
-struct HeaderView: View {
+struct HeaderToDoView: View {
     @EnvironmentObject var userModel : UserModel
     
     var body: some View {

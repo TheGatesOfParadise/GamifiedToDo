@@ -15,6 +15,7 @@
 		FD381B8E2975033B0002D1E7 /* Test5.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD381B8D2975033B0002D1E7 /* Test5.swift */; };
 		FD381B90297518710002D1E7 /* Unit6First.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD381B8F297518710002D1E7 /* Unit6First.swift */; };
 		FD381B9229765B9A0002D1E7 /* Test7.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD381B9129765B9A0002D1E7 /* Test7.swift */; };
+		FD381B942977BB7F0002D1E7 /* DailiesDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD381B932977BB7F0002D1E7 /* DailiesDetailsView.swift */; };
 		FD61BC61296B57B1008D7DA1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD61BC60296B57B1008D7DA1 /* ContentView.swift */; };
 		FD61BC63296B5808008D7DA1 /* Overview.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD61BC62296B5808008D7DA1 /* Overview.swift */; };
 		FD61BC65296B5E69008D7DA1 /* ToDoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD61BC64296B5E69008D7DA1 /* ToDoView.swift */; };
@@ -43,6 +44,7 @@
 		FD381B8D2975033B0002D1E7 /* Test5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test5.swift; sourceTree = "<group>"; };
 		FD381B8F297518710002D1E7 /* Unit6First.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Unit6First.swift; sourceTree = "<group>"; };
 		FD381B9129765B9A0002D1E7 /* Test7.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test7.swift; sourceTree = "<group>"; };
+		FD381B932977BB7F0002D1E7 /* DailiesDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailiesDetailsView.swift; sourceTree = "<group>"; };
 		FD61BC60296B57B1008D7DA1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		FD61BC62296B5808008D7DA1 /* Overview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Overview.swift; sourceTree = "<group>"; };
 		FD61BC64296B5E69008D7DA1 /* ToDoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoView.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 				FD61BC7F296FAEE5008D7DA1 /* DateSelectionView.swift */,
 				FD61BC75296E3E47008D7DA1 /* DailiesView.swift */,
 				FD61BC7D296F3E27008D7DA1 /* CheckDailiesView.swift */,
+				FD381B932977BB7F0002D1E7 /* DailiesDetailsView.swift */,
 				FD01308D296B554800C4B6B5 /* AvatarSectionView.swift */,
 				FD61BC66296B5FD4008D7DA1 /* Test2.swift */,
 				FD61BC7B296E8BA5008D7DA1 /* Test1.swift */,
@@ -223,6 +226,7 @@
 				FD61BC82296FBC6D008D7DA1 /* Test3.swift in Sources */,
 				FD61BC6C296C8DA6008D7DA1 /* Award.swift in Sources */,
 				FD61BC7E296F3E27008D7DA1 /* CheckDailiesView.swift in Sources */,
+				FD381B942977BB7F0002D1E7 /* DailiesDetailsView.swift in Sources */,
 				FD61BC61296B57B1008D7DA1 /* ContentView.swift in Sources */,
 				FD61BC6E296C8DB2008D7DA1 /* Task.swift in Sources */,
 				FD61BC6A296C8D98008D7DA1 /* User.swift in Sources */,
