@@ -2,24 +2,30 @@
 import Foundation
 import SwiftUI
 
+let lowLevlCoins = 5
 let basicLevelCoins = 30
 let silverLevelCoins = 100
 let goldLevelCoins = 200
 let plantinumLevelCoins = 500
+let extremelyHighLevelCoins = 10000
 
 let indexes = Array(1...12).map { $0 }
 
 struct Rules {
-    static var awardToAvatarPartRules = [AvatarPart: Award]()
-
-    static var taskToAwardRules = [DifficultyLevel: Award]()
+    private var awardToAvatarPartRules = [AvatarPart: Award]()
+    
+    private var taskToAwardRules = [DifficultyLevel: Award]()
     
     init() {
         //all basic avatar part needs basicLevelCoins
         indexes.forEach {num in
             AvatarPartType.allCases.forEach {
                 let partName = $0
-                Rules.awardToAvatarPartRules[AvatarPart(part: partName, category: .basic, index: num)] = Award(coin:basicLevelCoins)
+                if num < 7 {
+                    awardToAvatarPartRules[AvatarPart(part: partName, category: .basic, index: num)] = Award(coin:lowLevlCoins)
+                }else {
+                    awardToAvatarPartRules[AvatarPart(part: partName, category: .basic, index: num)] = Award(coin:basicLevelCoins)
+                }
             }
         }
         
@@ -27,7 +33,7 @@ struct Rules {
         indexes.forEach {num in
             AvatarPartType.allCases.forEach {
                 let partName = $0
-                Rules.awardToAvatarPartRules[AvatarPart(part: partName, category: .animal, index: num)] = Award(coin:silverLevelCoins)
+                awardToAvatarPartRules[AvatarPart(part: partName, category: .animal, index: num)] = Award(coin:silverLevelCoins)
             }
         }
         
@@ -36,33 +42,47 @@ struct Rules {
             AvatarPartType.allCases.forEach {
                 let partName = $0
                 if num < 7 {
-                    Rules.awardToAvatarPartRules[AvatarPart(part: partName, category: .castle, index: num)] = Award(coin:goldLevelCoins)
+                    awardToAvatarPartRules[AvatarPart(part: partName, category: .castle, index: num)] = Award(coin:goldLevelCoins)
                 }
                 else {
-                    Rules.awardToAvatarPartRules[AvatarPart(part: partName, category: .castle, index: num)] = Award(coin:plantinumLevelCoins)
+                    awardToAvatarPartRules[AvatarPart(part: partName, category: .castle, index: num)] = Award(coin:plantinumLevelCoins)
                 }
             }
         }
         
         //fill in taskToAwardRules
-        Rules.taskToAwardRules[.easy] = Award(coin:1)
-        Rules.taskToAwardRules[.medium] = Award(coin:3)
-        Rules.taskToAwardRules[.hard] = Award(coin:5)
+        taskToAwardRules[.easy] = Award(coin:1)
+        taskToAwardRules[.medium] = Award(coin:3)
+        taskToAwardRules[.hard] = Award(coin:5)
     }
     
-    static func printRules() -> Void {
+    
+    func printRules() -> Void {
         
         print("taskToAwardRules")
-        for (key,value) in Rules.taskToAwardRules {
+        for (key,value) in taskToAwardRules {
             print("\(key) = \(value)")
         }
         
         print("awardToAvatarPartRules")
-        for (key,value) in Rules.awardToAvatarPartRules {
+        for (key,value) in awardToAvatarPartRules {
             print("\(key) = \(value)")
         }
-        
-
     }
     
+    func getAward(taskLevel: DifficultyLevel) -> Award {
+        guard let _ = taskToAwardRules[taskLevel] else {
+            return Award(coin:extremelyHighLevelCoins)
+        }
+        
+        return taskToAwardRules[taskLevel]!
+    }
+    
+    func getAward(avatarPart: AvatarPart) -> Award {
+        guard let _ = awardToAvatarPartRules[avatarPart] else {
+            return Award(coin:extremelyHighLevelCoins)
+        }
+        
+        return awardToAvatarPartRules[avatarPart]!
+    }
 }

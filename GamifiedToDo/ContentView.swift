@@ -8,15 +8,6 @@
 import SwiftUI
 
 struct ContentView: View {
-    @EnvironmentObject var userModel : UserModel
-    
-    //tobe deleted
-    init() {
-        let rules = Rules()
-        Rules.printRules()
-    }
-    //end
-    
     var body: some View {
        Overview()
             .environmentObject(UserModel(user: User.getASampleUser(), rules: Rules()))

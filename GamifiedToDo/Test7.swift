@@ -38,7 +38,7 @@ struct Test7: View {
         self.group = group
           
         let rules = Rules()
-          Rules.printRules()
+          rules.printRules()
         
       }
 

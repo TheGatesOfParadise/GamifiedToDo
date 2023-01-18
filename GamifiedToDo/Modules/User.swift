@@ -9,16 +9,16 @@ import Foundation
 
 class UserModel:ObservableObject {
     @Published var user: User
-    var rules: Rules
+    @Published var rules: Rules
     var userDailiesCompletionStatus: CGFloat {
         //get total dailiy list
         var total: Int = 0
         var completed: Int = 0
         user.dailiesList.forEach{ daily in
-            total += Rules.taskToAwardRules[daily.difficulty]!.coin
+            total += rules.getAward(taskLevel: daily.difficulty).coin
             
             if daily.isComplete {
-                completed += Rules.taskToAwardRules[daily.difficulty]!.coin
+                completed += rules.getAward(taskLevel: daily.difficulty).coin
             }
         }
         
@@ -36,12 +36,12 @@ class UserModel:ObservableObject {
         //total conins earned from ToDoList
         user.toDoList.forEach { toDo in
             if toDo.isComplete {
-                result += Rules.taskToAwardRules[toDo.difficulty]!.coin
+                result += rules.getAward(taskLevel: toDo.difficulty).coin
             }
             else {
                 toDo.checkList.forEach{ checkItem in
                     if checkItem.isComplete {
-                        result += Rules.taskToAwardRules[checkItem.difficulty]!.coin
+                        result += rules.getAward(taskLevel: checkItem.difficulty).coin
                     }
                 }
             }
@@ -50,7 +50,7 @@ class UserModel:ObservableObject {
         //total coins earned from Dailies
         user.dailiesList.forEach{ daily in
             if daily.isComplete {
-                result += Rules.taskToAwardRules[daily.difficulty]!.coin
+                result += rules.getAward(taskLevel: daily.difficulty).coin
             }
         }
         

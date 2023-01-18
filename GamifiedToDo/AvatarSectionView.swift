@@ -11,20 +11,23 @@
 
 import SwiftUI
 
+let iconWidth = 60.0
+let body_width = 25.0
+
 struct AvatarSelectionView: View {
     @EnvironmentObject var userModel : UserModel
     @State var selectedCategory: AvatarCategory = AvatarCategory.basic
     @State var selectedPart: AvatarPartType = AvatarPartType.head
-    @State var currentAvatar =  Avatar(parts: [AvatarPart(part: .head, category: .basic, index: 1),
+ /*   @State var currentAvatar =  Avatar(parts: [AvatarPart(part: .head, category: .basic, index: 1),
                                                AvatarPart(part: .body, category: .basic, index: 1),
                                                AvatarPart(part: .bottom, category: .basic, index: 1)
                                               ]
-                                        )
+                                        )  */
 
     var body: some View {
         Form {
             Section {
-                AvatarView(avatar:currentAvatar)
+                AvatarWithCoinView(avatar:userModel.user.avatar)
             }
             
             Section(header: Text("Choose"),
@@ -53,17 +56,32 @@ struct AvatarSelectionView: View {
                     ForEach(0..<3) {row in
                         GridRow {
                             ForEach(1..<5) { column in
-                                
-                                Image("\(selectedPart)_\(selectedCategory)_\(row * 4 + column)".lowercased())
-                                    .resizable()
-                                    .frame(width:60, height:60)
-                                    .padding()
-                                    .onTapGesture {
-                                        calculateAvatar(part: selectedPart,
-                                                        category: selectedCategory,
-                                                        position: (row * 4 + column))
-                                        
-                                    }
+                                ZStack{
+                                    Image("\(selectedPart)_\(selectedCategory)_\(row * 4 + column)".lowercased())
+                                        .resizable()
+                                        .frame(width:iconWidth, height:iconWidth)
+                                        .padding(.trailing, 15)
+                                        .onTapGesture {
+                                            calculateAvatar(part: selectedPart,
+                                                            category: selectedCategory,
+                                                            position: (row * 4 + column))
+                                            
+                                        }
+                                    Text(String(needsAward(userModel: userModel, part: selectedPart,
+                                                           category: selectedCategory,
+                                                           position: (row * 4 + column)).coin))
+                                        .bold()
+                                        .offset(x: iconWidth/2-5, y: iconWidth/2 * -1)
+                                    
+                                    if needsAward(userModel: userModel, part: selectedPart,
+                                                  category: selectedCategory,
+                                                  position: (row * 4 + column)).coin > userModel.userTotalCoin{
+                                           Rectangle()
+                                               .frame(width:iconWidth, height:iconWidth)
+                                               .padding(.trailing, 15)
+                                               .foregroundColor(.gray.opacity(0.8))
+                                       }
+                                }
                             }
                         }
                     }
@@ -73,16 +91,25 @@ struct AvatarSelectionView: View {
         }
     }
     
+    func needsAward (userModel: UserModel, part: AvatarPartType, category: AvatarCategory, position: Int) -> Award {
+        return userModel.rules.getAward(avatarPart: AvatarPart(part:part, category: category, index: position))
+        
+    }
+    
     //this func services this view
     func calculateAvatar (part: AvatarPartType, category: AvatarCategory, position: Int) {
         var index = 0
-        for i in 0..<currentAvatar.parts.count {
-            if currentAvatar.parts[i].part == part {
+        for i in 0..<userModel.user.avatar.parts.count {
+            if userModel.user.avatar.parts[i].part == part {
                 index = i
             }
         }
-        currentAvatar.parts[index].category = category
-        currentAvatar.parts[index].index = position
+        userModel.user.avatar.parts[index].category = category
+        userModel.user.avatar.parts[index].index = position
+        
+        //force a view to update comes from this post:
+        //https://stackoverflow.com/questions/56561630/swiftui-forcing-an-update
+        userModel.updateView()
     }
 }
 
@@ -92,13 +119,11 @@ struct AvatarSelectionView: View {
 //Dispalys an Avatar
 //It accepts 1 paramter: Avatar
 //This view assembles the avatar from the Avatar object
-let body_width = 25.0
+
 struct AvatarView: View {
-    @EnvironmentObject var userModel : UserModel
     var avatar: Avatar
     
     var body: some View {
-        HStack{
             VStack (spacing: 0){
                 Image(avatar.parts[0].imageName)
                     .resizable()
@@ -111,6 +136,16 @@ struct AvatarView: View {
                     .frame(width:body_width, height: body_width)
             }
             .padding(.leading, 30)
+    }
+}
+
+struct AvatarWithCoinView: View {
+    @EnvironmentObject var userModel : UserModel
+    var avatar: Avatar
+    
+    var body: some View {
+        HStack{
+            AvatarView(avatar: avatar)
             
             Spacer()
             
@@ -126,6 +161,7 @@ struct AvatarView: View {
         }
     }
 }
+
 
 
 //========================================================
