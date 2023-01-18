@@ -36,7 +36,7 @@ struct DailiesView: View {
                     Spacer()
                 }
                 
-                AddButtonPopup()
+               // AddButtonPopup()
                 
             }
         }

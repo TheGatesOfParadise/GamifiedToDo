@@ -40,7 +40,9 @@ struct ToDoView: View {
                     Spacer()
                 }
                 
-                AddButtonPopup()
+                //AddButtonPopup()
+               // AddButton()
+               //     .padding(.trailing, 8)
                 
             }
         }
@@ -49,6 +51,11 @@ struct ToDoView: View {
 
 struct HeaderView: View {
     @EnvironmentObject var userModel : UserModel
+  //  @State var emptyTodo =  Todo.getAnEmptyToDo()
+    
+ //   @State var hiddenFlag:Bool = false
+    //@Binding var toDo: Todo
+    
     var body: some View {
         HStack {
             AvatarView(avatar: userModel.user.avatar)
@@ -60,7 +67,28 @@ struct HeaderView: View {
                 Text(Date().today())
                     .font(.system(size: 10))
             }
+            
             Spacer()
+            
+            //add button
+            NavigationLink(destination: {
+                ToDoDetailsView(toDo: $userModel.user.toDoList[0], type: .New)
+            }, label: {
+                Text("+")
+                    .font(.system(.largeTitle))
+                    .frame(width: 60, height: 60)
+                    .foregroundColor(Color.white)
+                //.padding(.trailing, 7)
+            })
+            .background( Color.yellow.opacity(0.6))
+            .cornerRadius(30)
+            //.padding(.bottom, 10)
+            .shadow(color: Color.black.opacity(0.3),
+                    radius: 3,
+                    x: 3,
+                    y: 3)
+        
+            
         }
     }
 }
@@ -155,7 +183,7 @@ extension UIColor {
    }
 }
 
-//TODO: status is not calculated
+
 struct StatusCircle : View {
     @State var percent: CGFloat
     var body: some View {
@@ -197,6 +225,45 @@ struct ToDoView_Previews: PreviewProvider {
         ToDoView().environmentObject(UserModel(user: User.getASampleUser(), rules: Rules()))
     }
 }
+
+/*
+//beging of new add button
+struct AddButton: View {
+    @State var emptyTodo =  Todo.getAnEmptyToDo()
+    var body: some View {
+        VStack{
+            //Spacer()
+            HStack {
+                Spacer()
+                
+                NavigationLink(destination: {
+                    ToDoDetailsView(toDo: $emptyTodo, type: .New)
+                }, label: {
+                    Text("+")
+                        .font(.system(.largeTitle))
+                        .frame(width: 60, height: 60)
+                        .foregroundColor(Color.white)
+                    //.padding(.trailing, 7)
+                })
+                .background( Color.yellow.opacity(0.6))
+                .cornerRadius(30)
+                //.padding(.bottom, 10)
+                .shadow(color: Color.black.opacity(0.3),
+                        radius: 3,
+                        x: 3,
+                        y: 3)
+            }
+            Spacer()
+            Spacer()
+        }
+    }
+}
+
+
+//end of new add button
+*/
+
+/*
 //////////////////////////////////////////////////////////////////////////////////////////
 //beging of floating add  button
 struct AddButtonPopup: View {
@@ -302,3 +369,4 @@ struct floatButton: View {
 }
 //end of floating add button
 //////////////////////////////////////////////////////////////////////////////////////////
+*/

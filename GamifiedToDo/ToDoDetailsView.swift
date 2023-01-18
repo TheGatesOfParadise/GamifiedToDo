@@ -9,16 +9,31 @@ import SwiftUI
 
 let checkListSignSize = 12.0
 
+enum DetailsType: String {
+    case Edit
+    case New
+}
+
 struct ToDoDetailsView: View {
+    @EnvironmentObject var userModel : UserModel
     @Binding var toDo: Todo
     @State private var datePopOverPresented = false
     @State var localToDo: Todo
     @State var hiddenTrigger = false
+    var type: DetailsType
     
-    init(toDo: Binding<Todo>) {
+    init(toDo: Binding<Todo>, type: DetailsType) {
         self._toDo = toDo
         self.datePopOverPresented = false
-        self.localToDo = toDo.wrappedValue
+        self.type = type
+        
+        if type == .Edit {
+            self.localToDo = toDo.wrappedValue
+        }
+        else {
+            self.localToDo = Todo.getAnEmptyToDo()
+        }
+        
     }
     
     var body: some View {
@@ -47,9 +62,6 @@ struct ToDoDetailsView: View {
                     Section (header: Text("Difficulty Level")){
                         HStack {
                             ForEach(DifficultyLevel.allCases) { level in
-                                /*DifficultyLevelButton(selectedLevel: $localToDo.difficulty,
-                                 image: level)  */
-                                
                                 Button(action: {
                                     
                                 }) {
@@ -91,8 +103,6 @@ struct ToDoDetailsView: View {
                         }
                     }
                     
-                    //reminder???  necessary
-                    
                     //Tags
                     Section (header: Text("Tags")){
                         VStack (spacing: 0){
@@ -132,16 +142,29 @@ struct ToDoDetailsView: View {
                 ToolbarItemGroup(placement: ToolbarItemPlacement.navigationBarTrailing,
                                  content: {
                     HStack{
+                        if type == .Edit{
+                            Button(action: {
+                                //delete this todo
+                                //TODO: how to delete this todo without knowing user object
+                            }, label: {
+                                Text("DELETE")
+                                    .bold()
+                            })
+                        }
                         Button(action: {
-                            //delete this todo
-                            //TODO: how to delete this todo without knowing user object
-                        }, label: {
-                            Text("DELETE")
-                                .bold()
-                        })
-                        
-                        Button(action: {
-                            toDo = localToDo
+                            if type == .Edit {
+                                toDo = localToDo
+                            }
+                            else {
+                                userModel.user.toDoList.append(localToDo)
+                            }
+                            
+                            //force a view to update comes from this post:
+                            //https://stackoverflow.com/questions/56561630/swiftui-forcing-an-update
+                            userModel.updateView()
+                            
+                            //TODO: return to previous screen
+                            
                         }, label: {
                             Text("SAVE")
                                 .bold()
@@ -176,7 +199,6 @@ struct CheckListView: View {
                             //newItem.createdAt = Date()
                             
                             do {
-                                //try viewContext.save()
                                 
                                 checkList.append(newItem)
                                 
@@ -215,9 +237,9 @@ struct CheckListView: View {
                         return
                     }
                     let itemToDelete = $checkList[index]
-                   // viewContext.delete(itemToDelete)
+                  
                     do {
-                       // try viewContext.save()
+                       
                         checkList.remove(at: index)
                     }
                     catch {
@@ -232,7 +254,9 @@ struct CheckListView: View {
 
 struct ToDoDetailsView_Previews: PreviewProvider {
     @StateObject static var user = User.getASampleUser()
+   @State   static var toDo = Todo.getAnEmptyToDo()
     static var previews: some View {
-        ToDoDetailsView(toDo: $user.toDoList[0])
+        //ToDoDetailsView(toDo: $user.toDoList[0],type: .Edit)
+        ToDoDetailsView(toDo: $toDo, type: .New)
     }
 }

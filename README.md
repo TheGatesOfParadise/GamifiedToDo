@@ -24,3 +24,4 @@ sort task
 
 1.  add/delete a daily and todo
 2. reset status and coins every 24 hours, does daily needs to have date property? throw out expired todo list
+3. save button disable when data is not complete

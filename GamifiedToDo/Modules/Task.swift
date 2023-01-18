@@ -50,20 +50,9 @@ class Todo: Task{
         self.reminder = reminder
     }
     
-/*    override var isComplete: Bool {
-        get {
-            var result = true
-            for task in checkList {
-                result = result && task.isComplete
-            }
-            
-            return result
-        }
-        set {
-            self.isComplete = newValue
-        }*
+    static func getAnEmptyToDo() -> Todo {
+        return Todo(title: "", difficulty: .easy, notes: "", tags: [Tag](), due_date: Date.now, checkList: [Task](), reminder: Date.now)
     }
- */
     
     var numberOfCheckList: Int {
         return checkList.count

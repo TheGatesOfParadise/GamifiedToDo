@@ -40,7 +40,7 @@ struct CheckToDoView: View {
             
             VStack (alignment: .leading){
                 NavigationLink(
-                    destination: ToDoDetailsView(toDo: $toDo),
+                    destination: ToDoDetailsView(toDo: $toDo, type: .Edit),
                     label: {
                         Text(toDo.title)
                             .padding(.top, 10)
