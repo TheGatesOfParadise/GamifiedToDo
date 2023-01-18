@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-       Overview()
+        Overview()
             .environmentObject(UserModel(user: User.getASampleUser(), rules: Rules()))
     }
 }

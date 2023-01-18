@@ -87,8 +87,6 @@ class Todo: Task{
         // Convert Date to String
         return dateFormatter.string(from: due_date)
     }
-    
-    
 }
 
 class Dailies: Task {

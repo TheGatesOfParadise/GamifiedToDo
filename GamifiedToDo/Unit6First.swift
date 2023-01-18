@@ -33,10 +33,10 @@ struct Unit6First: View {
     }
 }
 
-//dismiss current view and go back to previous screen
-//https://stackoverflow.com/questions/56492965/swiftui-is-there-a-popviewcontroller-equivalent-in-swiftui
+//dismiss a page comes from
+//https://www.hackingwithswift.com/quick-start/swiftui/how-to-make-a-view-dismiss-itself
 struct NextPage: View{
-    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+    @Environment(\.dismiss) var dismiss
     var model: Model
     var body: some View{
         Button(action: {
@@ -47,7 +47,8 @@ struct NextPage: View{
         
         Button(action: {
             model.aList.append(5)
-            self.mode.wrappedValue.dismiss()
+            //self.mode.wrappedValue.dismiss()
+            dismiss()
         },
                label: {Text("Append 5")})
     }

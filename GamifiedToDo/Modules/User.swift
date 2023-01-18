@@ -68,6 +68,20 @@ class UserModel:ObservableObject {
         self.objectWillChange.send()
     }
     
+    func removToDo(whichIs: Todo) -> Void{
+        if let idx = user.toDoList.firstIndex(where: { $0 === whichIs }) {
+            user.toDoList.remove(at: idx)
+        }
+        updateView()
+    }
+    
+    func removDaily(whichIs: Dailies) -> Void{
+        if let idx = user.dailiesList.firstIndex(where: { $0 === whichIs }) {
+            user.dailiesList.remove(at: idx)
+        }
+        updateView()
+    }
+    
 }
 
 class User :ObservableObject  {

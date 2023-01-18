@@ -16,28 +16,25 @@ enum DetailsType: String {
 
 struct ToDoDetailsView: View {
     @EnvironmentObject var userModel : UserModel
+    @Environment(\.dismiss) private var dismiss
     @Binding var toDo: Todo
     @State private var datePopOverPresented = false
-    @State var localToDo: Todo
+    @State var localToDo: Todo = Todo.getAnEmptyToDo()
     @State var hiddenTrigger = false
     var type: DetailsType
     
     init(toDo: Binding<Todo>, type: DetailsType) {
         self._toDo = toDo
-        self.datePopOverPresented = false
+        //self._datePopOverPresented = false
         self.type = type
         
         if type == .Edit {
-            self.localToDo = toDo.wrappedValue
+            self._localToDo = State(initialValue: toDo.wrappedValue)
         }
-        else {
-            self.localToDo = Todo.getAnEmptyToDo()
-        }
-        
     }
     
     var body: some View {
-        NavigationView{
+       // NavigationView{
             VStack {
                 Form {
                     
@@ -146,6 +143,8 @@ struct ToDoDetailsView: View {
                             Button(action: {
                                 //delete this todo
                                 //TODO: how to delete this todo without knowing user object
+                                
+                                userModel.removToDo(whichIs: localToDo)
                             }, label: {
                                 Text("DELETE")
                                     .bold()
@@ -164,6 +163,7 @@ struct ToDoDetailsView: View {
                             userModel.updateView()
                             
                             //TODO: return to previous screen
+                            dismiss()
                             
                         }, label: {
                             Text("SAVE")
@@ -173,7 +173,7 @@ struct ToDoDetailsView: View {
                     
                 })
             }
-        }  //end of navigationview
+       // }  //end of navigationview
     }//end of view
 }//end of struct
 
@@ -256,7 +256,7 @@ struct ToDoDetailsView_Previews: PreviewProvider {
     @StateObject static var user = User.getASampleUser()
    @State   static var toDo = Todo.getAnEmptyToDo()
     static var previews: some View {
-        //ToDoDetailsView(toDo: $user.toDoList[0],type: .Edit)
-        ToDoDetailsView(toDo: $toDo, type: .New)
+        ToDoDetailsView(toDo: $user.toDoList[0],type: .Edit)
+        //ToDoDetailsView(toDo: $toDo, type: .New)
     }
 }
