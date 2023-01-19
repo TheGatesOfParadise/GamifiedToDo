@@ -7,14 +7,14 @@
 
 import Foundation
 
-enum DifficultyLevel: String, CaseIterable, Identifiable {
+enum DifficultyLevel: String, CaseIterable, Identifiable, Codable {
     var id: String { self.rawValue }
     case easy
     case medium
     case hard
 }
 
-enum Tag: String, CaseIterable, Identifiable {
+enum Tag: String, CaseIterable, Identifiable, Codable {
     var id: String { self.rawValue }
     case work
     case school
@@ -22,12 +22,41 @@ enum Tag: String, CaseIterable, Identifiable {
     case chores
 }
 
-class Task: Identifiable, ObservableObject {
+//Adding Codable conformance for @Published properties
+//https://www.hackingwithswift.com/books/ios-swiftui/adding-codable-conformance-for-published-properties
+class Task: Identifiable, ObservableObject, Codable {
     @Published var title: String
     @Published var difficulty: DifficultyLevel
     @Published var notes: String
     @Published var tags: [Tag]?
     @Published var isComplete: Bool = false
+    
+    enum CodingKeys: CodingKey {
+        case title
+        case difficulty
+        case notes
+        case tags
+        case isComplete
+    }
+    
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        title = try container.decode(String.self, forKey: .title)
+        notes = try container.decode(String.self, forKey: .notes)
+        isComplete = try container.decode(Bool.self, forKey: .isComplete)
+        difficulty = try container.decode(DifficultyLevel.self, forKey: .difficulty)
+        tags = try container.decode([Tag].self, forKey: .tags)
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(title, forKey: .title)
+        try container.encode(notes, forKey: .notes)
+        try container.encode(isComplete, forKey: .isComplete)
+        try container.encode(difficulty, forKey: .difficulty)
+        try container.encode(tags, forKey: .tags)
+    }
+    
     
     init(title: String, difficulty: DifficultyLevel, notes: String, tags: [Tag]?, isComplete: Bool) {
         self.title = title
@@ -42,6 +71,28 @@ class Todo: Task{
     @Published var due_date: Date = Date.now + 7
     @Published var checkList: [Task] = []
     @Published var reminder: Date = Date.now
+    
+    enum CodingKeys: CodingKey {
+        case due_date
+        case checkList
+        case reminder
+    }
+    
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        due_date = try container.decode(Date.self, forKey: .due_date)
+        checkList = try container.decode([Task].self, forKey: .checkList)
+        reminder = try container.decode(Date.self, forKey: .reminder)
+    }
+    
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(due_date, forKey: .due_date)
+        try container.encode(checkList, forKey: .checkList)
+        try container.encode(reminder, forKey: .reminder)
+    }
     
     init(title: String, difficulty: DifficultyLevel, notes: String, tags: [Tag]?, due_date: Date, checkList: [Task], reminder: Date) {
         super.init(title: title, difficulty: difficulty, notes: notes, tags: tags,isComplete: false)
@@ -92,6 +143,22 @@ class Todo: Task{
 class Dailies: Task {
     @Published var start_date: Date =  Date.now
     
+    enum CodingKeys: CodingKey {
+        case start_date
+    }
+    
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        start_date = try container.decode(Date.self, forKey: .start_date)
+    }
+    
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(start_date, forKey: .start_date)
+    }
+    
     init(title: String, difficulty: DifficultyLevel, notes: String, tags: [Tag], isComplete: Bool, start_date: Date) {
         super.init(title: title, difficulty: difficulty, notes: notes, tags: tags, isComplete: isComplete)
         self.start_date = start_date
@@ -102,6 +169,10 @@ class Dailies: Task {
     }
 }
 
+
+///
+///Utitliy extensions
+///
 extension Date {
     init(_ dateString:String) {
         let dateStringFormatter = DateFormatter()
@@ -159,4 +230,4 @@ extension Date {
 }
 
 ///TODO
-///1. dailies,   due_date ,  priority
+///1. dailies,   due_date ,  priority, sort by due date

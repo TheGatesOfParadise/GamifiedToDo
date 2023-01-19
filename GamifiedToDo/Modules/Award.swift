@@ -7,10 +7,8 @@
 
 import Foundation
 
-struct Award {
+struct Award: Codable {
     var coin: Int
-    
-
 }
 
 struct TaskToAward {
@@ -19,19 +17,19 @@ struct TaskToAward {
 }
 
 
-enum AvatarPartType: String, CaseIterable {
+enum AvatarPartType: String, CaseIterable, Codable {
     case head = "Head"
     case body = "Body"
     case bottom = "Bottom"
 }
 
-enum AvatarCategory: String, CaseIterable {
+enum AvatarCategory: String, CaseIterable, Codable {
     case basic = "Basic"
     case animal = "Animal"
     case castle = "Castle"
 }
 
-struct AvatarPart: Hashable {
+struct AvatarPart: Hashable, Codable {
     var part: AvatarPartType
     var category: AvatarCategory
     var index: Int
@@ -39,7 +37,7 @@ struct AvatarPart: Hashable {
     var imageName: String {"\(part.rawValue.lowercased())_\(category.rawValue.lowercased())_\(index)"}
 }
 
-struct Avatar {
+struct Avatar: Codable {
     var parts: [AvatarPart]
     
 }

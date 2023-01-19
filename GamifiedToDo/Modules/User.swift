@@ -8,7 +8,27 @@
 import Foundation
 
 class UserModel:ObservableObject {
-    @Published var user: User
+    @Published var user: User = User.getASampleUser() {
+    didSet {
+        if let encoded = try? JSONEncoder().encode(user) {
+            UserDefaults.standard.set(encoded, forKey: "user")
+        }
+    }
+}
+    
+/*
+init() {
+    if let savedItems = UserDefaults.standard.data(forKey: "Items") {
+        if let decodedItems = try? JSONDecoder().decode([ExpenseItem].self, from: savedItems) {
+            items = decodedItems
+            return
+        }
+    }
+
+    items = []
+}
+*/
+
     @Published var rules: Rules
     var userDailiesCompletionStatus: CGFloat {
         //get total dailiy list
@@ -84,12 +104,38 @@ class UserModel:ObservableObject {
     
 }
 
-class User :ObservableObject  {
+class User : ObservableObject, Codable  {
     @Published var name: String
     @Published var avatar: Avatar
     @Published var award: Award
     @Published var toDoList: [Todo]
     @Published var dailiesList: [Dailies]
+    
+    enum CodingKeys: CodingKey {
+        case name
+        case avatar
+        case award
+        case toDoList
+        case dailiesList
+    }
+    
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        name = try container.decode(String.self, forKey: .name)
+        avatar = try container.decode(Avatar.self, forKey: .avatar)
+        award = try container.decode(Award.self, forKey: .award)
+        toDoList = try container.decode([Todo].self, forKey: .toDoList)
+        dailiesList = try container.decode([Dailies].self, forKey: .dailiesList)
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(name, forKey: .name)
+        try container.encode(avatar, forKey: .avatar)
+        try container.encode(award, forKey: .award)
+        try container.encode(toDoList, forKey: .toDoList)
+        try container.encode(dailiesList, forKey: .dailiesList)
+    }
     
     init(name: String, avatar: Avatar, award: Award, toDoList: [Todo], dailiesList: [Dailies]) {
         self.name = name
