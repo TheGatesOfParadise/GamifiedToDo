@@ -29,13 +29,13 @@ struct ToDoView: View {
                 MiddleView()
                     .frame(width: shadeAreaWidth, height: 70)
                 //.padding(.bottom, 10)
-                //.border(.green, width: 1)
+                //.border(.green, width: 3)
                 
                 //list of todos
                 BottomToDoView()
                     .frame(width: shadeAreaWidth)
-                //.border(.blue, width: 1)
-                
+                //.border(.blue, width: 3)
+           
                 Spacer()
             }
         }
@@ -140,13 +140,26 @@ struct MiddleView: View {
 struct BottomToDoView: View {
     @EnvironmentObject var userModel : UserModel
     var body: some View {
-        ForEach($userModel.user.toDoList) { toDo in
-            HStack{
-                CheckToDoView(toDo: toDo)
-                    .cornerRadius(cornerRadiusValue)
-                    .padding(.bottom, 5)
+        List {
+            ForEach($userModel.user.toDoList) { toDo in
+                HStack{
+                    CheckToDoView(toDo: toDo)
+                        .cornerRadius(cornerRadiusValue)
+                }
             }
+            .onDelete(perform: { indexSet in
+                guard let index = indexSet.first else {
+                    return
+                }
+                userModel.user.toDoList.remove(at: index)
+                userModel.updateView()
+            })
+            .listRowInsets(.init(top: 5, leading: 0, bottom: 5, trailing: 0))
+            .listRowSeparator(.hidden)
         }
+        // remove space at the top of List comes from this post:
+        //https://developer.apple.com/forums/thread/662544
+        .listStyle(PlainListStyle())
     }
 }
 

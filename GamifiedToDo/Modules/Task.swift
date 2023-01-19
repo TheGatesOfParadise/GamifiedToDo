@@ -106,14 +106,10 @@ class Todo: Task{
     }
     
     var numberOfCheckList: Int {
-        guard checkList != nil else { return 0 }
-        
         return checkList.count
     }
     
     func numberofCompletedCheckList() -> Int {
-        guard checkList != nil else { return 0 }
-        
         var count = 0
         for task in checkList {
             if task.isComplete {

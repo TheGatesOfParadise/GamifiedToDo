@@ -69,13 +69,13 @@ struct DailiesDetailsView: View {
                             ForEach(Tag.allCases) {tag in
                                // TagCheckBox(tags:$localToDo.tags, currentTag: tag)
                                 HStack (alignment: .center){
-                                    Image(systemName: (localDaily.tags != nil) && localDaily.tags.contains(tag) ? "checkmark.square.fill": "square")
+                                    Image(systemName: localDaily.tags.contains(tag) ? "checkmark.square.fill": "square")
                                         .frame(maxHeight: .infinity)
                                         .padding()
                                         .foregroundColor(.black)
                                         .onTapGesture {
                                             //adjust tags
-                                            if  (localDaily.tags != nil) && localDaily.tags.contains(tag) {
+                                            if  localDaily.tags.contains(tag) {
                                                 let index = localDaily.tags.firstIndex { $0 == tag }
                                                 localDaily.tags.remove(at:index!)
                                             }
@@ -102,17 +102,6 @@ struct DailiesDetailsView: View {
                 ToolbarItemGroup(placement: ToolbarItemPlacement.navigationBarTrailing,
                                  content: {
                     HStack{
-                        if type == .Edit{
-                            Button(action: {
-                                //delete this todo
-                                //TODO: how to delete this todo without knowing user object
-                                
-                                userModel.removeDaily(whichIs: localDaily)
-                            }, label: {
-                                Text("DELETE")
-                                    .bold()
-                            })
-                        }
                         Button(action: {
                             if type == .Edit {
                                 daily = localDaily

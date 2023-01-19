@@ -85,14 +85,26 @@ struct BottomDailiesView: View {
     @EnvironmentObject var userModel : UserModel
     @State private var checked = true
     var body: some View {
-        
-        ForEach($userModel.user.dailiesList) { daily in
-           
-            HStack{
-                CheckDailiesView(daily: daily)
-                    .cornerRadius(cornerRadiusValue)
+        List {
+            ForEach($userModel.user.dailiesList) { daily in
+                HStack{
+                    CheckDailiesView(daily: daily)
+                        .cornerRadius(cornerRadiusValue)
+                }
             }
+            .onDelete(perform: { indexSet in
+                guard let index = indexSet.first else {
+                    return
+                }
+                userModel.user.dailiesList.remove(at: index)
+                userModel.updateView()
+            })
+            .listRowInsets(.init(top: 5, leading: 0, bottom: 5, trailing: 0))
+            .listRowSeparator(.hidden)
         }
+        // remove space at the top of List comes from this post:
+        //https://developer.apple.com/forums/thread/662544
+        .listStyle(PlainListStyle())
     }
 }
 

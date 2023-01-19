@@ -43,7 +43,7 @@ struct CheckToDoView: View {
                     destination: ToDoDetailsView(toDo: $toDo, type: .Edit),
                     label: {
                         Text(toDo.title)
-                            .padding(.top, 10)
+                            //.padding(.top, 10)
                             .font(.system(size: 18))
                             .strikethrough(toDo.isComplete )
                             .foregroundColor(toDo.isComplete  ? .gray : .black)
@@ -59,10 +59,10 @@ struct CheckToDoView: View {
                         .font(.system(size: 14))
                     
                 })
-                .padding(.top, 2)
+                //.padding(.top, 2)
             }
             .frame(maxHeight: .infinity)
-            .padding(.bottom, 10)
+            //.padding(.bottom, 10)
             
             Spacer()
             
@@ -71,8 +71,6 @@ struct CheckToDoView: View {
                 FractionView(numberator: toDo.numberofCompletedCheckList(), denominator: toDo.numberOfCheckList)
                     .padding(.trailing, 5)
             }
-            
-            
         }
         .fixedSize(horizontal: false, vertical: true)
         .cornerRadius(cornerRadiusValue)
