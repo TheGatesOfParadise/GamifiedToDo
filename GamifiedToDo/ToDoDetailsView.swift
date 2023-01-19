@@ -1,10 +1,7 @@
-//
-//  ToDoDetailsView.swift
-//  GamifiedToDo
-//
-//  Created by Mom macbook air on 1/11/23.
-//
-
+///
+///
+///
+///
 import SwiftUI
 
 let checkListSignSize = 12.0
@@ -34,10 +31,8 @@ struct ToDoDetailsView: View {
     }
     
     var body: some View {
-        // NavigationView{
         VStack {
             Form {
-                
                 //notes
                 Section (header: Text("Task Title")){
                     TextField("",
@@ -53,7 +48,6 @@ struct ToDoDetailsView: View {
                 Section (header: Text("Checklist (Swipe to delete an existing item)")){
                     CheckListView(checkList: $localToDo.checkList, hiddenFlag: $hiddenTrigger)
                 }
-                
                 
                 //difficulty
                 Section (header: Text("Difficulty Level")){
@@ -75,7 +69,6 @@ struct ToDoDetailsView: View {
                         }
                     }
                 }
-                
                 
                 //scheduling -  due date
                 Section (header: Text("Due Date")){
@@ -161,7 +154,6 @@ struct ToDoDetailsView: View {
                 
             })
         }
-        // }  //end of navigationview
     }//end of view
 }//end of struct
 

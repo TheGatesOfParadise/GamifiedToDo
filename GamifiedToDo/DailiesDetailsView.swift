@@ -1,11 +1,7 @@
-
-//
-//  ToDoDetailsView.swift
-//  GamifiedToDo
-//
-//  Created by Mom macbook air on 1/11/23.
-//
-
+///
+///
+///
+///
 import SwiftUI
 
 struct DailiesDetailsView: View {
@@ -27,10 +23,8 @@ struct DailiesDetailsView: View {
     }
     
     var body: some View {
-       // NavigationView{
             VStack {
                 Form {
-                    
                     //notes
                     Section (header: Text("Task Title")){
                         TextField("",
@@ -113,10 +107,8 @@ struct DailiesDetailsView: View {
                             //force a view to update comes from this post:
                             //https://stackoverflow.com/questions/56561630/swiftui-forcing-an-update
                             userModel.updateView()
-                            
-                            //TODO: return to previous screen
+
                             dismiss()
-                            
                         }, label: {
                             Text("SAVE")
                                 .bold()
@@ -125,7 +117,6 @@ struct DailiesDetailsView: View {
                     
                 })
             }
-       // }  //end of navigationview
     }//end of view
 }//end of struct
 

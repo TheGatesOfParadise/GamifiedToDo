@@ -1,4 +1,7 @@
-///TODO: todo/daily item color should be different from complete color
+///
+///
+///
+///
 
 import SwiftUI
 

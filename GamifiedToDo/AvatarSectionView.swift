@@ -1,9 +1,4 @@
-//
-//  AvatarSelectionView.swift
-//  GamifiedToDos
-//
-//  Created by Mom macbook air on 1/8/23.
-//
+
 ///
 ///
 ///Images come from https://caravanshoppe.com/products/olliblocks-starter-pack?variant=1027912704

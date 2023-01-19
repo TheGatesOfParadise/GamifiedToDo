@@ -21,20 +21,15 @@ struct ToDoView: View {
                 //show avatar
                 HeaderToDoView()
                     .frame(width: shadeAreaWidth)
-                //.padding(.bottom, 10)
-                //.border(.red, width: 1)
                     .offset(y:5)
                 
                 //show award
                 MiddleView()
                     .frame(width: shadeAreaWidth, height: 70)
-                //.padding(.bottom, 10)
-                //.border(.green, width: 3)
                 
                 //list of todos
                 BottomToDoView()
                     .frame(width: shadeAreaWidth)
-                //.border(.blue, width: 3)
            
                 Spacer()
             }
@@ -132,7 +127,6 @@ struct MiddleView: View {
                         .padding(.leading, 5)
                 }
             }
-            
         }
     }
 }

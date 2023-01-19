@@ -1,10 +1,7 @@
-//
-//  User.swift
-//  GamifiedToDo
-//
-//  Created by Mom macbook air on 1/9/23.
-//
-
+///
+///
+///
+///
 import Foundation
 
 class UserModel:ObservableObject {
@@ -29,12 +26,6 @@ class UserModel:ObservableObject {
     }
     
     var userDailiesCompletionStatus: CGFloat {
-  /*      guard
-            user.dailiesList != nil
-        else {
-            return 0.0
-        }
-  */
         //get total dailiy list
         var total: Int = 0
         var completed: Int = 0
@@ -56,10 +47,6 @@ class UserModel:ObservableObject {
     
     var userTotalCoin: Int {
         var result: Int = 0
-     //   if user.toDoList != nil {
-            //total conins earned from ToDoList
-            //if toDo item is complete, then get all its coins
-            //if toDo item is not complete, get completed portion of all its coins
             user.toDoList.forEach { toDo in
                 if toDo.isComplete {
                     result += rules.getAward(taskLevel: toDo.difficulty).coin
@@ -76,16 +63,12 @@ class UserModel:ObservableObject {
                     }
                 }
             }
-       // }
-        
-      //  if user.dailiesList != nil {
-            //total coins earned from Dailies
+
             user.dailiesList.forEach{ daily in
                 if daily.isComplete {
                     result += rules.getAward(taskLevel: daily.difficulty).coin
                 }
             }
-       // }
         
         return result
     }
@@ -118,7 +101,6 @@ class UserModel:ObservableObject {
         }
         updateView()
     }
-    
 }
 
 class User : ObservableObject, Codable  {
