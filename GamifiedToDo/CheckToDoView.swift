@@ -28,7 +28,7 @@ struct CheckToDoView: View {
                 .frame(maxHeight: .infinity)
                 .padding()
                 .foregroundColor(.black)
-                .background(toDo.isComplete  ? .green : checkColor())
+                .background(checkColor())
                 .onTapGesture {
                     toDo.isComplete.toggle()
                     

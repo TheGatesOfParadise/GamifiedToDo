@@ -31,7 +31,7 @@ struct CheckDailiesView: View {
                 .frame(maxHeight: .infinity)
                 .padding()
                 .foregroundColor(.black)
-                .background(daily.isComplete ? .green : checkColor)
+                .background(checkColor)
                 .onTapGesture {
                     daily.isComplete.toggle()
                     

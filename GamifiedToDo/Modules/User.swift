@@ -8,18 +8,16 @@
 import Foundation
 
 class UserModel:ObservableObject {
-    @Published var user: User = User.getASampleUser() {
+    @Published var user: User {
         didSet {
-            if let encoded = try? JSONEncoder().encode(user) {
-                UserDefaults.standard.set(encoded, forKey: "user")
-            }
+            saveUser()
         }
     }
     @Published var rules: Rules = Rules()
     
     init() {
-        if let savedItems = UserDefaults.standard.data(forKey: "user") {
-            if let decodedItems = try? JSONDecoder().decode(User.self, from: savedItems) {
+        if let data = UserDefaults.standard.data(forKey: "user") {
+            if let decodedItems = try? JSONDecoder().decode(User.self, from: data) {
                 user = decodedItems
                 return
             }
@@ -81,6 +79,13 @@ class UserModel:ObservableObject {
     //https://stackoverflow.com/questions/56561630/swiftui-forcing-an-update
     func updateView(){
         self.objectWillChange.send()
+        saveUser()
+    }
+    
+    func saveUser() {
+        if let data = try? JSONEncoder().encode(user) {
+            UserDefaults.standard.set(data, forKey: "user")
+        }
     }
     
     func removeToDo(whichIs: Todo) -> Void{
@@ -103,7 +108,11 @@ class User : ObservableObject, Codable  {
     @Published var name: String
     @Published var avatar: Avatar
     @Published var award: Award
-    @Published var toDoList: [Todo]
+    @Published var toDoList: [Todo] {
+        didSet {
+            print("toDoList is changed")
+        }
+    }
     @Published var dailiesList: [Dailies]
     
     enum CodingKeys: CodingKey {
