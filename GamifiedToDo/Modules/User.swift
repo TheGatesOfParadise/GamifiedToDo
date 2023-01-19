@@ -16,19 +16,25 @@ class UserModel:ObservableObject {
     @Published var rules: Rules = Rules()
     
     init() {
+        user = User.getASampleUser()
         if let data = UserDefaults.standard.data(forKey: "user") {
-            if let decodedItems = try? JSONDecoder().decode(User.self, from: data) {
-                user = decodedItems
-                return
+            do {
+                let decoded = try JSONDecoder().decode(User.self, from: data)
+                user = decoded
+                print(decoded)
+            } catch {
+                print(error)
             }
         }
-
-        user = User.getASampleUser()
     }
     
-    
-   
     var userDailiesCompletionStatus: CGFloat {
+  /*      guard
+            user.dailiesList != nil
+        else {
+            return 0.0
+        }
+  */
         //get total dailiy list
         var total: Int = 0
         var completed: Int = 0
@@ -50,27 +56,36 @@ class UserModel:ObservableObject {
     
     var userTotalCoin: Int {
         var result: Int = 0
-        
-        //total conins earned from ToDoList
-        user.toDoList.forEach { toDo in
-            if toDo.isComplete {
-                result += rules.getAward(taskLevel: toDo.difficulty).coin
-            }
-            else {
-                toDo.checkList.forEach{ checkItem in
-                    if checkItem.isComplete {
-                        result += rules.getAward(taskLevel: checkItem.difficulty).coin
+     //   if user.toDoList != nil {
+            //total conins earned from ToDoList
+            //if toDo item is complete, then get all its coins
+            //if toDo item is not complete, get completed portion of all its coins
+            user.toDoList.forEach { toDo in
+                if toDo.isComplete {
+                    result += rules.getAward(taskLevel: toDo.difficulty).coin
+                }
+                else {
+                    let toDoItemCoin = rules.getAward(taskLevel: toDo.difficulty).coin
+                    if toDo.checkList.count > 0  {
+                        let toDoItemCheckItemCoin = toDoItemCoin/toDo.checkList.count
+                        toDo.checkList.forEach{ checkItem in
+                            if checkItem.isComplete {
+                                result += toDoItemCheckItemCoin
+                            }
+                        }
                     }
                 }
             }
-        }
+       // }
         
-        //total coins earned from Dailies
-        user.dailiesList.forEach{ daily in
-            if daily.isComplete {
-                result += rules.getAward(taskLevel: daily.difficulty).coin
+      //  if user.dailiesList != nil {
+            //total coins earned from Dailies
+            user.dailiesList.forEach{ daily in
+                if daily.isComplete {
+                    result += rules.getAward(taskLevel: daily.difficulty).coin
+                }
             }
-        }
+       // }
         
         return result
     }
@@ -89,6 +104,7 @@ class UserModel:ObservableObject {
     }
     
     func removeToDo(whichIs: Todo) -> Void{
+       // guard user.toDoList != nil else { return }
         if let idx = user.toDoList.firstIndex(where: { $0 === whichIs }) {
             user.toDoList.remove(at: idx)
         }
@@ -96,6 +112,7 @@ class UserModel:ObservableObject {
     }
     
     func removeDaily(whichIs: Dailies) -> Void{
+       // guard user.dailiesList != nil else { return }
         if let idx = user.dailiesList.firstIndex(where: { $0 === whichIs }) {
             user.dailiesList.remove(at: idx)
         }
@@ -108,12 +125,8 @@ class User : ObservableObject, Codable  {
     @Published var name: String
     @Published var avatar: Avatar
     @Published var award: Award
-    @Published var toDoList: [Todo] {
-        didSet {
-            print("toDoList is changed")
-        }
-    }
-    @Published var dailiesList: [Dailies]
+    @Published var toDoList: [Todo] = [Todo]()
+    @Published var dailiesList: [Dailies] = [Dailies]()
     
     enum CodingKeys: CodingKey {
         case name
@@ -223,7 +236,7 @@ class User : ObservableObject, Codable  {
                                Todo(title: "Unit8 MVP",
                                     difficulty: .hard,
                                     notes: "gamified todos",
-                                    tags: nil,
+                                    tags: [],
                                     due_date: tenDaysFromToday!,
                                     checkList: [Task(title: "Step1",
                                                      difficulty: .medium,
@@ -240,7 +253,7 @@ class User : ObservableObject, Codable  {
                                Todo(title: "Unit9 MVP",
                                     difficulty: .hard,
                                     notes: "gamified todos",
-                                    tags: nil,
+                                    tags: [],
                                     due_date: tenDaysFromToday!,
                                     checkList: [],
                                     reminder: Date.init("2023/01/26 13:35"))],

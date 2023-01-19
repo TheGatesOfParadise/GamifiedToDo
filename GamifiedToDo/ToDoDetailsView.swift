@@ -106,18 +106,18 @@ struct ToDoDetailsView: View {
                             ForEach(Tag.allCases) {tag in
                                // TagCheckBox(tags:$localToDo.tags, currentTag: tag)
                                 HStack (alignment: .center){
-                                    Image(systemName: (localToDo.tags != nil) && localToDo.tags!.contains(tag) ? "checkmark.square.fill": "square")
+                                    Image(systemName: (localToDo.tags != nil) && localToDo.tags.contains(tag) ? "checkmark.square.fill": "square")
                                         .frame(maxHeight: .infinity)
                                         .padding()
                                         .foregroundColor(.black)
                                         .onTapGesture {
                                             //adjust tags
-                                            if  (localToDo.tags != nil) && localToDo.tags!.contains(tag) {
-                                                let index = localToDo.tags!.firstIndex { $0 == tag }
-                                                localToDo.tags!.remove(at:index!)
+                                            if  (localToDo.tags != nil) && localToDo.tags.contains(tag) {
+                                                let index = localToDo.tags.firstIndex { $0 == tag }
+                                                localToDo.tags.remove(at:index!)
                                             }
                                             else {
-                                                localToDo.tags?.append(tag)
+                                                localToDo.tags.append(tag)
                                             }
                                             
                                             hiddenTrigger.toggle()

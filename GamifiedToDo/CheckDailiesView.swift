@@ -66,6 +66,7 @@ struct CheckDailiesView: View {
 
 struct CheckDailiesView_Previews: PreviewProvider {
     @State static var user = User.getASampleUser()
+   
     
     static var previews: some View {
         CheckDailiesView(daily: $user.dailiesList[0])

@@ -28,7 +28,7 @@ class Task: Identifiable, ObservableObject, Codable {
     @Published var title: String
     @Published var difficulty: DifficultyLevel
     @Published var notes: String
-    @Published var tags: [Tag]?
+    @Published var tags: [Tag] = [Tag]()
     @Published var isComplete: Bool = false
     
     enum CodingKeys: CodingKey {
@@ -58,7 +58,7 @@ class Task: Identifiable, ObservableObject, Codable {
     }
     
     
-    init(title: String, difficulty: DifficultyLevel, notes: String, tags: [Tag]?, isComplete: Bool) {
+    init(title: String, difficulty: DifficultyLevel, notes: String, tags: [Tag], isComplete: Bool) {
         self.title = title
         self.difficulty = difficulty
         self.notes = notes
@@ -69,7 +69,7 @@ class Task: Identifiable, ObservableObject, Codable {
 
 class Todo: Task{
     @Published var due_date: Date = Date.now + 7
-    @Published var checkList: [Task] = []
+    @Published var checkList: [Task] = [Task]()
     @Published var reminder: Date = Date.now
     
     enum CodingKeys: CodingKey {
@@ -94,7 +94,7 @@ class Todo: Task{
         try container.encode(reminder, forKey: .reminder)
     }
     
-    init(title: String, difficulty: DifficultyLevel, notes: String, tags: [Tag]?, due_date: Date, checkList: [Task], reminder: Date) {
+    init(title: String, difficulty: DifficultyLevel, notes: String, tags: [Tag], due_date: Date, checkList: [Task], reminder: Date) {
         super.init(title: title, difficulty: difficulty, notes: notes, tags: tags,isComplete: false)
         self.due_date = due_date
         self.checkList = checkList
@@ -106,10 +106,14 @@ class Todo: Task{
     }
     
     var numberOfCheckList: Int {
+        guard checkList != nil else { return 0 }
+        
         return checkList.count
     }
     
     func numberofCompletedCheckList() -> Int {
+        guard checkList != nil else { return 0 }
+        
         var count = 0
         for task in checkList {
             if task.isComplete {

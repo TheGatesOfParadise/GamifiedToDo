@@ -69,18 +69,18 @@ struct DailiesDetailsView: View {
                             ForEach(Tag.allCases) {tag in
                                // TagCheckBox(tags:$localToDo.tags, currentTag: tag)
                                 HStack (alignment: .center){
-                                    Image(systemName: (localDaily.tags != nil) && localDaily.tags!.contains(tag) ? "checkmark.square.fill": "square")
+                                    Image(systemName: (localDaily.tags != nil) && localDaily.tags.contains(tag) ? "checkmark.square.fill": "square")
                                         .frame(maxHeight: .infinity)
                                         .padding()
                                         .foregroundColor(.black)
                                         .onTapGesture {
                                             //adjust tags
-                                            if  (localDaily.tags != nil) && localDaily.tags!.contains(tag) {
-                                                let index = localDaily.tags!.firstIndex { $0 == tag }
-                                                localDaily.tags!.remove(at:index!)
+                                            if  (localDaily.tags != nil) && localDaily.tags.contains(tag) {
+                                                let index = localDaily.tags.firstIndex { $0 == tag }
+                                                localDaily.tags.remove(at:index!)
                                             }
                                             else {
-                                                localDaily.tags?.append(tag)
+                                                localDaily.tags.append(tag)
                                             }
                                             
                                             hiddenTrigger.toggle()
