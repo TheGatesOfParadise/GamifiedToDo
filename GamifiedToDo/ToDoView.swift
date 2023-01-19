@@ -209,6 +209,6 @@ struct StatusCircle : View {
 struct ToDoView_Previews: PreviewProvider {
     
     static var previews: some View {
-        ToDoView().environmentObject(UserModel(user: User.getASampleUser(), rules: Rules()))
+        ToDoView().environmentObject(UserModel())
     }
 }

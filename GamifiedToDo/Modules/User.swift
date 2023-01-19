@@ -9,27 +9,27 @@ import Foundation
 
 class UserModel:ObservableObject {
     @Published var user: User = User.getASampleUser() {
-    didSet {
-        if let encoded = try? JSONEncoder().encode(user) {
-            UserDefaults.standard.set(encoded, forKey: "user")
+        didSet {
+            if let encoded = try? JSONEncoder().encode(user) {
+                UserDefaults.standard.set(encoded, forKey: "user")
+            }
         }
     }
-}
+    @Published var rules: Rules = Rules()
     
-/*
-init() {
-    if let savedItems = UserDefaults.standard.data(forKey: "Items") {
-        if let decodedItems = try? JSONDecoder().decode([ExpenseItem].self, from: savedItems) {
-            items = decodedItems
-            return
+    init() {
+        if let savedItems = UserDefaults.standard.data(forKey: "user") {
+            if let decodedItems = try? JSONDecoder().decode(User.self, from: savedItems) {
+                user = decodedItems
+                return
+            }
         }
+
+        user = User.getASampleUser()
     }
-
-    items = []
-}
-*/
-
-    @Published var rules: Rules
+    
+    
+   
     var userDailiesCompletionStatus: CGFloat {
         //get total dailiy list
         var total: Int = 0
@@ -75,11 +75,6 @@ init() {
         }
         
         return result
-    }
-
-    init(user:User, rules: Rules){
-        self.user = user
-        self.rules = rules
     }
     
     //force a view to update comes from this post:
@@ -208,12 +203,12 @@ class User : ObservableObject, Codable  {
                                                      difficulty: .medium,
                                                      notes: "finish step1å",
                                                      tags: [.school],
-                                                    isComplete: false),
+                                                     isComplete: false),
                                                 Task(title: "Step2",
                                                      difficulty: .medium,
                                                      notes: "finish step2",
                                                      tags: [.school, .health],
-                                                    isComplete: false)
+                                                     isComplete: false)
                                     ],
                                     reminder: Date.init("2023/02/12 14:50")),
                                Todo(title: "Unit8 MVP",
@@ -225,12 +220,12 @@ class User : ObservableObject, Codable  {
                                                      difficulty: .medium,
                                                      notes: "finish step1å",
                                                      tags: [.school, .health],
-                                                    isComplete: false),
+                                                     isComplete: false),
                                                 Task(title: "Step2",
                                                      difficulty: .medium,
                                                      notes: "finish step2",
                                                      tags: [.school, .health],
-                                                    isComplete: false)
+                                                     isComplete: false)
                                     ],
                                     reminder: Date.init("2023/01/26 13:35")),
                                Todo(title: "Unit9 MVP",

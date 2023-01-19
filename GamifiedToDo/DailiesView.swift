@@ -100,6 +100,6 @@ struct BottomDailiesView: View {
 struct DailiesView_Previews: PreviewProvider {
     
     static var previews: some View {
-        DailiesView().environmentObject(UserModel(user: User.getASampleUser(), rules: Rules()))
+        DailiesView().environmentObject(UserModel())
     }
 }

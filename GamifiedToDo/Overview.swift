@@ -36,6 +36,6 @@ struct Overview: View {
 
 struct Overview_Previews: PreviewProvider {
     static var previews: some View {
-        Overview().environmentObject(UserModel(user: User.getASampleUser(), rules: Rules()))
+        Overview().environmentObject(UserModel())
     }
 }

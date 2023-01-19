@@ -175,7 +175,7 @@ struct HeaderAvatarView: View {
 
 struct AvatarSelectionView_Previews: PreviewProvider {
     static var previews: some View {
-        AvatarSelectionView().environmentObject(UserModel(user: User.getASampleUser(), rules: Rules()))
+        AvatarSelectionView().environmentObject(UserModel())
     }
 }
 
