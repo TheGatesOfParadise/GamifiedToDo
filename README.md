@@ -26,3 +26,4 @@ sort task
 3. save button disable when data is not complete
 4. recalculate coins -- minus, look for due_date < toady's date'
 3. calculat todo coin -- check list is not right
+UserDefaults -- permanently save data
