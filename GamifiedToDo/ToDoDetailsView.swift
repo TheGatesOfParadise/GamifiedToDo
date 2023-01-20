@@ -150,13 +150,21 @@ struct ToDoDetailsView: View {
                         Text("SAVE")
                             .bold()
                     })
+                    .disabled(!fieldsAreFilled())
                 }
                 
             })
         }
-    }//end of view
-}//end of struct
-
+    }
+    
+    private func fieldsAreFilled() -> Bool {
+        var result = false
+        if localToDo.title != "" {
+                result = true
+            }
+        return result
+    }
+}
 
 struct CheckListView: View {
     @Binding var checkList: [Task]

@@ -113,12 +113,21 @@ struct DailiesDetailsView: View {
                             Text("SAVE")
                                 .bold()
                         })
+                        .disabled(!fieldsAreFilled())
                     }
                     
                 })
             }
-    }//end of view
-}//end of struct
+    }
+    
+    private func fieldsAreFilled() -> Bool {
+        var result = false
+        if localDaily.title != "" {
+                result = true
+            }
+        return result
+    }
+}
 
 
 struct DailiesDetailsView_Previews: PreviewProvider {

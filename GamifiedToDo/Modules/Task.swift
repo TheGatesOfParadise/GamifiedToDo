@@ -98,7 +98,7 @@ class Todo: Task{
     }
     
     static func getAnEmptyToDo() -> Todo {
-        return Todo(title: "", difficulty: .easy, notes: "", tags: [Tag](), due_date: Date.now, checkList: [Task](), reminder: Date.now)
+        return Todo(title: "", difficulty: .easy, notes: "", tags: [Tag](), due_date: Date.now.endOfDay, checkList: [Task](), reminder: Date.now)
     }
     
     var numberOfCheckList: Int {
@@ -177,7 +177,20 @@ extension Date {
         let date = dateStringFormatter.date(from: dateString)!
         self.init(timeInterval:0, since:date)
     }
+    
+    var startOfDay: Date {
+        return Calendar.current.startOfDay(for: self)
+    }
+
+    var endOfDay: Date {
+        var components = DateComponents()
+        components.day = 1
+        components.second = -1
+        return Calendar.current.date(byAdding: components, to: startOfDay)!
+    }
 }
+
+
 
 //https://stackoverflow.com/questions/40075850/swift-3-find-number-of-calendar-days-between-two-dates
 extension Date {

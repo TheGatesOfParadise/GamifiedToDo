@@ -20,16 +20,15 @@ sort task
   -- allowed,  award is propotional
 
 4. in Daily view,  add a few calendar day circles?   add next few days or add entire calendar  -- too much work
-
+5. change delete to swipe -- done
 
 ================
 
-
+1. throughly check if user is saved in every situation -- delete/add/edit/complete
+3. save button disable when data is not complete
+6. clean up warnings
 
 4. recalculate coins -- minus, look for due_date < toady's date'
-5. change delete to swipe
-3. save button disable when data is not complete
 2. reset status and coins every 24 hours, does daily needs to have date property? throw out expired todo list
-1. throughly check if user is saved in every situation -- delete/add/edit/complete
-6. clean up warnings
-7. what to do when you delete a todo/daily?   coin change?
+7. what to do when you delete a todo/daily?   coin changee
+8. when assign a due date,  what time should be assigned?
