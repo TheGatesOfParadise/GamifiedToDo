@@ -135,9 +135,11 @@ struct ToDoDetailsView: View {
                     Button(action: {
                         if type == .Edit {
                             toDo = localToDo
+                            userModel.sortToDoListByDueDate()
                         }
                         else {
                             userModel.user.toDoList.append(localToDo)
+                            userModel.sortToDoListByDueDate()
                         }
                         
                         //force a view to update comes from this post:

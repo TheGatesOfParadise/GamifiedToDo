@@ -10,7 +10,7 @@ class UserModel:ObservableObject {
             saveUser()
         }
     }
-    @Published var rules: Rules = Rules()
+    @Published var rules: Rules = Rules()  //TODO:  need published??
     
     init() {
         user = User.getASampleUser()
@@ -100,6 +100,12 @@ class UserModel:ObservableObject {
             user.dailiesList.remove(at: idx)
         }
         updateView()
+    }
+    
+    func sortToDoListByDueDate() {
+        print(user.toDoList.count)
+        user.toDoList.sort{$0.due_date < $1.due_date}
+        print(user.toDoList.count)
     }
 }
 
