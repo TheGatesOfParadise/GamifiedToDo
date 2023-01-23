@@ -218,5 +218,7 @@ struct ToDoDetailsView_Previews: PreviewProvider {
     static var previews: some View {
         ToDoDetailsView(toDo: $user.toDoList[0],type: .Edit)
         //ToDoDetailsView(toDo: $toDo, type: .New)
+        
+        //TODO:  in new case, todo assumes there is at least one item from array
     }
 }

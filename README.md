@@ -32,3 +32,6 @@ sort task
 2. reset status and coins every 24 hours, does daily needs to have date property? throw out expired todo list
 7. what to do when you delete a todo/daily?   coin changee
 8. when assign a due date,  what time should be assigned?
+
+
+never used @oveservedObject/@stateobject,  is it reason why view is not changed?
