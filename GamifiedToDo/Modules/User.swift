@@ -25,15 +25,19 @@ class UserModel:ObservableObject {
         }
     }
     
-    var userDailiesCompletionStatus: CGFloat {
-        //get total dailiy list
+    var userToDoCompletionStatus: CGFloat {
         var total: Int = 0
         var completed: Int = 0
-        user.dailiesList.forEach{ daily in
-            total += rules.getAward(taskLevel: daily.difficulty).coin
-            
-            if daily.isComplete {
-                completed += rules.getAward(taskLevel: daily.difficulty).coin
+        
+        user.toDoList.forEach{ toDo in
+            //look for due_date is today's to do item, only calculate those
+            let startOfToday = Date.now.startOfDay
+            let endOfToday = Date.now.endOfDay
+            let range = startOfToday...endOfToday
+            if range.contains(toDo.due_date) {
+                //due date is within today
+                total += rules.getAward(taskLevel: toDo.difficulty).coin
+                completed += getFractionCoinsFromAToDo(toDo: toDo)
             }
         }
         
@@ -48,27 +52,29 @@ class UserModel:ObservableObject {
     var userTotalCoin: Int {
         var result: Int = 0
             user.toDoList.forEach { toDo in
-                if toDo.isComplete {
-                    result += rules.getAward(taskLevel: toDo.difficulty).coin
-                }
-                else {
-                    let toDoItemCoin = rules.getAward(taskLevel: toDo.difficulty).coin
-                    if toDo.checkList.count > 0  {
-                        let toDoItemCheckItemCoin = toDoItemCoin/toDo.checkList.count
-                        toDo.checkList.forEach{ checkItem in
-                            if checkItem.isComplete {
-                                result += toDoItemCheckItemCoin
-                            }
-                        }
+                result += getFractionCoinsFromAToDo(toDo: toDo)
+            }
+        return result
+    }
+    
+    //TODO:  no logic to minus coins if not complete within due date
+    func getFractionCoinsFromAToDo (toDo: Todo) -> Int {
+        var result = 0;
+        
+        if toDo.isComplete {
+            result += rules.getAward(taskLevel: toDo.difficulty).coin
+        }
+        else {
+            let toDoItemCoin = rules.getAward(taskLevel: toDo.difficulty).coin
+            if toDo.checkList.count > 0  {
+                let toDoItemCheckItemCoin = toDoItemCoin/toDo.checkList.count
+                toDo.checkList.forEach{ checkItem in
+                    if checkItem.isComplete {
+                        result += toDoItemCheckItemCoin
                     }
                 }
             }
-
-            user.dailiesList.forEach{ daily in
-                if daily.isComplete {
-                    result += rules.getAward(taskLevel: daily.difficulty).coin
-                }
-            }
+        }
         
         return result
     }
@@ -94,18 +100,8 @@ class UserModel:ObservableObject {
         updateView()
     }
     
-    func removeDaily(whichIs: Dailies) -> Void{
-       // guard user.dailiesList != nil else { return }
-        if let idx = user.dailiesList.firstIndex(where: { $0 === whichIs }) {
-            user.dailiesList.remove(at: idx)
-        }
-        updateView()
-    }
-    
     func sortToDoListByDueDate() {
-        print(user.toDoList.count)
         user.toDoList.sort{$0.due_date < $1.due_date}
-        print(user.toDoList.count)
     }
 }
 
@@ -114,14 +110,12 @@ class User : ObservableObject, Codable  {
     @Published var avatar: Avatar
     @Published var award: Award
     @Published var toDoList: [Todo] = [Todo]()
-    @Published var dailiesList: [Dailies] = [Dailies]()
     
     enum CodingKeys: CodingKey {
         case name
         case avatar
         case award
         case toDoList
-        case dailiesList
     }
     
     required init(from decoder: Decoder) throws {
@@ -130,7 +124,6 @@ class User : ObservableObject, Codable  {
         avatar = try container.decode(Avatar.self, forKey: .avatar)
         award = try container.decode(Award.self, forKey: .award)
         toDoList = try container.decode([Todo].self, forKey: .toDoList)
-        dailiesList = try container.decode([Dailies].self, forKey: .dailiesList)
     }
     
     func encode(to encoder: Encoder) throws {
@@ -139,15 +132,13 @@ class User : ObservableObject, Codable  {
         try container.encode(avatar, forKey: .avatar)
         try container.encode(award, forKey: .award)
         try container.encode(toDoList, forKey: .toDoList)
-        try container.encode(dailiesList, forKey: .dailiesList)
     }
     
-    init(name: String, avatar: Avatar, award: Award, toDoList: [Todo], dailiesList: [Dailies]) {
+    init(name: String, avatar: Avatar, award: Award, toDoList: [Todo]) {
         self.name = name
         self.avatar = avatar
         self.award = award
         self.toDoList = toDoList
-        self.dailiesList = dailiesList
     }
     
     static func getASampleUser() -> User {
@@ -244,26 +235,7 @@ class User : ObservableObject, Codable  {
                                     tags: [],
                                     due_date: tenDaysFromToday!,
                                     checkList: [],
-                                    reminder: Date.init("2023/01/26 13:35"))],
-                    dailiesList: [Dailies(title: "Buy milk",
-                                          difficulty: .easy,
-                                          notes: "whole milk",
-                                          tags: [.chores],
-                                          isComplete: true,
-                                          start_date: Date.now),
-                                  Dailies(title: "wash hair",
-                                          difficulty: .medium,
-                                          notes: "",
-                                          tags: [.chores],
-                                          isComplete: true,
-                                          start_date: Date.now),
-                                  Dailies(title: "clean up room",
-                                          difficulty: .hard,
-                                          notes: "",
-                                          tags: [.chores],
-                                          isComplete: false,
-                                          start_date: Date.now)
-                    ]
+                                    reminder: Date.init("2023/01/26 13:35"))]
         )
     }
 }

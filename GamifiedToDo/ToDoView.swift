@@ -109,7 +109,7 @@ struct MiddleView: View {
             
             HStack {
                 HStack (spacing:0){
-                    Text("Daily tasks completion")
+                    Text("Today's todo completion")
                         .foregroundColor(.white)
                         .font(.system(size:12))
                         .padding()
@@ -122,15 +122,15 @@ struct MiddleView: View {
                         
                         //Andimation circle
                         Circle()
-                            .trim(from:0, to: userModel.userDailiesCompletionStatus)
+                            .trim(from:0, to: userModel.userToDoCompletionStatus)
                             .stroke(.yellow,
                                     style: StrokeStyle(lineWidth: 10))
                             .rotationEffect(.init(degrees: -90))
-                            .animation(Animation.linear(duration:0.8), value: userModel.userDailiesCompletionStatus)
+                            .animation(Animation.linear(duration:0.8), value: userModel.userToDoCompletionStatus)
                             .frame(width: statusCircleHeight, height: statusCircleHeight)
                         
                         
-                        Text( String(format: "%.1f", userModel.userDailiesCompletionStatus * 100))
+                        Text( String(format: "%.1f", userModel.userToDoCompletionStatus * 100))
                             .foregroundColor(.white)
                             .font(.system(size:14))
                         
@@ -191,7 +191,7 @@ struct BottomToDoView: View {
         
         switch selectedCategory {
         case .Active:
-            if toDo.due_date > Date.now.endOfDay {
+            if toDo.due_date > Date.now.endOfDay && !toDo.isComplete {
                 shouldDisplay = true
             }
         case .All :

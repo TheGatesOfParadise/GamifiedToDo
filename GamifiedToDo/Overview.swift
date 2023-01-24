@@ -14,11 +14,6 @@ struct Overview: View {
         ZStack {
             TabView (selection: $selectedTab){
                 Group {
-                    DailiesView()
-                        .tabItem {
-                            Label("Dailies", systemImage: "calendar")
-                        }
-                        .tag("Dailies")
                     ToDoView()
                         .tabItem {
                             Label("To Do's", systemImage: "checkmark.square.fill")

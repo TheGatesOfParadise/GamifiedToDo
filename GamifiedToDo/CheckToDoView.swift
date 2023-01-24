@@ -19,7 +19,9 @@ struct CheckToDoView: View {
     @Binding var toDo: Todo
     
     func checkColor() -> Color {
-        return  toDo.isWithinDays(interval: 3) ? pinkColor : toDo.isWithinDays(interval: 7) ? orangeColor : blueColor
+      /*  return  toDo.isWithinDays(interval: 3) ? pinkColor : toDo.isWithinDays(interval: 7) ? orangeColor : blueColor
+       */
+        return toDo.difficulty == .easy ? .green : toDo.difficulty == .medium ? .orange : pinkColor
     }
     
     var body: some View {

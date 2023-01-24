@@ -134,37 +134,6 @@ class Todo: Task{
         // Convert Date to String
         return dateFormatter.string(from: due_date)
     }
-    
-    //func 
-}
-
-class Dailies: Task {
-    @Published var start_date: Date =  Date.now
-    
-    enum CodingKeys: CodingKey {
-        case start_date
-    }
-    
-    required init(from decoder: Decoder) throws {
-        try super.init(from: decoder)
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        start_date = try container.decode(Date.self, forKey: .start_date)
-    }
-    
-    override func encode(to encoder: Encoder) throws {
-        try super.encode(to: encoder)
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(start_date, forKey: .start_date)
-    }
-    
-    init(title: String, difficulty: DifficultyLevel, notes: String, tags: [Tag], isComplete: Bool, start_date: Date) {
-        super.init(title: title, difficulty: difficulty, notes: notes, tags: tags, isComplete: isComplete)
-        self.start_date = start_date
-    }
-    
-    static func getAnEmptyDaily() -> Dailies {
-        Dailies(title: "", difficulty: .easy, notes: "", tags: [Tag](), isComplete: false, start_date: Date.now)
-    }
 }
 
 
@@ -239,6 +208,3 @@ extension Date {
       return greetingText
     }
 }
-
-///TODO
-///1. dailies,   due_date ,  priority, sort by due date
