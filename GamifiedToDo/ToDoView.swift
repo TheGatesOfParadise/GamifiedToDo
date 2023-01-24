@@ -15,12 +15,14 @@ let roundButtonWidth = 35.0
 
 struct ToDoView: View {
     @EnvironmentObject var userModel : UserModel
+    @State var selectedCategory = ToDoCategory.All
+    @State var selectedTags = [Tag.work, Tag.school, Tag.health, Tag.chores]
     
     var body: some View {
         NavigationView {
             VStack (alignment: .center){
                 //show avatar
-                HeaderToDoView()
+                HeaderToDoView(selectedCategory: $selectedCategory, selectedTags: $selectedTags)
                     .frame(width: shadeAreaWidth)
                     .offset(y:5)
                 
@@ -29,7 +31,7 @@ struct ToDoView: View {
                     .frame(width: shadeAreaWidth, height: 70)
                 
                 //list of todos
-                BottomToDoView()
+                BottomToDoView(selectedCategory: selectedCategory, selectedTags: selectedTags)
                     .frame(width: shadeAreaWidth)
            
                 Spacer()
@@ -41,6 +43,8 @@ struct ToDoView: View {
 struct HeaderToDoView: View {
     @EnvironmentObject var userModel : UserModel
     @State private var showingSheet = false
+    @Binding var selectedCategory: ToDoCategory
+    @Binding var selectedTags: [Tag]
     
     var body: some View {
         HStack {
@@ -73,7 +77,7 @@ struct HeaderToDoView: View {
                     x: 3,
                     y: 3)
             .sheet(isPresented: $showingSheet) {
-                FilterSheet(showingSheet: $showingSheet)
+                FilterSheet(showingSheet: $showingSheet, selectedCategory: $selectedCategory, selectedTags: $selectedTags)
                     .presentationDetents([.medium])
               }
             
@@ -155,10 +159,12 @@ struct MiddleView: View {
 
 struct BottomToDoView: View {
     @EnvironmentObject var userModel : UserModel
+    var selectedCategory: ToDoCategory
+    var selectedTags: [Tag]
     var body: some View {
         List {
             ForEach($userModel.user.toDoList) { toDo in
-                if !toDo.isComplete.wrappedValue {
+                if shouldShowToDo(toDo: toDo.wrappedValue, selectedCategory: selectedCategory, selectedTags: selectedTags){
                     HStack{
                         CheckToDoView(toDo: toDo)
                             .cornerRadius(cornerRadiusValue)

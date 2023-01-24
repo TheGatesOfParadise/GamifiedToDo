@@ -16,8 +16,8 @@ enum ToDoCategory: String, CaseIterable, Identifiable{
 
 struct FilterSheet: View {
     @Binding var showingSheet: Bool
-    @State var selectedCategory = ToDoCategory.All
-    @State var selectedTags = [Tag.work, Tag.school, Tag.health, Tag.chores]
+    @Binding var selectedCategory: ToDoCategory
+    @Binding var selectedTags: [Tag]
     
     var body: some View {
         VStack {
@@ -38,7 +38,7 @@ struct FilterSheet: View {
             
             HStack (spacing: 25){
                 ForEach(ToDoCategory.allCases) {category in
-                    Button(action:{},
+                    Button(action:{selectedCategory = category},
                            label:{
                         ButtonText(isSelected: selectedCategory == category,
                                    title: category.rawValue)
@@ -57,16 +57,14 @@ struct FilterSheet: View {
                                     .padding()
                                     .foregroundColor(.black)
                                     .onTapGesture {
-                                        /*        //adjust tags
-                                         if localToDo.tags.contains(tag) {
-                                         let index = localToDo.tags.firstIndex { $0 == tag }
-                                         localToDo.tags.remove(at:index!)
+                                        //adjust selectedTags
+                                         if selectedTags.contains(tag) {
+                                         let index = selectedTags.firstIndex { $0 == tag }
+                                             selectedTags.remove(at:index!)
                                          }
                                          else {
-                                         localToDo.tags.append(tag)
+                                             selectedTags.append(tag)
                                          }
-                                         
-                                         hiddenTrigger.toggle() */
                                     }
                                 Text(tag.rawValue)
                                     .padding(.top, 10)
@@ -102,7 +100,9 @@ struct ButtonText: View {
 
 struct FilterSheet_Previews: PreviewProvider {
     @State static var isShowing = true
+    @State static var selectedCategory = ToDoCategory.All
+    @State static var selectedTags = [Tag.work, Tag.school, Tag.health, Tag.chores]
     static var previews: some View {
-        FilterSheet(showingSheet: $isShowing)
+        FilterSheet(showingSheet: $isShowing, selectedCategory: $selectedCategory, selectedTags: $selectedTags)
     }
 }
