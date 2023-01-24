@@ -108,7 +108,7 @@ struct MiddleView: View {
             Color(middleViewBackgroundColor)
             HStack {
                 HStack (spacing:0){
-                    Text("Today's todo completion")
+                    Text("Today's completion")
                         .foregroundColor(.white)
                         .font(.system(size:12))
                         .padding()
