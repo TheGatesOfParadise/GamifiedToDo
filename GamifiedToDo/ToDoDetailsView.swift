@@ -97,7 +97,6 @@ struct ToDoDetailsView: View {
                 Section (header: Text("Tags")){
                     VStack (spacing: 0){
                         ForEach(Tag.allCases) {tag in
-                            // TagCheckBox(tags:$localToDo.tags, currentTag: tag)
                             HStack (alignment: .center){
                                 Image(systemName: localToDo.tags.contains(tag) ? "checkmark.square.fill": "square")
                                     .frame(maxHeight: .infinity)

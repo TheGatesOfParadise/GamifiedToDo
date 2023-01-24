@@ -11,6 +11,7 @@ let orangeColor = Color(uiColor: UIColor(rgb: 0xFFCC99))
 let pinkColor = Color(uiColor: UIColor(rgb: 0xFF6666))
 let statusCircleHeight = 45.0
 let middleViewBackgroundColor = UIColor(red:11/255.0, green: 15/255.0, blue: 128/255.0, alpha: 1)
+let roundButtonWidth = 35.0
 
 struct ToDoView: View {
     @EnvironmentObject var userModel : UserModel
@@ -39,6 +40,7 @@ struct ToDoView: View {
 
 struct HeaderToDoView: View {
     @EnvironmentObject var userModel : UserModel
+    @State private var showingSheet = false
     
     var body: some View {
         HStack {
@@ -54,23 +56,43 @@ struct HeaderToDoView: View {
             
             Spacer()
             
-            //add button
+            //sort button
+            Button(action: {
+                showingSheet.toggle()
+            }, label: {
+                Image("sort_down")
+                    .resizable()
+                    .font(.system(.largeTitle))
+                    .frame(width: roundButtonWidth, height: roundButtonWidth)
+                    .foregroundColor(Color.white)
+            })
+            .background( Color.yellow.opacity(0.6))
+            .cornerRadius(roundButtonWidth/2)
+            .shadow(color: Color.black.opacity(0.3),
+                    radius: 3,
+                    x: 3,
+                    y: 3)
+            .sheet(isPresented: $showingSheet) {
+                FilterSheet(showingSheet: $showingSheet)
+                    .presentationDetents([.medium])
+              }
+            
+            //add button TODO:can resue same code
             NavigationLink(destination: {
                 ToDoDetailsView(toDo: $userModel.user.toDoList[0], type: .New)
             }, label: {
                 Text("+")
                     .font(.system(.largeTitle))
-                    .frame(width: 60, height: 60)
-                    .foregroundColor(Color.white)
+                    .frame(width: roundButtonWidth, height: roundButtonWidth)
+                    //.foregroundColor(Color.white)
+                    .foregroundColor(Color(middleViewBackgroundColor))
             })
             .background( Color.yellow.opacity(0.6))
-            .cornerRadius(30)
+            .cornerRadius(roundButtonWidth/2)
             .shadow(color: Color.black.opacity(0.3),
                     radius: 3,
                     x: 3,
                     y: 3)
-            
-            
         }
     }
 }
@@ -136,9 +158,11 @@ struct BottomToDoView: View {
     var body: some View {
         List {
             ForEach($userModel.user.toDoList) { toDo in
-                HStack{
-                    CheckToDoView(toDo: toDo)
-                        .cornerRadius(cornerRadiusValue)
+                if !toDo.isComplete.wrappedValue {
+                    HStack{
+                        CheckToDoView(toDo: toDo)
+                            .cornerRadius(cornerRadiusValue)
+                    }
                 }
             }
             .onDelete(perform: { indexSet in
@@ -154,6 +178,40 @@ struct BottomToDoView: View {
         // remove space at the top of List comes from this post:
         //https://developer.apple.com/forums/thread/662544
         .listStyle(PlainListStyle())
+    }
+    
+    func shouldShowToDo(toDo: Todo, selectedCategory: ToDoCategory, selectedTags: [Tag] ) -> Bool {
+        var shouldDisplay = false
+        
+        switch selectedCategory {
+        case .Active:
+            if toDo.due_date > Date.now.endOfDay {
+                shouldDisplay = true
+            }
+        case .All :
+            shouldDisplay = true
+            
+        case .Completed :
+            shouldDisplay = toDo.isComplete
+        }
+        
+        if !shouldDisplay {
+            return false
+        }
+        
+        guard selectedTags.count > 0
+        else {
+            return shouldDisplay
+        }
+        
+        for tag in selectedTags {
+            if toDo.tags.contains(tag) {
+                shouldDisplay = true
+                break
+            }
+        }
+     
+        return shouldDisplay
     }
 }
 
