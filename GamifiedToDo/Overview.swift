@@ -21,13 +21,14 @@ struct Overview: View {
                         .tag("TODos")
                     AvatarSelectionView()
                         .tabItem {
-                            Label("Rewards", systemImage: "envelope.fill")
+                            Label("Award", systemImage: "gift.fill")
                         }
                         .tag("Rewards")
                 }
                 .toolbarBackground(.visible, for: .tabBar)
                 .toolbarBackground(Color.yellow, for: .tabBar)
             }
+            .tint(Color(middleViewBackgroundColor))
         }
     }
 }

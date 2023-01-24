@@ -106,7 +106,6 @@ struct MiddleView: View {
     var body: some View {
         ZStack {
             Color(middleViewBackgroundColor)
-            
             HStack {
                 HStack (spacing:0){
                     Text("Today's todo completion")
@@ -133,13 +132,9 @@ struct MiddleView: View {
                         Text( String(format: "%.1f", userModel.userToDoCompletionStatus * 100))
                             .foregroundColor(.white)
                             .font(.system(size:14))
-                        
                     }
-                    //.padding()
                 }
-                
                 Spacer()
-                
                 HStack (spacing: 0) {
                     Image("Coin")
                         .resizable()
@@ -152,6 +147,21 @@ struct MiddleView: View {
                         .padding(.trailing, 10)
                         .padding(.leading, 5)
                 }
+            }
+            
+            //fireworks animation
+            if userModel.userToDoCompletionStatus == 1.0 {
+                Circle()
+                    .fill(Color.blue)
+                    .frame(width: 12, height: 12)
+                    .modifier(ParticlesModifier())
+                    .offset(x: -100, y : -50)
+                
+                Circle()
+                    .fill(Color.red)
+                    .frame(width: 12, height: 12)
+                    .modifier(ParticlesModifier())
+                    .offset(x: 60, y : 70)
             }
         }
     }
