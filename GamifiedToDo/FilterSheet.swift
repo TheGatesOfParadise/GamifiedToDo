@@ -11,6 +11,7 @@ enum ToDoCategory: String, CaseIterable, Identifiable{
     var id: String { self.rawValue }
     case All
     case Active
+    case Today
     case Completed
 }
 
@@ -29,14 +30,17 @@ struct FilterSheet: View {
                 
                 Spacer()
                 
-                Button(action:{showingSheet.toggle()
+                Button(action:{
+                    //TODO: not finished
+                    showingSheet.toggle()
                 }, label:{
                     Text("Reset")
+                        .bold()
                 })
                 .padding()
             }
             
-            HStack (spacing: 25){
+            HStack (spacing: 10){
                 ForEach(ToDoCategory.allCases) {category in
                     Button(action:{selectedCategory = category},
                            label:{
@@ -88,7 +92,8 @@ struct ButtonText: View {
     let title: String
     var body: some View {
         Text(title)
-            .frame(width: 100,
+            .font(.system(size:15))
+            .frame(width: shadeAreaWidth/4 - 15,
                    height: 50,
                    alignment: .center)
             .background(isSelected ? .blue : .gray.opacity(0.4))
@@ -101,7 +106,7 @@ struct ButtonText: View {
 struct FilterSheet_Previews: PreviewProvider {
     @State static var isShowing = true
     @State static var selectedCategory = ToDoCategory.All
-    @State static var selectedTags = [Tag.work, Tag.school, Tag.health, Tag.chores]
+    @State static var selectedTags = [Tag]()
     static var previews: some View {
         FilterSheet(showingSheet: $isShowing, selectedCategory: $selectedCategory, selectedTags: $selectedTags)
     }

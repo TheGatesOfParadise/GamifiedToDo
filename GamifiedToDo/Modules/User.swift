@@ -25,17 +25,14 @@ class UserModel:ObservableObject {
         }
     }
     
+    //TODO: revisit logic
     var userToDoCompletionStatus: CGFloat {
         var total: Int = 0
         var completed: Int = 0
         
         user.toDoList.forEach{ toDo in
             //look for due_date is today's to do item, only calculate those
-            let startOfToday = Date.now.startOfDay
-            let endOfToday = Date.now.endOfDay
-            let range = startOfToday...endOfToday
-            if range.contains(toDo.due_date) {
-                //due date is within today
+            if toDo.due_date.isWithInToday() {
                 total += rules.getAward(taskLevel: toDo.difficulty).coin
                 completed += getFractionCoinsFromAToDo(toDo: toDo)
             }

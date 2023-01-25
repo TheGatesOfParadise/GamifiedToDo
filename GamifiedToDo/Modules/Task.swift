@@ -161,6 +161,20 @@ extension Date {
     }
 }
 
+///check if within today's range
+extension Date {
+    func isWithInToday() -> Bool {
+        let startOfToday = Date.now.startOfDay
+        let endOfToday = Date.now.endOfDay
+        let range = startOfToday...endOfToday
+        if range.contains(self) {
+            return true
+        }
+        else {
+            return false
+        }
+    }
+}
 
 
 //https://stackoverflow.com/questions/40075850/swift-3-find-number-of-calendar-days-between-two-dates

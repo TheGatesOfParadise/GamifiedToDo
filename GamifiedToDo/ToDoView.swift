@@ -16,7 +16,7 @@ let roundButtonWidth = 35.0
 struct ToDoView: View {
     @EnvironmentObject var userModel : UserModel
     @State var selectedCategory = ToDoCategory.All
-    @State var selectedTags = [Tag.work, Tag.school, Tag.health, Tag.chores]
+    @State var selectedTags = [Tag]()
     
     var body: some View {
         NavigationView {
@@ -33,7 +33,7 @@ struct ToDoView: View {
                 //list of todos
                 BottomToDoView(selectedCategory: selectedCategory, selectedTags: selectedTags)
                     .frame(width: shadeAreaWidth)
-           
+                
                 Spacer()
             }
         }
@@ -79,7 +79,7 @@ struct HeaderToDoView: View {
             .sheet(isPresented: $showingSheet) {
                 FilterSheet(showingSheet: $showingSheet, selectedCategory: $selectedCategory, selectedTags: $selectedTags)
                     .presentationDetents([.medium])
-              }
+            }
             
             //add button TODO:can resue same code
             NavigationLink(destination: {
@@ -88,7 +88,7 @@ struct HeaderToDoView: View {
                 Text("+")
                     .font(.system(.largeTitle))
                     .frame(width: roundButtonWidth, height: roundButtonWidth)
-                    //.foregroundColor(Color.white)
+                //.foregroundColor(Color.white)
                     .foregroundColor(Color(middleViewBackgroundColor))
             })
             .background( Color.yellow.opacity(0.6))
@@ -209,26 +209,31 @@ struct BottomToDoView: View {
             
         case .Completed :
             shouldDisplay = toDo.isComplete
+            
+        case .Today :
+            shouldDisplay = toDo.due_date.isWithInToday()
         }
-        
-        if !shouldDisplay {
-            return false
-        }
-        
-        guard selectedTags.count > 0
-        else {
-            return shouldDisplay
-        }
-        
-        for tag in selectedTags {
-            if toDo.tags.contains(tag) {
-                shouldDisplay = true
-                break
-            }
-        }
-     
+    
+    if !shouldDisplay {
+        return false
+    }
+    
+    guard selectedTags.count > 0
+    else {
         return shouldDisplay
     }
+        
+    shouldDisplay = false
+    //if multiple tags are checked in the filter, it's OR relationship
+    for tag in selectedTags {
+        if toDo.tags.contains(tag) {
+            shouldDisplay = true
+            break
+        }
+    }
+    
+    return shouldDisplay
+}
 }
 
 //use rgb to represent a UIColor
@@ -261,13 +266,11 @@ struct StatusCircle : View {
                               green: 15/255.0,
                               blue: 128/255.0,
                               alpha: 1))
-                
                 ZStack {
                     //track circle
                     Circle()
                         .stroke(.white.opacity(0.3),
                                 style: StrokeStyle(lineWidth: 30))
-                    
                     //Andimation circle
                     Circle()
                         .trim(from:0, to: percent)
@@ -275,17 +278,59 @@ struct StatusCircle : View {
                                 style: StrokeStyle(lineWidth: 30))
                         .rotationEffect(.init(degrees: -90))
                         .animation(Animation.linear(duration:0.8), value: percent)
-                    
-                    
                     Text("\(Int(self.percent * 100.0))%")
                         .foregroundColor(.white)
                         .font(.system(size:52))
-                    
                 }.padding()
             }
         }
     }
 }
+
+//Firework effect comes from this post:
+//https://betterprogramming.pub/creating-confetti-particle-effects-using-swiftui-afda4240de6b
+struct FireworkParticlesGeometryEffect : GeometryEffect {
+    var time : Double
+    var speed = Double.random(in: 20 ... 200)
+    var direction = Double.random(in: -Double.pi ...  Double.pi)
+    
+    var animatableData: Double {
+        get { time }
+        set { time = newValue }
+    }
+    func effectValue(size: CGSize) -> ProjectionTransform {
+        let xTranslation = speed * cos(direction) * time
+        let yTranslation = speed * sin(direction) * time
+        let affineTranslation =  CGAffineTransform(translationX: xTranslation, y: yTranslation)
+        return ProjectionTransform(affineTranslation)
+    }
+}
+
+
+struct ParticlesModifier: ViewModifier {
+    @State var time = 0.0
+    @State var scale = 0.1
+    let duration = 5.0
+    
+    func body(content: Content) -> some View {
+        ZStack {
+            ForEach(0..<80, id: \.self) { index in
+                content
+                    .hueRotation(Angle(degrees: time * 80))
+                    .scaleEffect(scale)
+                    .modifier(FireworkParticlesGeometryEffect(time: time))
+                    .opacity(((duration-time) / duration))
+            }
+        }
+        .onAppear {
+            withAnimation (.easeOut(duration: duration)) {
+                self.time = duration
+                self.scale = 1.0
+            }
+        }
+    }
+}
+
 
 struct ToDoView_Previews: PreviewProvider {
     
