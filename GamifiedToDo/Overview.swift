@@ -8,7 +8,6 @@ import SwiftUI
 struct Overview: View {
     
     @State var selectedTab = "TODos"
-    @EnvironmentObject var userModel : UserModel
         
     var body: some View {
         ZStack {
@@ -35,6 +34,6 @@ struct Overview: View {
 
 struct Overview_Previews: PreviewProvider {
     static var previews: some View {
-        Overview().environmentObject(UserModel())
+        Overview().environmentObject(DataModel())
     }
 }

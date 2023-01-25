@@ -14,7 +14,7 @@
 import SwiftUI
 
 struct CheckToDoView: View {
-    @EnvironmentObject var userModel : UserModel
+    @EnvironmentObject var dataModel : DataModel
     @State var hiddenFlag:Bool = false
     @Binding var toDo: Todo
     
@@ -34,9 +34,14 @@ struct CheckToDoView: View {
                 .onTapGesture {
                     toDo.isComplete.toggle()
                     
+                    if toDo.due_date > Date.now.startOfDay && toDo.isComplete {
+                        //update user's award
+                        dataModel.user.award.add(award:dataModel.rules.getAward(taskLevel: toDo.difficulty))
+                    }
+                    
                     //force a view to update comes from this post:
                     //https://stackoverflow.com/questions/56561630/swiftui-forcing-an-update
-                    userModel.updateView()
+                    dataModel.updateView()
                     hiddenFlag.toggle()
                 }
             

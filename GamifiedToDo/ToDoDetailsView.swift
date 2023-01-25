@@ -12,7 +12,7 @@ enum DetailsType: String {
 }
 
 struct ToDoDetailsView: View {
-    @EnvironmentObject var userModel : UserModel
+    @EnvironmentObject var dataModel : DataModel
     @Environment(\.dismiss) private var dismiss
     @Binding var toDo: Todo
     @State private var datePopOverPresented = false
@@ -34,7 +34,7 @@ struct ToDoDetailsView: View {
         VStack {
             Form {
                 //notes
-                Section (header: Text("Task Title")){
+                Section (header: Text("Title")){
                     TextField("",
                               text: $localToDo.title)
                 }
@@ -45,7 +45,7 @@ struct ToDoDetailsView: View {
                 }
                 
                 //checklist
-                Section (header: Text("Checklist (Swipe to delete an existing item)")){
+                Section (header: Text("Checklist (Swipe to delete)")){
                     CheckListView(checkList: $localToDo.checkList, hiddenFlag: $hiddenTrigger)
                 }
                 
@@ -134,16 +134,16 @@ struct ToDoDetailsView: View {
                     Button(action: {
                         if type == .Edit {
                             toDo = localToDo
-                            userModel.sortToDoListByDueDate()
+                            dataModel.sortToDoListByDueDate()
                         }
                         else {
-                            userModel.user.toDoList.append(localToDo)
-                            userModel.sortToDoListByDueDate()
+                            dataModel.user.toDoList.append(localToDo)
+                            dataModel.sortToDoListByDueDate()
                         }
                         
                         //force a view to update comes from this post:
                         //https://stackoverflow.com/questions/56561630/swiftui-forcing-an-update
-                        userModel.updateView()
+                        dataModel.updateView()
                         
                         dismiss()
                         

@@ -5,6 +5,18 @@ import Foundation
 
 struct Award: Codable {
     var coin: Int
+    
+    init(coin: Int) {
+        self.coin = coin
+    }
+    
+    mutating func add(award: Award) {
+        self.coin += award.coin
+    }
+    
+    mutating func minus(award: Award) {
+        self.coin -= award.coin
+    }
 }
 
 struct TaskToAward {

@@ -24,6 +24,7 @@
 		FD61BC80296FAEE5008D7DA1 /* DateSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD61BC7F296FAEE5008D7DA1 /* DateSelectionView.swift */; };
 		FDEE2CDC297F060D0024CD7E /* FilterSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDEE2CDB297F060D0024CD7E /* FilterSheet.swift */; };
 		FDEE2CDE297F73F00024CD7E /* Test1.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDEE2CDD297F73F00024CD7E /* Test1.swift */; };
+		FDEE2CE02980D1A70024CD7E /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDEE2CDF2980D1A70024CD7E /* DataModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 		FD61BC7F296FAEE5008D7DA1 /* DateSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSelectionView.swift; sourceTree = "<group>"; };
 		FDEE2CDB297F060D0024CD7E /* FilterSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSheet.swift; sourceTree = "<group>"; };
 		FDEE2CDD297F73F00024CD7E /* Test1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test1.swift; sourceTree = "<group>"; };
+		FDEE2CDF2980D1A70024CD7E /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +112,7 @@
 				FD61BC6B296C8DA6008D7DA1 /* Award.swift */,
 				FD61BC6D296C8DB2008D7DA1 /* Task.swift */,
 				FD61BC71296D28AC008D7DA1 /* Rules.swift */,
+				FDEE2CDF2980D1A70024CD7E /* DataModel.swift */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -190,6 +193,7 @@
 				FD01308E296B554800C4B6B5 /* AvatarSectionView.swift in Sources */,
 				FD61BC74296E10DC008D7DA1 /* CheckToDoView.swift in Sources */,
 				FD61BC65296B5E69008D7DA1 /* ToDoView.swift in Sources */,
+				FDEE2CE02980D1A70024CD7E /* DataModel.swift in Sources */,
 				FD61BC7A296E8A3F008D7DA1 /* ToDoDetailsView.swift in Sources */,
 				FD01308C296B554800C4B6B5 /* GamifiedToDoApp.swift in Sources */,
 				FD61BC6C296C8DA6008D7DA1 /* Award.swift in Sources */,

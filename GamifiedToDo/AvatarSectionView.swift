@@ -1,5 +1,5 @@
 
-///
+///TODO:  when an avatar is selected, adjust coins. 
 ///
 ///Images come from https://caravanshoppe.com/products/olliblocks-starter-pack?variant=1027912704
 ///
@@ -10,18 +10,18 @@ let iconWidth = 60.0
 let body_width = 25.0
 
 struct AvatarSelectionView: View {
-    @EnvironmentObject var userModel : UserModel
+    @EnvironmentObject var dataModel : DataModel
     @State var selectedCategory: AvatarCategory = AvatarCategory.basic
     @State var selectedPart: AvatarPartType = AvatarPartType.head
     
     var body: some View {
         
         VStack (alignment: .center){
-               
-                HeaderAvatarView()
+            
+            HeaderAvatarView()
                 .frame(width: shadeAreaWidth)
                 .offset(y:5)
-
+            
             Form {
                 Section(header: Text("Choose"),
                         content: {
@@ -55,20 +55,23 @@ struct AvatarSelectionView: View {
                                             .frame(width:iconWidth, height:iconWidth)
                                             .padding(.trailing, 15)
                                             .onTapGesture {
+                                                dataModel.user.award.minus(award: needsAward(dataModel: dataModel, part: selectedPart,
+                                                                                             category: selectedCategory,
+                                                                                             position: (row * 4 + column)))
                                                 calculateAvatar(part: selectedPart,
                                                                 category: selectedCategory,
                                                                 position: (row * 4 + column))
                                                 
                                             }
-                                        Text(String(needsAward(userModel: userModel, part: selectedPart,
+                                        Text(String(needsAward(dataModel: dataModel, part: selectedPart,
                                                                category: selectedCategory,
                                                                position: (row * 4 + column)).coin))
                                         .bold()
                                         .offset(x: iconWidth/2-5, y: iconWidth/2 * -1)
                                         
-                                        if needsAward(userModel: userModel, part: selectedPart,
+                                        if needsAward(dataModel: dataModel, part: selectedPart,
                                                       category: selectedCategory,
-                                                      position: (row * 4 + column)).coin > userModel.userTotalCoin{
+                                                      position: (row * 4 + column)).coin > dataModel.user.award.coin{
                                             Rectangle()
                                                 .frame(width:iconWidth, height:iconWidth)
                                                 .padding(.trailing, 15)
@@ -81,29 +84,31 @@ struct AvatarSelectionView: View {
                     }
                     .padding()
                 }
+
             }
         }
     }
     
-    func needsAward (userModel: UserModel, part: AvatarPartType, category: AvatarCategory, position: Int) -> Award {
-        return userModel.rules.getAward(avatarPart: AvatarPart(part:part, category: category, index: position))
+    func needsAward (dataModel: DataModel, part: AvatarPartType, category: AvatarCategory, position: Int) -> Award {
+        return dataModel.rules.getAward(avatarPart: AvatarPart(part:part, category: category, index: position))
         
     }
     
-    //this func services this view
+    ///calculate new avatar
+    ///deduct coins if needed
     func calculateAvatar (part: AvatarPartType, category: AvatarCategory, position: Int) {
         var index = 0
-        for i in 0..<userModel.user.avatar.parts.count {
-            if userModel.user.avatar.parts[i].part == part {
+        for i in 0..<dataModel.user.avatar.parts.count {
+            if dataModel.user.avatar.parts[i].part == part {
                 index = i
             }
         }
-        userModel.user.avatar.parts[index].category = category
-        userModel.user.avatar.parts[index].index = position
+        dataModel.user.avatar.parts[index].category = category
+        dataModel.user.avatar.parts[index].index = position
         
         //force a view to update comes from this post:
         //https://stackoverflow.com/questions/56561630/swiftui-forcing-an-update
-        userModel.updateView()
+        dataModel.updateView()
     }
 }
 
@@ -134,27 +139,27 @@ struct AvatarView: View {
 }
 
 struct HeaderAvatarView: View {
-    @EnvironmentObject var userModel : UserModel
+    @EnvironmentObject var dataModel : DataModel
     
     var body: some View {
         HStack {
-            AvatarView(avatar: userModel.user.avatar)
+            AvatarView(avatar: dataModel.user.avatar)
                 .frame(width:80, height:80)
                 .background(.yellow.opacity(0.2))
             
             VStack (alignment: .leading, spacing: 10){
-                Text("\(Date().greetings()) \(userModel.user.name)!")
+                Text("\(Date().greetings()) \(dataModel.user.name)!")
                 Text(Date().today())
                     .font(.system(size: 10))
             }
             
             Spacer()
-    
+            
             Image("Coin")
                 .resizable()
                 .frame(width: 25, height: 25)
             
-            Text(String(format: "%i", userModel.userTotalCoin))
+            Text(String(format: "%i", dataModel.user.award.coin))
                 .bold()
                 .font(.system(size:18))
                 .padding(.trailing, 10)
@@ -170,7 +175,7 @@ struct HeaderAvatarView: View {
 
 struct AvatarSelectionView_Previews: PreviewProvider {
     static var previews: some View {
-        AvatarSelectionView().environmentObject(UserModel())
+        AvatarSelectionView().environmentObject(DataModel())
     }
 }
 

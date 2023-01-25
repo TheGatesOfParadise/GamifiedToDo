@@ -13,7 +13,7 @@ let middleViewBackgroundColor = UIColor(red:11/255.0, green: 15/255.0, blue: 128
 let roundButtonWidth = 35.0
 
 struct ToDoView: View {
-    @EnvironmentObject var userModel : UserModel
+    @EnvironmentObject var dataModel : DataModel
     @State var selectedCategory = ToDoCategory.All
     @State var selectedTags = [Tag]()
     
@@ -40,19 +40,19 @@ struct ToDoView: View {
 }
 
 struct HeaderToDoView: View {
-    @EnvironmentObject var userModel : UserModel
+    @EnvironmentObject var dataModel : DataModel
     @State private var showingSheet = false
     @Binding var selectedCategory: ToDoCategory
     @Binding var selectedTags: [Tag]
     
     var body: some View {
         HStack {
-            AvatarView(avatar: userModel.user.avatar)
+            AvatarView(avatar: dataModel.user.avatar)
                 .frame(width:80, height:80)
                 .background(.yellow.opacity(0.2))
             
             VStack (alignment: .leading, spacing: 10){
-                Text("\(Date().greetings()) \(userModel.user.name)!")
+                Text("\(Date().greetings()) \(dataModel.user.name)!")
                 Text(Date().today())
                     .font(.system(size: 10))
             }
@@ -82,7 +82,7 @@ struct HeaderToDoView: View {
             
             //add button
             NavigationLink(destination: {
-                ToDoDetailsView(toDo: $userModel.user.toDoList[0], type: .New)
+                ToDoDetailsView(toDo: $dataModel.user.toDoList[0], type: .New)
             }, label: {
                 Text("+")
                     .font(.system(.largeTitle))
@@ -100,7 +100,11 @@ struct HeaderToDoView: View {
 }
 
 struct MiddleView: View {
-    @EnvironmentObject var userModel : UserModel
+    @EnvironmentObject var dataModel : DataModel
+    
+    init(){
+        print("coin=\(dataModel.user.award.coin)")
+    }
     var body: some View {
         ZStack {
             Color(middleViewBackgroundColor)
@@ -119,15 +123,15 @@ struct MiddleView: View {
                         
                         //Andimation circle
                         Circle()
-                            .trim(from:0, to: userModel.userToDoCompletionStatus)
+                            .trim(from:0, to: dataModel.userToDoCompletionStatus)
                             .stroke(.yellow,
                                     style: StrokeStyle(lineWidth: 10))
                             .rotationEffect(.init(degrees: -90))
-                            .animation(Animation.linear(duration:0.8), value: userModel.userToDoCompletionStatus)
+                            .animation(Animation.linear(duration:0.8), value: dataModel.userToDoCompletionStatus)
                             .frame(width: statusCircleHeight, height: statusCircleHeight)
                         
                         
-                        Text( String(format: "%.1f", userModel.userToDoCompletionStatus * 100))
+                        Text( String(format: "%.1f", dataModel.userToDoCompletionStatus * 100))
                             .foregroundColor(.white)
                             .font(.system(size:14))
                     }
@@ -139,7 +143,7 @@ struct MiddleView: View {
                         .frame(width: 25, height: 25)
                     
                     
-                    Text(String(format: "coin %i", userModel.userTotalCoin))
+                    Text(String(format: "coin %i", dataModel.user.award.coin))
                         .foregroundColor(.white)
                         .font(.system(size:18))
                         .padding(.trailing, 10)
@@ -148,7 +152,7 @@ struct MiddleView: View {
             }
             
             //fireworks animation
-            if userModel.userToDoCompletionStatus == 1.0 {
+            if dataModel.userToDoCompletionStatus == 1.0 {
                 Circle()
                     .fill(Color.blue)
                     .frame(width: 12, height: 12)
@@ -166,12 +170,12 @@ struct MiddleView: View {
 }
 
 struct BottomToDoView: View {
-    @EnvironmentObject var userModel : UserModel
+    @EnvironmentObject var dataModel : DataModel
     var selectedCategory: ToDoCategory
     var selectedTags: [Tag]
     var body: some View {
         List {
-            ForEach($userModel.user.toDoList) { toDo in
+            ForEach($dataModel.user.toDoList) { toDo in
                 if shouldShowToDo(toDo: toDo.wrappedValue, selectedCategory: selectedCategory, selectedTags: selectedTags){
                     HStack{
                         CheckToDoView(toDo: toDo)
@@ -183,8 +187,8 @@ struct BottomToDoView: View {
                 guard let index = indexSet.first else {
                     return
                 }
-                userModel.user.toDoList.remove(at: index)
-                userModel.updateView()
+                dataModel.user.toDoList.remove(at: index)
+                dataModel.updateView()
             })
             .listRowInsets(.init(top: 5, leading: 0, bottom: 5, trailing: 0))
             .listRowSeparator(.hidden)
@@ -331,8 +335,7 @@ struct ParticlesModifier: ViewModifier {
 
 
 struct ToDoView_Previews: PreviewProvider {
-    
     static var previews: some View {
-        ToDoView().environmentObject(UserModel())
+        ToDoView().environmentObject(DataModel())
     }
 }
