@@ -19,10 +19,10 @@ sort task
 8. when assign a due date,  what time should be assigned?  -- end of day
 ================
 
-1. filter selction should be remembered
-2. add a today's todo filter
-3.empty tags/ search does not work 
-4. recalculate coins -- minus, look for due_date < toady's date'
+1. filter selction should be remembered  -- out of scope
+2. add a today's todo filter -- done
+3.empty tags/ search does not work -- done
+4. recalculate coins -- minus, look for due_date < toady's date'>  -- no need, overdue means coin = 0
 
 
 7. what to do when you delete a todo/daily? -- does not change  coin?

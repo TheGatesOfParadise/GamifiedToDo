@@ -1,5 +1,4 @@
-///TODO:
-///1. sort list based on due date
+
 
 import SwiftUI
 
@@ -81,14 +80,13 @@ struct HeaderToDoView: View {
                     .presentationDetents([.medium])
             }
             
-            //add button TODO:can resue same code
+            //add button
             NavigationLink(destination: {
                 ToDoDetailsView(toDo: $userModel.user.toDoList[0], type: .New)
             }, label: {
                 Text("+")
                     .font(.system(.largeTitle))
                     .frame(width: roundButtonWidth, height: roundButtonWidth)
-                //.foregroundColor(Color.white)
                     .foregroundColor(Color(middleViewBackgroundColor))
             })
             .background( Color.yellow.opacity(0.6))

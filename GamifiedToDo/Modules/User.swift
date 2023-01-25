@@ -10,7 +10,7 @@ class UserModel:ObservableObject {
             saveUser()
         }
     }
-    @Published var rules: Rules = Rules()  //TODO:  need published??
+    var rules: Rules = Rules()
     
     init() {
         user = User.getASampleUser()
@@ -24,8 +24,7 @@ class UserModel:ObservableObject {
             }
         }
     }
-    
-    //TODO: revisit logic
+
     var userToDoCompletionStatus: CGFloat {
         var total: Int = 0
         var completed: Int = 0
@@ -48,16 +47,20 @@ class UserModel:ObservableObject {
     
     var userTotalCoin: Int {
         var result: Int = 0
-            user.toDoList.forEach { toDo in
-                result += getFractionCoinsFromAToDo(toDo: toDo)
-            }
+        user.toDoList.forEach { toDo in
+            result += getFractionCoinsFromAToDo(toDo: toDo)
+        }
         return result
     }
     
-    //TODO:  no logic to minus coins if not complete within due date
+    //if it's overdue todo, no coin regardless it's complete or not
     func getFractionCoinsFromAToDo (toDo: Todo) -> Int {
-        var result = 0;
+        guard !toDo.due_date.isOverDue()
+        else {
+            return 0
+        }
         
+        var result = 0;
         if toDo.isComplete {
             result += rules.getAward(taskLevel: toDo.difficulty).coin
         }
@@ -90,7 +93,7 @@ class UserModel:ObservableObject {
     }
     
     func removeToDo(whichIs: Todo) -> Void{
-       // guard user.toDoList != nil else { return }
+        // guard user.toDoList != nil else { return }
         if let idx = user.toDoList.firstIndex(where: { $0 === whichIs }) {
             user.toDoList.remove(at: idx)
         }

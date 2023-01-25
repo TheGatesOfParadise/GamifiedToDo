@@ -174,6 +174,15 @@ extension Date {
             return false
         }
     }
+    
+    func isOverDue() -> Bool {
+        if self < Date.now.startOfDay {
+            return true
+        }
+        else {
+            return false
+        }
+    }
 }
 
 

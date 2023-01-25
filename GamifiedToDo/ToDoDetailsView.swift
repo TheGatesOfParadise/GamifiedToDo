@@ -44,7 +44,7 @@ struct ToDoDetailsView: View {
                               text:$localToDo.notes)
                 }
                 
-                //checklist TODO
+                //checklist
                 Section (header: Text("Checklist (Swipe to delete an existing item)")){
                     CheckListView(checkList: $localToDo.checkList, hiddenFlag: $hiddenTrigger)
                 }

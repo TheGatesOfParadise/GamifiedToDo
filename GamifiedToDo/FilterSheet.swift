@@ -31,8 +31,8 @@ struct FilterSheet: View {
                 Spacer()
                 
                 Button(action:{
-                    //TODO: not finished
-                    showingSheet.toggle()
+                    selectedTags = [Tag]()
+                    selectedCategory = .All
                 }, label:{
                     Text("Reset")
                         .bold()

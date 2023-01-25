@@ -42,7 +42,11 @@ struct Test1: View {
                 
                 
                 //list of todos
-                Text("ererew")
+                Text(Date().addingTimeInterval(-4 * 24 * 60 * 60) < Date.now.startOfDay ? "overdue" : "normal")
+                    .frame(width: shadeAreaWidth)
+                    .border(.blue, width: 5)
+                
+                Text(Date().addingTimeInterval(4 * 24 * 60 * 60) < Date.now.startOfDay ? "overdue" : "normal")
                     .frame(width: shadeAreaWidth)
                     .border(.blue, width: 5)
            
