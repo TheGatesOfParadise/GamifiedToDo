@@ -106,6 +106,7 @@ struct AvatarSelectionView: View {
         dataModel.user.avatar.parts[index].category = category
         dataModel.user.avatar.parts[index].index = position
         
+        //this line is required to update avatar view and update coins
         //force a view to update comes from this post:
         //https://stackoverflow.com/questions/56561630/swiftui-forcing-an-update
         dataModel.updateView()

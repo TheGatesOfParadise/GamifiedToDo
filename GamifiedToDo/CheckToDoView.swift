@@ -43,9 +43,9 @@ struct CheckToDoView: View {
                 .background(checkColor())
                 .onTapGesture {
                     toDo.isComplete.toggle()
-                    
                     calculateAward()
                     
+                    //without the following line, middle view's coin is not updated
                     //force a view to update comes from this post:
                     //https://stackoverflow.com/questions/56561630/swiftui-forcing-an-update
                     dataModel.updateView()

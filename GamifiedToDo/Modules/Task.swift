@@ -98,7 +98,7 @@ class Todo: Task{
     }
     
     static func getAnEmptyToDo() -> Todo {
-        return Todo(title: "", difficulty: .easy, notes: "", tags: [Tag](), due_date: Date.now.endOfDay, checkList: [Task](), reminder: Date.now)
+        return Todo(title: "", difficulty: .easy, notes: "", tags: [Tag](), due_date: Date.now.endOfDay, checkList: [Task](), reminder: Date.now.endOfDay)
     }
     
     var numberOfCheckList: Int {

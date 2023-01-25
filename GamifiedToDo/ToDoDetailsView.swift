@@ -139,11 +139,12 @@ struct ToDoDetailsView: View {
                         else {
                             dataModel.user.toDoList.append(localToDo)
                             dataModel.sortToDoListByDueDate()
+                            
+                            //this line is required to see newly added task reflected on the main screen
+                            //force a view to update comes from this post:
+                            //https://stackoverflow.com/questions/56561630/swiftui-forcing-an-update
+                            dataModel.updateView()
                         }
-                        
-                        //force a view to update comes from this post:
-                        //https://stackoverflow.com/questions/56561630/swiftui-forcing-an-update
-                        dataModel.updateView()
                         
                         dismiss()
                         
@@ -151,7 +152,7 @@ struct ToDoDetailsView: View {
                         Text("SAVE")
                             .bold()
                     })
-                    .disabled(!fieldsAreFilled())
+                    .disabled(localToDo.title == "")
                 }
                 
             })

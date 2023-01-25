@@ -11,7 +11,7 @@ On the main page:
 3. To add a new todo -- on the main page click on the top right "+" button to add a new todo.  When you are satisfied with your content, click "Add" button to it.  If you click on "Back" button, the new todo will NOT be saved.
 
 On the ToDo Details page:
-You arrive at this page either by editing an existing todo or by clicking "+" to add a new todo.   The "Add"/"Save" button is disabled unless you put in its Title and Due Date.  The rest fields are optional.  You can add a checklist item to your todo, it helps to divide a big todo to smaller tasks.
+You arrive at this page either by editing an existing todo or by clicking "+" to add a new todo.   The "Add"/"Save" button is disabled unless you put in its Title.  The rest fields are optional.  You can add a checklist item to your todo, it helps to divide a big todo to smaller tasks.
 
 How to earn coin:
 If you complete a todo before due date, based on difficulty level, you earn coins.  Easy todo earns 1 coin, Medium todo earns 3 coins, Hard todo earns 5 coins.
@@ -21,3 +21,9 @@ How to use coins to exchange avatar part:
 Click on "Award" tab to go to Avatar page.  It shows user's existing avatar and available coins.  It also shows the library of all avatar parts with corresponding coins to get it.  For those avatar parts too expensive for the user, the part is grayed out and disabled.  Only when user earns enough coin, those avatar part will be available for selection. 
 
 
+todo:
+
+revisit dataModel.updateView,  if it's really needed  -- done
+delete a todo, does it affect completion status?
+can't uddate a complete todo -- disable save
+save/add button should be enabled, when title is not empty,   due_date set to today's last minute

@@ -184,7 +184,8 @@ struct BottomToDoView: View {
                     return
                 }
                 dataModel.user.toDoList.remove(at: index)
-                dataModel.updateView()
+               //this line is not needed, deleting a todo does not affect coin or completion status TODO
+               // dataModel.updateView()
             })
             .listRowInsets(.init(top: 5, leading: 0, bottom: 5, trailing: 0))
             .listRowSeparator(.hidden)
