@@ -101,10 +101,6 @@ struct HeaderToDoView: View {
 
 struct MiddleView: View {
     @EnvironmentObject var dataModel : DataModel
-    
-    init(){
-        print("coin=\(dataModel.user.award.coin)")
-    }
     var body: some View {
         ZStack {
             Color(middleViewBackgroundColor)

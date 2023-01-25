@@ -19,9 +19,19 @@ struct CheckToDoView: View {
     @Binding var toDo: Todo
     
     func checkColor() -> Color {
-      /*  return  toDo.isWithinDays(interval: 3) ? pinkColor : toDo.isWithinDays(interval: 7) ? orangeColor : blueColor
-       */
         return toDo.difficulty == .easy ? .green : toDo.difficulty == .medium ? .orange : pinkColor
+    }
+    
+    func calculateAward() {
+        //adjust award only when toDo's is not overdue
+        if toDo.due_date > Date.now.startOfDay {
+            if toDo.isComplete{
+                dataModel.user.award.add(award:dataModel.rules.getAward(taskLevel: toDo.difficulty))
+            }
+            else {
+                dataModel.user.award.minus(award:dataModel.rules.getAward(taskLevel: toDo.difficulty))
+            }
+        }
     }
     
     var body: some View {
@@ -34,10 +44,7 @@ struct CheckToDoView: View {
                 .onTapGesture {
                     toDo.isComplete.toggle()
                     
-                    if toDo.due_date > Date.now.startOfDay && toDo.isComplete {
-                        //update user's award
-                        dataModel.user.award.add(award:dataModel.rules.getAward(taskLevel: toDo.difficulty))
-                    }
+                    calculateAward()
                     
                     //force a view to update comes from this post:
                     //https://stackoverflow.com/questions/56561630/swiftui-forcing-an-update
@@ -66,11 +73,9 @@ struct CheckToDoView: View {
                         .font(.system(size: 14))
                     
                 })
-                //.padding(.top, 2)
             }
             .frame(maxHeight: .infinity)
-            //.padding(.bottom, 10)
-            
+
             Spacer()
             
             //display fraction
