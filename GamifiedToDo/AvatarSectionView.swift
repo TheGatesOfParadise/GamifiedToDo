@@ -60,6 +60,12 @@ struct AvatarSelectionView: View {
                                             .padding(.trailing, 15)
                                             .onTapGesture {
                                                 selectedIndex = row * 4 + column
+                                                localAvatar = getNewAvatar(part: selectedPart,
+                                                                           category: selectedCategory,
+                                                                           position: selectedIndex)
+                                                selecteAward = needsAward(part: selectedPart,
+                                                                          category: selectedCategory,
+                                                                          position: selectedIndex)
                                                 alertPresented.toggle()
                                             }
                                         Text(String(needsAward(part: selectedPart,
@@ -84,13 +90,11 @@ struct AvatarSelectionView: View {
                     .padding()
                 }
                 .sheet(isPresented:$alertPresented) {
-                    ConfirmAvatarView(part: $selectedPart,
-                                     category: $selectedCategory,
-                                     position: $selectedIndex,
-                                     alertPresented: $alertPresented)
+                    ConfirmAvatarView(newAvatar: $localAvatar,
+                                      newAvatarAward: $selecteAward,
+                                      alertPresented: $alertPresented)
                     .presentationDetents([.medium])
                 }
-
             }
         }
     }
@@ -139,28 +143,34 @@ struct AvatarView: View {
     }
 }
 
-struct TestView: View {
-    @EnvironmentObject var dataModel : DataModel
-    var part: AvatarPart
-    var category: AvatarCategory
-    var position: Int
-    @Binding var alertPresented: Bool
-    @State var hiddenTrigger = false
-    var body: some View{
-        Text("abc")
-    }
-}
-
 struct ConfirmAvatarView: View {
     @EnvironmentObject var dataModel : DataModel
-    @Binding var part: AvatarPartType
-    @Binding var category: AvatarCategory
-    @Binding var position: Int
+    @Binding var newAvatar: Avatar
+    @Binding var newAvatarAward: Award
     @Binding var alertPresented: Bool
-    @State var hiddenTrigger = false
-
+    
     var body: some View {
-        Text("index=\(position)")
+        VStack{
+            HStack {
+                AvatarView(avatar: newAvatar)
+                    .frame(width:80, height:80)
+                    .background(.yellow.opacity(0.2))
+                Text("Sure to get this new avatar?")
+            }
+            HStack (spacing: 25){
+                Button(action: {
+                    alertPresented.toggle()
+                },
+                       label: {ButtonText(isSelected: true, title: "No")})
+                Button(action: {
+                    dataModel.user.avatar = newAvatar
+                    dataModel.user.award.minus(award: newAvatarAward)
+                    dataModel.updateView()
+                    alertPresented.toggle()
+                },
+                       label: {ButtonText(isSelected: true, title: "Yes")})
+            }
+        }
     }
 }
 
@@ -190,8 +200,6 @@ struct HeaderAvatarView: View {
                 .font(.system(size:18))
                 .padding(.trailing, 10)
                 .padding(.leading, 0)
-            
-            
         }
     }
 }
