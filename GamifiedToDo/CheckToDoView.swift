@@ -16,7 +16,7 @@ import SwiftUI
 struct CheckToDoView: View {
     @EnvironmentObject var dataModel : DataModel
     @State var hiddenFlag:Bool = false
-    @Binding var toDo: Todo
+    var toDo: Todo
     
     func checkColor() -> Color {
         return toDo.difficulty == .easy ? .green : toDo.difficulty == .medium ? .orange : pinkColor
@@ -109,6 +109,6 @@ struct CheckToDoView_Previews: PreviewProvider {
     @StateObject static var user = User.getASampleUser()
     
     static var previews: some View {
-        CheckToDoView(toDo: $user.toDoList[4])
+        CheckToDoView(toDo: user.toDoList[4])
     }
 }

@@ -126,22 +126,24 @@ struct ToDoDetailsView: View {
             ToolbarItemGroup(placement: ToolbarItemPlacement.navigationBarTrailing,
                              content: {
                 //show SAVE button only when todo is not complete
-                if !existingToDo.isComplete {
+                if !existingToDo.isComplete || type == .New {
                     HStack{
                         Button(action: {
                             if type == .Edit {
+                               // print(existingToDo.due_date.toString())
                                 existingToDo.copy(from:localToDo)
+                              //  print(existingToDo.due_date.toString())
                                 dataModel.sortToDoListByDueDate()
                             }
                             else {
                                 dataModel.user.toDoList.append(localToDo)
                                 dataModel.sortToDoListByDueDate()
-                                
-                                //this line is required to see newly added task reflected on the main screen
-                                //force a view to update comes from this post:
-                                //https://stackoverflow.com/questions/56561630/swiftui-forcing-an-update
-                                dataModel.updateView()
                             }
+                            
+                            //this line is required to see newly added/edited todo reflected on the main screen
+                            //force a view to update comes from this post:
+                            //https://stackoverflow.com/questions/56561630/swiftui-forcing-an-update
+                            dataModel.updateView()
                             
                             dismiss()
                             

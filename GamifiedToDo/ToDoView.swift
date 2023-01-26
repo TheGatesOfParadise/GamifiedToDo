@@ -171,8 +171,8 @@ struct BottomToDoView: View {
     var selectedTags: [Tag]
     var body: some View {
         List {
-            ForEach($dataModel.user.toDoList) { toDo in
-                if shouldShowToDo(toDo: toDo.wrappedValue, selectedCategory: selectedCategory, selectedTags: selectedTags){
+            ForEach(dataModel.user.toDoList) { toDo in
+                if shouldShowToDo(toDo: toDo, selectedCategory: selectedCategory, selectedTags: selectedTags){
                     HStack{
                         CheckToDoView(toDo: toDo)
                             .cornerRadius(cornerRadiusValue)

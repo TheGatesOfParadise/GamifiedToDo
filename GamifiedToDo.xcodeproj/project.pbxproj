@@ -25,6 +25,7 @@
 		FDEE2CDC297F060D0024CD7E /* FilterSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDEE2CDB297F060D0024CD7E /* FilterSheet.swift */; };
 		FDEE2CDE297F73F00024CD7E /* Test1.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDEE2CDD297F73F00024CD7E /* Test1.swift */; };
 		FDEE2CE02980D1A70024CD7E /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDEE2CDF2980D1A70024CD7E /* DataModel.swift */; };
+		FDEE2CE2298223920024CD7E /* Test2.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDEE2CE1298223920024CD7E /* Test2.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,7 @@
 		FDEE2CDB297F060D0024CD7E /* FilterSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSheet.swift; sourceTree = "<group>"; };
 		FDEE2CDD297F73F00024CD7E /* Test1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test1.swift; sourceTree = "<group>"; };
 		FDEE2CDF2980D1A70024CD7E /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		FDEE2CE1298223920024CD7E /* Test2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test2.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +92,7 @@
 				FD01308D296B554800C4B6B5 /* AvatarSectionView.swift */,
 				FDEE2CDB297F060D0024CD7E /* FilterSheet.swift */,
 				FDEE2CDD297F73F00024CD7E /* Test1.swift */,
+				FDEE2CE1298223920024CD7E /* Test2.swift */,
 				FD61BC68296C8D54008D7DA1 /* Modules */,
 				FD01308F296B554900C4B6B5 /* Assets.xcassets */,
 				FD013091296B554900C4B6B5 /* Preview Content */,
@@ -196,6 +199,7 @@
 				FDEE2CE02980D1A70024CD7E /* DataModel.swift in Sources */,
 				FD61BC7A296E8A3F008D7DA1 /* ToDoDetailsView.swift in Sources */,
 				FD01308C296B554800C4B6B5 /* GamifiedToDoApp.swift in Sources */,
+				FDEE2CE2298223920024CD7E /* Test2.swift in Sources */,
 				FD61BC6C296C8DA6008D7DA1 /* Award.swift in Sources */,
 				FDEE2CDC297F060D0024CD7E /* FilterSheet.swift in Sources */,
 				FD61BC61296B57B1008D7DA1 /* ContentView.swift in Sources */,

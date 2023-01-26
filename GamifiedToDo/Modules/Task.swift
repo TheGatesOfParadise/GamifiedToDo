@@ -64,7 +64,7 @@ class Task: Identifiable, ObservableObject, Codable {
 }
 
 class Todo: Task{
-    @Published var due_date: Date = Date.now + 7
+    @Published var due_date: Date = Date.now
     @Published var checkList: [Task] = [Task]()
     @Published var reminder: Date = Date.now
     
@@ -219,6 +219,12 @@ extension Date {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMM/dd/yyyy"
         return dateFormatter.string(from: Date.now)
+    }
+    
+    func toString() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM/dd/yyyy"
+        return dateFormatter.string(from: self)
     }
     
     

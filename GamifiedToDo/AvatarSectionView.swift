@@ -13,7 +13,7 @@ struct AvatarSelectionView: View {
     @EnvironmentObject var dataModel : DataModel
     @State var selectedCategory: AvatarCategory = AvatarCategory.basic
     @State var selectedPart: AvatarPartType = AvatarPartType.head
-    
+    @State var alertPresented = false
     var body: some View {
         
         VStack (alignment: .center){
