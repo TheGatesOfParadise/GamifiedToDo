@@ -84,6 +84,10 @@ struct AvatarSelectionView: View {
                     }
                     .padding()
                 }
+                
+                Section {
+                    CompareAvtarView()
+                }
 
             }
         }
@@ -111,6 +115,8 @@ struct AvatarSelectionView: View {
         //https://stackoverflow.com/questions/56561630/swiftui-forcing-an-update
         dataModel.updateView()
     }
+    
+    
 }
 
 
@@ -136,6 +142,18 @@ struct AvatarView: View {
                 .frame(width:body_width, height: body_width)
         }
         .padding()
+    }
+}
+
+struct CompareAvtarView: View {
+    @EnvironmentObject var dataModel : DataModel
+    
+    var body: some View {
+        HStack {
+            AvatarView(avatar: dataModel.user.avatar)
+                .frame(width:80, height:80)
+                .background(.yellow.opacity(0.2))
+        }
     }
 }
 
