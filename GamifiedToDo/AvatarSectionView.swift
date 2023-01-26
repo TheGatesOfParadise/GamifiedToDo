@@ -13,7 +13,10 @@ struct AvatarSelectionView: View {
     @EnvironmentObject var dataModel : DataModel
     @State var selectedCategory: AvatarCategory = AvatarCategory.basic
     @State var selectedPart: AvatarPartType = AvatarPartType.head
+    @State var selectedIndex: Int = 1
+    @State var localAvatar = Avatar.getSampleAvatar()
     @State var alertPresented = false
+    
     var body: some View {
         
         VStack (alignment: .center){
@@ -55,13 +58,16 @@ struct AvatarSelectionView: View {
                                             .frame(width:iconWidth, height:iconWidth)
                                             .padding(.trailing, 15)
                                             .onTapGesture {
-                                                dataModel.user.award.minus(award: needsAward(dataModel: dataModel, part: selectedPart,
+                                                alertPresented.toggle()
+                                                selectedIndex = row * 4 + column
+                                                localAvatar = getNewAvatar(part: selectedPart, category: selectedCategory, position: selectedIndex)
+                                        /*        dataModel.user.award.minus(award: needsAward(dataModel: dataModel, part: selectedPart,
                                                                                              category: selectedCategory,
                                                                                              position: (row * 4 + column)))
                                                 calculateAvatar(part: selectedPart,
                                                                 category: selectedCategory,
                                                                 position: (row * 4 + column))
-                                                
+                                                */
                                             }
                                         Text(String(needsAward(dataModel: dataModel, part: selectedPart,
                                                                category: selectedCategory,
@@ -84,9 +90,9 @@ struct AvatarSelectionView: View {
                     }
                     .padding()
                 }
-                
-                Section {
-                    CompareAvtarView()
+                .sheet(isPresented:$alertPresented) {
+                    CompareAvtarView(newAvatar: localAvatar)
+                        .presentationDetents([.medium])
                 }
 
             }
@@ -116,6 +122,19 @@ struct AvatarSelectionView: View {
         dataModel.updateView()
     }
     
+    func getNewAvatar (part: AvatarPartType, category: AvatarCategory, position: Int) -> Avatar{
+        var index = 0
+        var newAvatar =  dataModel.user.avatar
+        for i in 0..<dataModel.user.avatar.parts.count {
+            if dataModel.user.avatar.parts[i].part == part {
+                index = i
+                newAvatar.parts[index].category = category
+                newAvatar.parts[index].index = position
+                break
+            }
+        }
+        return newAvatar
+    }
     
 }
 
@@ -146,13 +165,36 @@ struct AvatarView: View {
 }
 
 struct CompareAvtarView: View {
-    @EnvironmentObject var dataModel : DataModel
+    var newAvatar: Avatar
     
     var body: some View {
-        HStack {
-            AvatarView(avatar: dataModel.user.avatar)
-                .frame(width:80, height:80)
-                .background(.yellow.opacity(0.2))
+        VStack{
+            HStack {
+                AvatarView(avatar: newAvatar)
+                    .frame(width:80, height:80)
+                    .background(.yellow.opacity(0.2))
+                
+                Text("Sure to get this new avatar?")
+            }
+            
+            HStack (spacing: 25){
+                Button(action: {}, label: {ButtonText(title: "No")})
+                Button(action: {}, label: {ButtonText(title: "Yes")})
+            }
+        }
+    }
+    
+    struct ButtonText: View {
+       // let isDisabled: Bool
+        let title: String
+        var body: some View {
+            Text(title)
+                .frame(width: 100,
+                       height: 50,
+                       alignment: .center)
+                .background(.blue)
+                .foregroundColor(.white)
+                .cornerRadius(8)
         }
     }
 }

@@ -53,11 +53,7 @@ class User : ObservableObject, Codable  {
         let tenDaysFromToday = Calendar.current.date(byAdding: dateComponent, to: currentDate)
         
         return User(name: "Adams",
-                    avatar: Avatar(parts: [AvatarPart(part: .head, category: .basic, index: 1),
-                                           AvatarPart(part: .body, category: .basic, index: 1),
-                                           AvatarPart(part: .bottom, category: .basic, index: 1)
-                                          ]
-                                  ),
+                    avatar: Avatar.getSampleAvatar(),
                     award: Award(coin:10),
                     toDoList: [Todo(title: "Unit5 MVP",
                                     difficulty: .hard,

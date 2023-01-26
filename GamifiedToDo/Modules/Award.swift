@@ -48,6 +48,12 @@ struct AvatarPart: Hashable, Codable {
 struct Avatar: Codable {
     var parts: [AvatarPart]
     
+    static func getSampleAvatar() -> Avatar {
+        return Avatar(parts: [AvatarPart(part: .head, category: .basic, index: 1),
+                              AvatarPart(part: .body, category: .basic, index: 1),
+                              AvatarPart(part: .bottom, category: .basic, index: 1)]
+                     )
+    }
 }
 
 struct AwardToAvatarPart {
