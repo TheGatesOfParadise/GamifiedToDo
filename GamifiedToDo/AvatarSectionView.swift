@@ -15,6 +15,7 @@ struct AvatarSelectionView: View {
     @State var selectedPart: AvatarPartType = AvatarPartType.head
     @State var selectedIndex: Int = 1
     @State var localAvatar = Avatar.getSampleAvatar()
+    @State var selecteAward: Award = Award(coin:5)
     @State var alertPresented = false
     
     var body: some View {
@@ -58,26 +59,24 @@ struct AvatarSelectionView: View {
                                             .frame(width:iconWidth, height:iconWidth)
                                             .padding(.trailing, 15)
                                             .onTapGesture {
-                                                alertPresented.toggle()
                                                 selectedIndex = row * 4 + column
-                                                localAvatar = getNewAvatar(part: selectedPart, category: selectedCategory, position: selectedIndex)
-                                        /*        dataModel.user.award.minus(award: needsAward(dataModel: dataModel, part: selectedPart,
-                                                                                             category: selectedCategory,
-                                                                                             position: (row * 4 + column)))
-                                                calculateAvatar(part: selectedPart,
-                                                                category: selectedCategory,
-                                                                position: (row * 4 + column))
-                                                */
+                                                localAvatar = getNewAvatar(part: selectedPart,
+                                                                           category: selectedCategory,
+                                                                           position: selectedIndex)
+                                                selecteAward = needsAward(part: selectedPart,
+                                                                          category: selectedCategory,
+                                                                          position: selectedIndex)
+                                                alertPresented.toggle()
                                             }
-                                        Text(String(needsAward(dataModel: dataModel, part: selectedPart,
-                                                               category: selectedCategory,
-                                                               position: (row * 4 + column)).coin))
+                                        Text(String(needsAward(part: selectedPart,
+                                                                      category: selectedCategory,
+                                                                      position: (row * 4 + column)).coin))
                                         .bold()
                                         .offset(x: iconWidth/2-5, y: iconWidth/2 * -1)
                                         
-                                        if needsAward(dataModel: dataModel, part: selectedPart,
-                                                      category: selectedCategory,
-                                                      position: (row * 4 + column)).coin > dataModel.user.award.coin{
+                                        if needsAward(part: selectedPart,
+                                                                category: selectedCategory,
+                                                                position: (row * 4 + column)).coin > dataModel.user.award.coin{
                                             Rectangle()
                                                 .frame(width:iconWidth, height:iconWidth)
                                                 .padding(.trailing, 15)
@@ -91,7 +90,9 @@ struct AvatarSelectionView: View {
                     .padding()
                 }
                 .sheet(isPresented:$alertPresented) {
-                    CompareAvtarView(newAvatar: localAvatar)
+                    CompareAvtarView(newAvatar: localAvatar,
+                                     newAvatarAward: selecteAward,
+                                     alertPresented: $alertPresented)
                         .presentationDetents([.medium])
                 }
 
@@ -99,37 +100,17 @@ struct AvatarSelectionView: View {
         }
     }
     
-    func needsAward (dataModel: DataModel, part: AvatarPartType, category: AvatarCategory, position: Int) -> Award {
+    func needsAward (part: AvatarPartType, category: AvatarCategory, position: Int) -> Award {
         return dataModel.rules.getAward(avatarPart: AvatarPart(part:part, category: category, index: position))
         
     }
     
-    ///calculate new avatar
-    ///deduct coins if needed
-    func calculateAvatar (part: AvatarPartType, category: AvatarCategory, position: Int) {
-        var index = 0
-        for i in 0..<dataModel.user.avatar.parts.count {
-            if dataModel.user.avatar.parts[i].part == part {
-                index = i
-            }
-        }
-        dataModel.user.avatar.parts[index].category = category
-        dataModel.user.avatar.parts[index].index = position
-        
-        //this line is required to update avatar view and update coins
-        //force a view to update comes from this post:
-        //https://stackoverflow.com/questions/56561630/swiftui-forcing-an-update
-        dataModel.updateView()
-    }
-    
     func getNewAvatar (part: AvatarPartType, category: AvatarCategory, position: Int) -> Avatar{
-        var index = 0
         var newAvatar =  dataModel.user.avatar
         for i in 0..<dataModel.user.avatar.parts.count {
             if dataModel.user.avatar.parts[i].part == part {
-                index = i
-                newAvatar.parts[index].category = category
-                newAvatar.parts[index].index = position
+                newAvatar.parts[i].category = category
+                newAvatar.parts[i].index = position
                 break
             }
         }
@@ -137,7 +118,6 @@ struct AvatarSelectionView: View {
     }
     
 }
-
 
 
 //========================================================
@@ -165,7 +145,10 @@ struct AvatarView: View {
 }
 
 struct CompareAvtarView: View {
+    @EnvironmentObject var dataModel : DataModel
     var newAvatar: Avatar
+    var newAvatarAward: Award
+    @Binding var alertPresented: Bool
     
     var body: some View {
         VStack{
@@ -178,8 +161,16 @@ struct CompareAvtarView: View {
             }
             
             HStack (spacing: 25){
-                Button(action: {}, label: {ButtonText(title: "No")})
-                Button(action: {}, label: {ButtonText(title: "Yes")})
+                Button(action: {alertPresented.toggle()},
+                       label: {ButtonText(title: "No")})
+                Button(action: {
+                    dataModel.user.avatar = newAvatar
+                    alertPresented.toggle()
+                    dataModel.user.award.minus(award: newAvatarAward)
+                    dataModel.user.avatar = newAvatar
+                    dataModel.updateView()
+                },
+                       label: {ButtonText(title: "Yes")})
             }
         }
     }
