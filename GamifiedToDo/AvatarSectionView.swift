@@ -14,9 +14,10 @@ struct AvatarSelectionView: View {
     @State var selectedCategory: AvatarCategory = AvatarCategory.basic
     @State var selectedPart: AvatarPartType = AvatarPartType.head
     @State var selectedIndex: Int = 1
-    @State var localAvatar = Avatar.getSampleAvatar()
+    @State var localAvatar =  Avatar.getSampleAvatar()
     @State var selecteAward: Award = Award(coin:5)
     @State var alertPresented = false
+    @State var hiddenTrigger = false
     
     var body: some View {
         
@@ -60,23 +61,19 @@ struct AvatarSelectionView: View {
                                             .padding(.trailing, 15)
                                             .onTapGesture {
                                                 selectedIndex = row * 4 + column
-                                                localAvatar = getNewAvatar(part: selectedPart,
-                                                                           category: selectedCategory,
-                                                                           position: selectedIndex)
-                                                selecteAward = needsAward(part: selectedPart,
-                                                                          category: selectedCategory,
-                                                                          position: selectedIndex)
+                                                
+                                                hiddenTrigger.toggle()
                                                 alertPresented.toggle()
                                             }
                                         Text(String(needsAward(part: selectedPart,
-                                                                      category: selectedCategory,
-                                                                      position: (row * 4 + column)).coin))
+                                                               category: selectedCategory,
+                                                               position: (row * 4 + column)).coin))
                                         .bold()
                                         .offset(x: iconWidth/2-5, y: iconWidth/2 * -1)
                                         
                                         if needsAward(part: selectedPart,
-                                                                category: selectedCategory,
-                                                                position: (row * 4 + column)).coin > dataModel.user.award.coin{
+                                                      category: selectedCategory,
+                                                      position: (row * 4 + column)).coin > dataModel.user.award.coin{
                                             Rectangle()
                                                 .frame(width:iconWidth, height:iconWidth)
                                                 .padding(.trailing, 15)
@@ -90,10 +87,17 @@ struct AvatarSelectionView: View {
                     .padding()
                 }
                 .sheet(isPresented:$alertPresented) {
-                    CompareAvtarView(newAvatar: localAvatar,
-                                     newAvatarAward: selecteAward,
-                                     alertPresented: $alertPresented)
-                        .presentationDetents([.medium])
+                 /*   ConfirmAvtarView(part: $selectedPart,
+                                     category: $selectedCategory,
+                                     position: $selectedIndex,
+                                     alertPresented: $alertPresented)  */
+                    VStack{
+                        Text("selectedIndex=\(selectedIndex)")
+                    }
+                    .onAppear{
+                        print("selectedIndex=\(selectedIndex)")
+                    }
+                    .presentationDetents([.medium])
                 }
 
             }
@@ -144,49 +148,50 @@ struct AvatarView: View {
     }
 }
 
-struct CompareAvtarView: View {
+struct ConfirmAvtarView: View {
     @EnvironmentObject var dataModel : DataModel
-    var newAvatar: Avatar
-    var newAvatarAward: Award
+    var part: AvatarPart
+    var category: AvatarCategory
+    var position: Int
     @Binding var alertPresented: Bool
-    
+    @State var hiddenTrigger = false
+    /*
+     localAvatar = getNewAvatar(part: selectedPart,
+     category: selectedCategory,
+     position: selectedIndex)
+     selecteAward = needsAward(part: selectedPart,
+     category: selectedCategory,
+     position: selectedIndex)
+     */
     var body: some View {
-        VStack{
-            HStack {
-                AvatarView(avatar: newAvatar)
-                    .frame(width:80, height:80)
-                    .background(.yellow.opacity(0.2))
-                
-                Text("Sure to get this new avatar?")
-            }
-            
-            HStack (spacing: 25){
-                Button(action: {alertPresented.toggle()},
-                       label: {ButtonText(title: "No")})
-                Button(action: {
-                    dataModel.user.avatar = newAvatar
-                    alertPresented.toggle()
-                    dataModel.user.award.minus(award: newAvatarAward)
-                    dataModel.user.avatar = newAvatar
-                    dataModel.updateView()
-                },
-                       label: {ButtonText(title: "Yes")})
-            }
-        }
-    }
-    
-    struct ButtonText: View {
-       // let isDisabled: Bool
-        let title: String
-        var body: some View {
-            Text(title)
-                .frame(width: 100,
-                       height: 50,
-                       alignment: .center)
-                .background(.blue)
-                .foregroundColor(.white)
-                .cornerRadius(8)
-        }
+        Text("abc")
+        /*       VStack{
+         /*            HStack {
+          AvatarView(avatar: newAvatar)
+          .frame(width:80, height:80)
+          .background(.yellow.opacity(0.2))
+          
+          Text("Sure to get this new avatar?")
+          }
+          */
+         HStack (spacing: 25){
+         Button(action: {
+         alertPresented.toggle()
+         },
+         label: {ButtonText(title: "No")})
+         Button(action: {
+         /*                    dataModel.user.avatar = newAvatar
+          dataModel.user.award.minus(award: newAvatarAward)
+          dataModel.user.avatar = newAvatar
+          dataModel.updateView()
+          */
+         alertPresented.toggle()
+         },
+         label: {ButtonText(title: "Yes")})
+         }
+         }
+         .onAppear{
+         hiddenTrigger.toggle()  */
     }
 }
 
