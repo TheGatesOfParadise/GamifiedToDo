@@ -14,19 +14,18 @@ enum DetailsType: String {
 struct ToDoDetailsView: View {
     @EnvironmentObject var dataModel : DataModel
     @Environment(\.dismiss) private var dismiss
-    @Binding var toDo: Todo
+    var existingToDo: Todo
     @State private var datePopOverPresented = false
-    @State var localToDo: Todo = Todo.getAnEmptyToDo()
+    @StateObject var localToDo: Todo = Todo.getAnEmptyToDo()
     @State var hiddenTrigger = false
     var type: DetailsType
     
-    init(toDo: Binding<Todo>, type: DetailsType) {
-        self._toDo = toDo
-        //self._datePopOverPresented = false
+    init(toDo: Todo, type: DetailsType) {
+        self.existingToDo = toDo
         self.type = type
         
         if type == .Edit {
-            self._localToDo = State(initialValue: toDo.wrappedValue)
+            self.localToDo.copy(from: existingToDo)
         }
     }
     
@@ -133,7 +132,7 @@ struct ToDoDetailsView: View {
                 HStack{
                     Button(action: {
                         if type == .Edit {
-                            toDo = localToDo
+                            existingToDo.copy(from:localToDo)
                             dataModel.sortToDoListByDueDate()
                         }
                         else {
@@ -218,7 +217,7 @@ struct CheckListView: View {
 struct ToDoDetailsView_Previews: PreviewProvider {
     @StateObject static var user = User.getASampleUser()
     static var previews: some View {
-        ToDoDetailsView(toDo: $user.toDoList[0],type: .Edit)
+        ToDoDetailsView(toDo: user.toDoList[0],type: .Edit)
         //ToDoDetailsView(toDo: $toDo, type: .New)
         
         //TODO:  in new case, todo assumes there is at least one item from array

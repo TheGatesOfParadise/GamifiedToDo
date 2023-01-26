@@ -97,6 +97,18 @@ class Todo: Task{
         self.reminder = reminder
     }
     
+    //convenience function to copy from an existing todo item
+    func copy(from:Todo) {
+        self.due_date = from.due_date
+        self.checkList = from.checkList
+        self.reminder = from.reminder
+        self.title  =  from.title
+        self.isComplete = from.isComplete
+        self.difficulty = from.difficulty
+        self.tags = from.tags
+        self.notes =  from.notes
+    }
+    
     static func getAnEmptyToDo() -> Todo {
         return Todo(title: "", difficulty: .easy, notes: "", tags: [Tag](), due_date: Date.now.endOfDay, checkList: [Task](), reminder: Date.now.endOfDay)
     }

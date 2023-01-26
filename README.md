@@ -26,4 +26,4 @@ todo:
 revisit dataModel.updateView,  if it's really needed  -- done
 delete a todo, does it affect completion status?
 can't uddate a complete todo -- disable save
-save/add button should be enabled, when title is not empty,   due_date set to today's last minute
+save/add button should be enabled, when title is not empty,   due_date set to today's last minute  -- done

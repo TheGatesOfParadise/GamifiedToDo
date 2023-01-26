@@ -54,10 +54,9 @@ struct CheckToDoView: View {
             
             VStack (alignment: .leading){
                 NavigationLink(
-                    destination: ToDoDetailsView(toDo: $toDo, type: .Edit),
+                    destination: ToDoDetailsView(toDo: toDo, type: .Edit),
                     label: {
                         Text(toDo.title)
-                            //.padding(.top, 10)
                             .font(.system(size: 18))
                             .strikethrough(toDo.isComplete )
                             .foregroundColor(toDo.isComplete  ? .gray : .black)

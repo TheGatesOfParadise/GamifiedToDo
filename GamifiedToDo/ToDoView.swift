@@ -82,7 +82,7 @@ struct HeaderToDoView: View {
             
             //add button
             NavigationLink(destination: {
-                ToDoDetailsView(toDo: $dataModel.user.toDoList[0], type: .New)
+                ToDoDetailsView(toDo: dataModel.user.toDoList[0], type: .New)
             }, label: {
                 Text("+")
                     .font(.system(.largeTitle))
