@@ -23,10 +23,6 @@ struct ToDoDetailsView: View {
     init(toDo: Todo, type: DetailsType) {
         self.existingToDo = toDo
         self.type = type
-        
-        if type == .Edit {
-            self.localToDo.copy(from: existingToDo)
-        }
     }
     
     var body: some View {
@@ -129,41 +125,44 @@ struct ToDoDetailsView: View {
         .toolbar{
             ToolbarItemGroup(placement: ToolbarItemPlacement.navigationBarTrailing,
                              content: {
-                HStack{
-                    Button(action: {
-                        if type == .Edit {
-                            existingToDo.copy(from:localToDo)
-                            dataModel.sortToDoListByDueDate()
-                        }
-                        else {
-                            dataModel.user.toDoList.append(localToDo)
-                            dataModel.sortToDoListByDueDate()
+                //show SAVE button only when todo is not complete
+                if !existingToDo.isComplete {
+                    HStack{
+                        Button(action: {
+                            if type == .Edit {
+                                existingToDo.copy(from:localToDo)
+                                dataModel.sortToDoListByDueDate()
+                            }
+                            else {
+                                dataModel.user.toDoList.append(localToDo)
+                                dataModel.sortToDoListByDueDate()
+                                
+                                //this line is required to see newly added task reflected on the main screen
+                                //force a view to update comes from this post:
+                                //https://stackoverflow.com/questions/56561630/swiftui-forcing-an-update
+                                dataModel.updateView()
+                            }
                             
-                            //this line is required to see newly added task reflected on the main screen
-                            //force a view to update comes from this post:
-                            //https://stackoverflow.com/questions/56561630/swiftui-forcing-an-update
-                            dataModel.updateView()
-                        }
-                        
-                        dismiss()
-                        
-                    }, label: {
-                        Text("SAVE")
-                            .bold()
-                    })
-                    .disabled(localToDo.title == "")
+                            dismiss()
+                            
+                        }, label: {
+                            Text("SAVE")
+                                .bold()
+                        })
+                        //does not allow to save without a title
+                        .disabled(localToDo.title == "")
+                    }
                 }
-                
             })
         }
-    }
-    
-    private func fieldsAreFilled() -> Bool {
-        var result = false
-        if localToDo.title != "" {
-                result = true
+        //this is the way to set value for a @StateObject
+        //referenced from this post:
+        //https://stackoverflow.com/questions/58327013/swift-5-whats-escaping-closure-captures-mutating-self-parameter-and-how-t
+        .onAppear{
+            if type == .Edit {
+                localToDo.copy(from: existingToDo)
             }
-        return result
+        }
     }
 }
 

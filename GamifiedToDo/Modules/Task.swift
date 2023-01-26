@@ -113,6 +113,10 @@ class Todo: Task{
         return Todo(title: "", difficulty: .easy, notes: "", tags: [Tag](), due_date: Date.now.endOfDay, checkList: [Task](), reminder: Date.now.endOfDay)
     }
     
+    static func getToDo(from: Todo) -> Todo {
+        return Todo(title: from.title, difficulty: from.difficulty, notes: from.notes, tags: from.tags, due_date: from.due_date, checkList: from.checkList, reminder: from.reminder)
+    }
+    
     var numberOfCheckList: Int {
         return checkList.count
     }
