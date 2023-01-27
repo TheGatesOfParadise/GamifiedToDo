@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		FD01308C296B554800C4B6B5 /* GamifiedToDoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD01308B296B554800C4B6B5 /* GamifiedToDoApp.swift */; };
-		FD01308E296B554800C4B6B5 /* AvatarSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD01308D296B554800C4B6B5 /* AvatarSectionView.swift */; };
+		FD01308E296B554800C4B6B5 /* AvatarSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD01308D296B554800C4B6B5 /* AvatarSelectionView.swift */; };
 		FD013090296B554900C4B6B5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD01308F296B554900C4B6B5 /* Assets.xcassets */; };
 		FD013093296B554900C4B6B5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD013092296B554900C4B6B5 /* Preview Assets.xcassets */; };
 		FD61BC61296B57B1008D7DA1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD61BC60296B57B1008D7DA1 /* ContentView.swift */; };
@@ -29,7 +29,7 @@
 /* Begin PBXFileReference section */
 		FD013088296B554800C4B6B5 /* GamifiedToDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GamifiedToDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD01308B296B554800C4B6B5 /* GamifiedToDoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamifiedToDoApp.swift; sourceTree = "<group>"; };
-		FD01308D296B554800C4B6B5 /* AvatarSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarSectionView.swift; sourceTree = "<group>"; };
+		FD01308D296B554800C4B6B5 /* AvatarSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarSelectionView.swift; sourceTree = "<group>"; };
 		FD01308F296B554900C4B6B5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FD013092296B554900C4B6B5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		FD61BC60296B57B1008D7DA1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -82,7 +82,7 @@
 				FD61BC60296B57B1008D7DA1 /* ContentView.swift */,
 				FDEE2CE3298303B40024CD7E /* Overview */,
 				FDEE2CE4298303DF0024CD7E /* ToDoDetails */,
-				FD01308D296B554800C4B6B5 /* AvatarSectionView.swift */,
+				FD01308D296B554800C4B6B5 /* AvatarSelectionView.swift */,
 				FD61BC68296C8D54008D7DA1 /* Modules */,
 				FD01308F296B554900C4B6B5 /* Assets.xcassets */,
 				FD013091296B554900C4B6B5 /* Preview Content */,
@@ -203,7 +203,7 @@
 			files = (
 				FD61BC80296FAEE5008D7DA1 /* DateSelectionView.swift in Sources */,
 				FD61BC63296B5808008D7DA1 /* Overview.swift in Sources */,
-				FD01308E296B554800C4B6B5 /* AvatarSectionView.swift in Sources */,
+				FD01308E296B554800C4B6B5 /* AvatarSelectionView.swift in Sources */,
 				FD61BC74296E10DC008D7DA1 /* CheckToDoView.swift in Sources */,
 				FD61BC65296B5E69008D7DA1 /* ToDoView.swift in Sources */,
 				FDEE2CE02980D1A70024CD7E /* DataModel.swift in Sources */,
