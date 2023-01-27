@@ -19,11 +19,3 @@ if your todo is overdue, no coin is earned regardless if the todo is completed l
 
 How to use coins to exchange avatar part:
 Click on "Award" tab to go to Avatar page.  It shows user's existing avatar and available coins.  It also shows the library of all avatar parts with corresponding coins to get it.  For those avatar parts too expensive for the user, the part is grayed out and disabled.  Only when user earns enough coin, those avatar part will be available for selection. 
-
-
-todo:
-
-revisit dataModel.updateView,  if it's really needed  -- done
-delete a todo, does it affect completion status?
-can't uddate a complete todo -- disable save
-save/add button should be enabled, when title is not empty,   due_date set to today's last minute  -- done

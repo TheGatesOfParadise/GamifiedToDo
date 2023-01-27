@@ -1,6 +1,10 @@
+//
+//Rules.swift
+//
 ///
-///
-///
+///This class represents preset rules for this game.
+///There are 2 rules.  First one is awardToAvatarPartRules, it's a dictionary that tells how much award is needed for an avatar part
+///Second rule is taskToAwardRules, it tells how much award is earned to complete a todo based on difficulty level
 ///
 ///
 import Foundation
@@ -12,12 +16,10 @@ let silverLevelCoins = 100
 let goldLevelCoins = 200
 let plantinumLevelCoins = 500
 let extremelyHighLevelCoins = 10000
-
 let indexes = Array(1...12).map { $0 }
 
 struct Rules {
     private var awardToAvatarPartRules = [AvatarPart: Award]()
-    
     private var taskToAwardRules = [DifficultyLevel: Award]()
     
     init() {
@@ -74,6 +76,10 @@ struct Rules {
         }
     }
     
+    ///This function tells how much award is earned based on difficulty level of a todo
+    ///In Parameter --`taskLevel`: DifficultyLevel can be easy, medium and hard
+    ///Return --`Award`: the award earned based on preset rules from the todo
+    ///
     func getAward(taskLevel: DifficultyLevel) -> Award {
         guard let _ = taskToAwardRules[taskLevel] else {
             return Award(coin:extremelyHighLevelCoins)
@@ -82,6 +88,11 @@ struct Rules {
         return taskToAwardRules[taskLevel]!
     }
     
+
+    ///This function tells how much award is needed  to purchase an avatar part
+    ///In Parameter --`avatarPart`: the avatar part to be purchased
+    ///Return --`Award`: the award needed for the part
+    ///
     func getAward(avatarPart: AvatarPart) -> Award {
         guard let _ = awardToAvatarPartRules[avatarPart] else {
             return Award(coin:extremelyHighLevelCoins)

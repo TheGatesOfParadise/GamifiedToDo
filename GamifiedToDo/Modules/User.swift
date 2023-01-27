@@ -1,15 +1,20 @@
-///
-///
-///
+//
+//User.swift
+//
+///For a user, he/she has a name (used in greetings), an avatar, an award and a list of Todos
+///By completing todos on time, user earns award, then the award can be used to purchase a new avatar
 ///
 import Foundation
 
+///Represents a User entity
 class User : ObservableObject, Codable  {
     @Published var name: String
     @Published var avatar: Avatar
     @Published var award: Award
     @Published var toDoList: [Todo] = [Todo]()
     
+    ///Adding Codable conformance for @Published properties
+    ///https://www.hackingwithswift.com/books/ios-swiftui/adding-codable-conformance-for-published-properties
     enum CodingKeys: CodingKey {
         case name
         case avatar
@@ -17,6 +22,7 @@ class User : ObservableObject, Codable  {
         case toDoList
     }
     
+    ///Adding Codable conformance for @Published properties
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         name = try container.decode(String.self, forKey: .name)
@@ -25,6 +31,7 @@ class User : ObservableObject, Codable  {
         toDoList = try container.decode([Todo].self, forKey: .toDoList)
     }
     
+    ///Adding Codable conformance for @Published properties
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(name, forKey: .name)
@@ -33,6 +40,8 @@ class User : ObservableObject, Codable  {
         try container.encode(toDoList, forKey: .toDoList)
     }
     
+    
+    ///initializer
     init(name: String, avatar: Avatar, award: Award, toDoList: [Todo]) {
         self.name = name
         self.avatar = avatar
@@ -40,6 +49,7 @@ class User : ObservableObject, Codable  {
         self.toDoList = toDoList
     }
     
+    ///Convenient function to get a sample User object
     static func getASampleUser() -> User {
         let currentDate = Date.now
         var dateComponent = DateComponents()

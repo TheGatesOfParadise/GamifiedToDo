@@ -1,8 +1,13 @@
+//
+//Award.swift
 ///
-///
+///User award is represented by # of coins earned through completing todos.  User can use the award to buy avatar part to get a new avatar
 ///
 import Foundation
 
+///Represents Award
+///Right now Award is represented by property coin, more coins means more award.
+///
 struct Award: Codable {
     var coin: Int
     
@@ -19,11 +24,28 @@ struct Award: Codable {
     }
 }
 
-struct TaskToAward {
-    var award: Award
-    var difficulty: DifficultyLevel
+///Avatar entity
+///An Avatar is comprised of an array of Avatarpart.
+struct Avatar: Codable {
+    var parts: [AvatarPart]
+    
+    ///convenient function to get a sample Avatar object
+    static func getSampleAvatar() -> Avatar {
+        return Avatar(parts: [AvatarPart(part: .head, category: .basic, index: 1),
+                              AvatarPart(part: .body, category: .basic, index: 1),
+                              AvatarPart(part: .bottom, category: .basic, index: 1)]
+                     )
+    }
 }
 
+///AvatarPart entity
+///property `imageName` - respresents the image in Assets
+struct AvatarPart: Hashable, Codable {
+    var part: AvatarPartType
+    var category: AvatarCategory
+    var index: Int
+    var imageName: String {"\(part.rawValue.lowercased())_\(category.rawValue.lowercased())_\(index)"}
+}
 
 enum AvatarPartType: String, CaseIterable, Codable {
     case head = "Head"
@@ -36,39 +58,3 @@ enum AvatarCategory: String, CaseIterable, Codable {
     case animal = "Animal"
     case castle = "Castle"
 }
-
-struct AvatarPart: Hashable, Codable {
-    var part: AvatarPartType
-    var category: AvatarCategory
-    var index: Int
-    
-    var imageName: String {"\(part.rawValue.lowercased())_\(category.rawValue.lowercased())_\(index)"}
-}
-
-struct Avatar: Codable {
-    var parts: [AvatarPart]
-    
-    static func getSampleAvatar() -> Avatar {
-        return Avatar(parts: [AvatarPart(part: .head, category: .basic, index: 1),
-                              AvatarPart(part: .body, category: .basic, index: 1),
-                              AvatarPart(part: .bottom, category: .basic, index: 1)]
-                     )
-    }
-}
-
-struct AwardToAvatarPart {
-    var award: Award
-    var part: AvatarPart
-    
-    func printRule() {
-        print("Award:\(award.coin) to \(part.imageName)")
-    }
-}
-
-var avatarCategories = [
-    "Basic", "Animal", "Castle"
-]
-
-var partCategories = [
-    "Head", "Body", "Bottom"
-]

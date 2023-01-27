@@ -1,10 +1,13 @@
 //
 //  FilterSheet.swift
-//  GamifiedToDo
 //
-//  Created by Mom macbook air on 1/23/23.
-//
-
+///This view presents a filter for todos.  It's presented as a half sheet in ToDoView.  This view is invoked when user clicks on sort button on ToDoView
+///
+///The Filter has 2 parts, one is top 4 buttons: All, Active, Today and Complete.  User is allowed to select one button at a time
+/// Second part is marked with Tags, user is allowed to selected more than 1 tag.
+///
+///The Reset button at the top right reset filter.
+///
 import SwiftUI
 
 enum ToDoCategory: String, CaseIterable, Identifiable{
@@ -87,6 +90,7 @@ struct FilterSheet: View {
     }
 }
 
+//Customize Text for Button
 struct ButtonText: View {
     var isSelected: Bool = false
     let title: String
@@ -101,7 +105,6 @@ struct ButtonText: View {
             .cornerRadius(8)
     }
 }
-
 
 struct FilterSheet_Previews: PreviewProvider {
     @State static var isShowing = true

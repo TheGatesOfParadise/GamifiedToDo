@@ -1,5 +1,19 @@
-
-
+//
+//ToDoView.swift
+//
+///This view presents a list of todos.  It divides the screen into 3 parts:
+///The very top portion shows user's avatar, today's date, greetings, a sort button and a "+" button to add new todo
+///The middle portion shows 2 things:  today's todo completion status and user's total coins
+///The last part shows a list of todos.  By default, it shows all todos without any filters.
+///
+///On this screen, user can:
+///1. Sort todos by clicking on sort button at the top right
+///2. Add a new todo by clicking on "+" button at the top right
+///3. Swipe any todo to delete it.
+///4. Click on the checkbox next to the todo to mark the todo item as complete or not complete
+///
+///This view uses @EnvironmentObject dataModel to get interact with model layer
+///
 import SwiftUI
 
 let shadeAreaWidth = UIScreen.main.bounds.width - 20
@@ -20,12 +34,12 @@ struct ToDoView: View {
     var body: some View {
         NavigationView {
             VStack (alignment: .center){
-                //show avatar
+                //avatar
                 HeaderToDoView(selectedCategory: $selectedCategory, selectedTags: $selectedTags)
                     .frame(width: shadeAreaWidth)
                     .offset(y:5)
                 
-                //show award
+                //award
                 MiddleView()
                     .frame(width: shadeAreaWidth, height: 70)
                 
@@ -39,6 +53,10 @@ struct ToDoView: View {
     }
 }
 
+///
+///Header view for ToDoView
+///It displays user's avatar, today's date, greetings, a sort button and a "+" button
+///
 struct HeaderToDoView: View {
     @EnvironmentObject var dataModel : DataModel
     @State private var showingSheet = false
@@ -56,7 +74,6 @@ struct HeaderToDoView: View {
                 Text(Date().today())
                     .font(.system(size: 10))
             }
-            
             Spacer()
             
             //sort button
@@ -99,6 +116,10 @@ struct HeaderToDoView: View {
     }
 }
 
+///This view presents middle portion of ToDoView
+///It displays today's todo completion status, when 100% today's todos are completed, the status shows 100% and there is a firework animation to celebrate it.
+///It also displays user's total coins.
+///
 struct MiddleView: View {
     @EnvironmentObject var dataModel : DataModel
     var body: some View {
@@ -117,7 +138,7 @@ struct MiddleView: View {
                                     style: StrokeStyle(lineWidth: 10))
                             .frame(width: statusCircleHeight, height: statusCircleHeight)
                         
-                        //Andimation circle
+                        //Animation circle
                         Circle()
                             .trim(from:0, to: dataModel.userToDoCompletionStatus)
                             .stroke(.yellow,
@@ -137,7 +158,6 @@ struct MiddleView: View {
                     Image("Coin")
                         .resizable()
                         .frame(width: 25, height: 25)
-                    
                     
                     Text(String(format: "coin %i", dataModel.user.award.coin))
                         .foregroundColor(.white)
@@ -165,6 +185,10 @@ struct MiddleView: View {
     }
 }
 
+///
+///This views displays a list of todos for ToDoView.
+///For each individual todo, user can swipe to delete a todo, toggle complete/not-complete status of a todo
+///
 struct BottomToDoView: View {
     @EnvironmentObject var dataModel : DataModel
     var selectedCategory: ToDoCategory
@@ -184,8 +208,8 @@ struct BottomToDoView: View {
                     return
                 }
                 dataModel.user.toDoList.remove(at: index)
-               //this line is not needed, deleting a todo does not affect coin or completion status TODO
-               // dataModel.updateView()
+                //this line is not needed, deleting a todo does not affect coin or completion status
+                // dataModel.updateView()
             })
             .listRowInsets(.init(top: 5, leading: 0, bottom: 5, trailing: 0))
             .listRowSeparator(.hidden)
@@ -195,6 +219,20 @@ struct BottomToDoView: View {
         .listStyle(PlainListStyle())
     }
     
+    ///
+    ///This function determines if a todo should be shown based on filter selection
+    ///
+    ///It accepts 3 parameters:
+    ///         -- `toDo`: the subject to be judged
+    ///         -- `selectedCategory`: of Enum type ToDoCategory, possible values are Active, All, Completed and Today
+    ///                        Active means to display those todos whose due date is not past past due
+    ///                        All means to display every todo, this is the default setting.
+    ///                        Completed means to display those todos who is marked as complete
+    ///                        Today means to display those todos whose due date is within today.
+    ///         -- `selectedTags`: array of Tag,  if more than 2 tags are selected, e.g. work and school, then either work OR work
+    ///                     todos are displayed.  If no tags are selected, it means there is no filter for tags.
+    ///it returns a `Bool`, true means the toDo should be displayed
+    ///
     func shouldShowToDo(toDo: Todo, selectedCategory: ToDoCategory, selectedTags: [Tag] ) -> Bool {
         var shouldDisplay = false
         
@@ -212,31 +250,32 @@ struct BottomToDoView: View {
         case .Today :
             shouldDisplay = toDo.due_date.isWithInToday()
         }
-    
-    if !shouldDisplay {
-        return false
-    }
-    
-    guard selectedTags.count > 0
-    else {
+        
+        if !shouldDisplay {
+            return false
+        }
+        
+        guard selectedTags.count > 0
+        else {
+            return shouldDisplay
+        }
+        
+        shouldDisplay = false
+        //if multiple tags are checked in the filter, it's OR relationship
+        for tag in selectedTags {
+            if toDo.tags.contains(tag) {
+                shouldDisplay = true
+                break
+            }
+        }
+        
         return shouldDisplay
     }
-        
-    shouldDisplay = false
-    //if multiple tags are checked in the filter, it's OR relationship
-    for tag in selectedTags {
-        if toDo.tags.contains(tag) {
-            shouldDisplay = true
-            break
-        }
-    }
-    
-    return shouldDisplay
-}
 }
 
-//use rgb to represent a UIColor
-//https://stackoverflow.com/questions/24263007/how-to-use-hex-color-values
+///Utility extension for UIColor
+///Use rgb to represent a UIColor, it comes from this post:
+///https://stackoverflow.com/questions/24263007/how-to-use-hex-color-values
 extension UIColor {
     convenience init(red: Int, green: Int, blue: Int) {
         assert(red >= 0 && red <= 255, "Invalid red component")
@@ -255,7 +294,10 @@ extension UIColor {
     }
 }
 
-
+///
+///This view presents a circle with animation
+///In parameter: `percent` is a @State variable, its value is from 0.0 to 1.0
+///
 struct StatusCircle : View {
     @State var percent: CGFloat
     var body: some View {
@@ -286,8 +328,9 @@ struct StatusCircle : View {
     }
 }
 
-//Firework effect comes from this post:
-//https://betterprogramming.pub/creating-confetti-particle-effects-using-swiftui-afda4240de6b
+///This view presetns a firework effect
+///Firework effect comes from this post:
+///https://betterprogramming.pub/creating-confetti-particle-effects-using-swiftui-afda4240de6b
 struct FireworkParticlesGeometryEffect : GeometryEffect {
     var time : Double
     var speed = Double.random(in: 20 ... 200)
@@ -305,12 +348,14 @@ struct FireworkParticlesGeometryEffect : GeometryEffect {
     }
 }
 
-
+///
+///This view works together with FireworkParticlesGeometryEffect to present a firework effect on the entire screen
+///The code comes from this post:
+///https://betterprogramming.pub/creating-confetti-particle-effects-using-swiftui-afda4240de6b
 struct ParticlesModifier: ViewModifier {
     @State var time = 0.0
     @State var scale = 0.1
     let duration = 5.0
-    
     func body(content: Content) -> some View {
         ZStack {
             ForEach(0..<80, id: \.self) { index in
@@ -329,7 +374,6 @@ struct ParticlesModifier: ViewModifier {
         }
     }
 }
-
 
 struct ToDoView_Previews: PreviewProvider {
     static var previews: some View {

@@ -124,8 +124,8 @@
 		FDEE2CE4298303DF0024CD7E /* ToDoDetails */ = {
 			isa = PBXGroup;
 			children = (
-				FD61BC7F296FAEE5008D7DA1 /* DateSelectionView.swift */,
 				FD61BC79296E8A3F008D7DA1 /* ToDoDetailsView.swift */,
+				FD61BC7F296FAEE5008D7DA1 /* DateSelectionView.swift */,
 			);
 			path = ToDoDetails;
 			sourceTree = "<group>";

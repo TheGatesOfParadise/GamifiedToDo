@@ -1,9 +1,10 @@
-
-///TODO:  when an avatar is selected, adjust coins. 
+//
+//AvatarSelectionView.swift
+//
 ///
-///Images come from https://caravanshoppe.com/products/olliblocks-starter-pack?variant=1027912704
+///This view displays a matrix of avatar parts to the user to choose from.
+///If user has enough coins to buy the part, the part is enabled.   For those avatar part that user can't afford, the image is disabled.
 ///
-
 import SwiftUI
 
 let iconWidth = 60.0
@@ -19,9 +20,7 @@ struct AvatarSelectionView: View {
     @State var alertPresented = false
     
     var body: some View {
-        
         VStack (alignment: .center){
-            
             HeaderAvatarView()
                 .frame(width: shadeAreaWidth)
                 .offset(y:5)
@@ -99,11 +98,27 @@ struct AvatarSelectionView: View {
         }
     }
     
+    ///
+    ///Calculate how much award is needed for a avatar part
+    ///In Parameters:
+    ///     --`part`: AvatarPartType, e.g. Head, Body or Bottom
+    ///     --`category`: AvatarCategory, e.g. Basic, Animal or Castle
+    ///     --`position`: Int type.  index number correspond to the image name of this particular avatar part
+    ///Return
+    ///     --`Award`: use preset rules to calcuate the required award needed for the avatar part
+    ///
     func needsAward (part: AvatarPartType, category: AvatarCategory, position: Int) -> Award {
         return dataModel.rules.getAward(avatarPart: AvatarPart(part:part, category: category, index: position))
         
     }
     
+    ///Create a new avatar based on user's selection from the avart part matrix
+    ///In Parameters:
+    ///     --`part`: AvatarPartType, e.g. Head, Body or Bottom
+    ///     --`category`: AvatarCategory, e.g. Basic, Animal or Castle
+    ///     --`position`: Int type.  index number correspond to the image name of this particular avatar part
+    ///Return
+    ///     --`Avatar`: The new avatar eplaces existing avatar's part with selected avatar part
     func getNewAvatar (part: AvatarPartType, category: AvatarCategory, position: Int) -> Avatar{
         var newAvatar =  dataModel.user.avatar
         for i in 0..<dataModel.user.avatar.parts.count {
@@ -118,15 +133,12 @@ struct AvatarSelectionView: View {
     
 }
 
-
-//========================================================
-//Dispalys an Avatar
-//It accepts 1 paramter: Avatar
-//This view assembles the avatar from the Avatar object
+///Dispalys an Avatar
+///This view assembles the avatar from the Avatar object
+//////It accepts 1 paramter: `Avatar`
 
 struct AvatarView: View {
     var avatar: Avatar
-    
     var body: some View {
         VStack (spacing: 0){
             Image(avatar.parts[0].imageName)
@@ -143,6 +155,11 @@ struct AvatarView: View {
     }
 }
 
+///
+///Displays a confirmation screen with new Avatar in it
+///User has the option not to purchase the selected avatar, nothing changes following this choice
+///If user decide to buy the selected avatar part, then user's total coin will be deducted and new avatar will be displayed
+///
 struct ConfirmAvatarView: View {
     @EnvironmentObject var dataModel : DataModel
     @Binding var newAvatar: Avatar
@@ -174,6 +191,9 @@ struct ConfirmAvatarView: View {
     }
 }
 
+///
+///Displays user's current Avatar and total coins
+///
 struct HeaderAvatarView: View {
     @EnvironmentObject var dataModel : DataModel
     
@@ -203,9 +223,6 @@ struct HeaderAvatarView: View {
         }
     }
 }
-
-
-//========================================================
 
 struct AvatarSelectionView_Previews: PreviewProvider {
     static var previews: some View {

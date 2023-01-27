@@ -11,6 +11,8 @@
 ///The code is referenced from this article:
 ///https://makeapppie.com/2019/10/16/checkboxes-in-swiftui/
 ///
+///I reused this file from previous project
+///
 import SwiftUI
 
 struct CheckToDoView: View {
@@ -18,10 +20,23 @@ struct CheckToDoView: View {
     @State var hiddenFlag:Bool = false
     var toDo: Todo
     
+    ///Internal function to CheckToDoView
+    ///This function has no in coming parater, it returns a Color object
+    ///If toDo's difficulty level is hard, return color is pink
+    ///If toDo's difficulty level is medium, return color is orange
+    ///If toDo's difficulty level is easy, return color is green
+    ///
     func checkColor() -> Color {
         return toDo.difficulty == .easy ? .green : toDo.difficulty == .medium ? .orange : pinkColor
     }
     
+    ///Internal function to CheckToDoView
+    ///When user toggles checkmark of a todo, it has impacts to user's total award
+    ///Give award to a complete todo only when the todo is not overdue.   Overdue todo does not earn any award.
+    ///
+    ///When a not-ovedue todo is marked as complete, give user award based on todo's difficulty level
+    ///When a not-overdue todo is marked as not complete, minuse award based on todo's difficulty level
+    ///
     func calculateAward() {
         //adjust award only when toDo's is not overdue
         if toDo.due_date > Date.now.startOfDay {
@@ -63,7 +78,7 @@ struct CheckToDoView: View {
                             .multilineTextAlignment(.leading)
                     })
                 
-                Label(title: { Text(toDo.dueDateString())
+                Label(title: { Text(toDo.dueDateString)
                         .foregroundColor(toDo.isComplete  ? .gray : .black)
                         .font(.system(size: 14))
                             },
@@ -79,7 +94,7 @@ struct CheckToDoView: View {
             
             //display fraction
             if toDo.numberOfCheckList != 0 {
-                FractionView(numberator: toDo.numberofCompletedCheckList(), denominator: toDo.numberOfCheckList)
+                FractionView(numerator: toDo.numberofCompletedCheckList, denominator: toDo.numberOfCheckList)
                     .padding(.trailing, 5)
             }
         }
@@ -89,12 +104,17 @@ struct CheckToDoView: View {
     }
 }
 
+///
+///This view displays a fraction to reflect complete status of a todo
+///If a todo has a non-empty checklist, which is a smaller task for the todo, user can mark individual checklist as complete
+///this view shows a fraction, numerator is # of completed checklist items. denominator is the total number of checklist
+///
 struct FractionView: View {
-    var numberator: Int
+    var numerator: Int
     var denominator: Int
     var body: some View {
         VStack (alignment: .center, spacing: 0){
-            Text(String(numberator))
+            Text(String(numerator))
             Text("--")
             Text(String(denominator))
         }
@@ -103,7 +123,6 @@ struct FractionView: View {
         
     }
 }
-
 
 struct CheckToDoView_Previews: PreviewProvider {
     @StateObject static var user = User.getASampleUser()

@@ -1,6 +1,13 @@
-///
-///
-///
+//
+//ToDoDetailsView.swift
+//
+///This view displays details for a todo.  It's used as a new todo screen and edit an existing todo screen
+///It accepts 2 parameters:
+///         -- `existingToDo`:  If this is Edit type, this parameter represents the existing todo to be edited.
+///                     If this is New type, this paramter is passed in a dummy todo, not used.
+///         -- `type`: enum type of DetailsType.
+///               Edit means this screen is for an existing todo editing,
+///               New means this screen is invoked when user clicks "+" button on ToDoView screen
 ///
 import SwiftUI
 
@@ -68,7 +75,7 @@ struct ToDoDetailsView: View {
                 //scheduling -  due date
                 Section (header: Text("Due Date")){
                     HStack{
-                        Text(localToDo.dueDateString())
+                        Text(localToDo.dueDateString)
                         Spacer()
                         
                         //date
@@ -130,9 +137,7 @@ struct ToDoDetailsView: View {
                     HStack{
                         Button(action: {
                             if type == .Edit {
-                               // print(existingToDo.due_date.toString())
                                 existingToDo.copy(from:localToDo)
-                              //  print(existingToDo.due_date.toString())
                                 dataModel.sortToDoListByDueDate()
                             }
                             else {
@@ -168,6 +173,13 @@ struct ToDoDetailsView: View {
     }
 }
 
+///
+///This view allows user to add new checklist to todo.
+///On this screen, user can
+///1. add a new checklist
+///2. mark a checklist as complete by check the box next to the checklist
+///3. swipe to delete a checklist
+///
 struct CheckListView: View {
     @Binding var checkList: [Task]
     @State var localEntry: String = ""
@@ -202,7 +214,6 @@ struct CheckListView: View {
                             hiddenFlag.toggle()
                         }
                     }
-                    
                 }
                 .onDelete(perform: { indexSet in
                     guard let index = indexSet.first else {
@@ -220,7 +231,5 @@ struct ToDoDetailsView_Previews: PreviewProvider {
     static var previews: some View {
         ToDoDetailsView(toDo: user.toDoList[0],type: .Edit)
         //ToDoDetailsView(toDo: $toDo, type: .New)
-        
-        //TODO:  in new case, todo assumes there is at least one item from array
     }
 }

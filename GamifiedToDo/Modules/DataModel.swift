@@ -2,7 +2,7 @@
 ///DataModel layer for this app
 ///
 ///It contains a published variable of User type,  the published variable's content can be updated by the user of this app
-///Another variabled is of Rules type, it's preset and fixed.
+///It also contains a variabled of Rules type, it's preset and fixed.
 ///
 ///
 import Foundation
@@ -15,6 +15,7 @@ class DataModel:ObservableObject {
     }
     var rules: Rules = Rules()
     
+    ///initializer
     init() {
         user = User.getASampleUser()
         if let data = UserDefaults.standard.data(forKey: "user") {
@@ -28,6 +29,7 @@ class DataModel:ObservableObject {
         }
     }
 
+    ///Calculate percentage of today's todo completion
     var userToDoCompletionStatus: CGFloat {
         var total: Int = 0
         var completed: Int = 0
@@ -47,25 +49,14 @@ class DataModel:ObservableObject {
             return Double(completed) / Double(total)
         }
     }
- /*
-    var userTotalCoin: Int {
-        var result: Int = 0
-        user.toDoList.forEach { toDo in
-            result += getFractionCoinsFromAToDo(toDo: toDo)
-        }
-        return result - userAvatarCoin
-    }
     
-    private var userAvatarCoin: Int {
-        var result: Int = 0
-        for avatarPart in user.avatar.parts {
-            result += rules.getAward(avatarPart: avatarPart).coin
-        }
-        return result
-    }
-  */
     
-    //if it's overdue todo, no coin regardless it's complete or not
+    ///Get # of coins earned for a todo
+    ///if it's overdue todo, no award is earned regardless it's complete or not
+    ///In parameter -- `toDo`: the todo to be evaluated
+    ///Return --`Int`: the # of coins earned fron the todo.  If a todo is not complete,
+    ///and it has a non-empty checklist, some checklist is marked as completed, then the
+    ///coin is earned propotionally
     func getFractionCoinsFromAToDo (toDo: Todo) -> Int {
         guard !toDo.due_date.isOverDue()
         else {
@@ -91,19 +82,22 @@ class DataModel:ObservableObject {
         return result
     }
     
-    //force a view to update comes from this post:
-    //https://stackoverflow.com/questions/56561630/swiftui-forcing-an-update
+    ///force a view to update comes from this post:
+    ///https://stackoverflow.com/questions/56561630/swiftui-forcing-an-update
     func updateView(){
         self.objectWillChange.send()
         saveUser()
     }
     
+    ///Persist user to UserDefaults
     func saveUser() {
         if let data = try? JSONEncoder().encode(user) {
             UserDefaults.standard.set(data, forKey: "user")
         }
     }
     
+    ///Remove a todo from user's todo list
+    ///In parameter --`whichIs`: the totdo to be deleted
     func removeToDo(whichIs: Todo) -> Void{
         // guard user.toDoList != nil else { return }
         if let idx = user.toDoList.firstIndex(where: { $0 === whichIs }) {
@@ -112,6 +106,7 @@ class DataModel:ObservableObject {
         updateView()
     }
     
+    ///Sort todo list based on due date
     func sortToDoListByDueDate() {
         user.toDoList.sort{$0.due_date < $1.due_date}
     }
