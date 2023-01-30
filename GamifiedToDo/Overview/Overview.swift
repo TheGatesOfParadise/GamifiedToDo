@@ -18,7 +18,7 @@ struct Overview: View {
                             Label("To Do's", systemImage: "checkmark.square.fill")
                         }
                         .tag("TODos")
-                    AvatarSelectionView()
+                    MerchantView()
                         .tabItem {
                             Label("Award", systemImage: "gift.fill")
                         }

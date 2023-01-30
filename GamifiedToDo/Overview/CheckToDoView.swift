@@ -37,17 +37,17 @@ struct CheckToDoView: View {
     ///When a not-ovedue todo is marked as complete, give user award based on todo's difficulty level
     ///When a not-overdue todo is marked as not complete, minuse award based on todo's difficulty level
     ///
-    func calculateAward() {
-        //adjust award only when toDo's is not overdue
-        if toDo.due_date > Date.now.startOfDay {
-            if toDo.isComplete{
-                dataModel.user.award.add(award:dataModel.rules.getAward(taskLevel: toDo.difficulty))
-            }
-            else {
-                dataModel.user.award.minus(award:dataModel.rules.getAward(taskLevel: toDo.difficulty))
-            }
-        }
-    }
+//    func calculateAward() {
+//        //adjust award only when toDo's is not overdue
+//        if toDo.due_date > Date.now.startOfDay {
+//            if toDo.isComplete{
+//                dataModel.user.award.add(award:dataModel.rules.getAward(taskLevel: toDo.difficulty))
+//            }
+//            else {
+//                dataModel.user.award.minus(award:dataModel.rules.getAward(taskLevel: toDo.difficulty))
+//            }
+//        }
+//    }
     
     var body: some View {
         HStack (alignment: .center){
@@ -58,7 +58,7 @@ struct CheckToDoView: View {
                 .background(checkColor())
                 .onTapGesture {
                     toDo.isComplete.toggle()
-                    calculateAward()
+                  //  calculateAward()
                     
                     //without the following line, middle view's coin is not updated
                     //force a view to update comes from this post:

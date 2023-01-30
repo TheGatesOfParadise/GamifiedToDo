@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B8F80222987978C00127128 /* MerchantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8F80212987978C00127128 /* MerchantView.swift */; };
 		FD01308C296B554800C4B6B5 /* GamifiedToDoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD01308B296B554800C4B6B5 /* GamifiedToDoApp.swift */; };
 		FD01308E296B554800C4B6B5 /* AvatarSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD01308D296B554800C4B6B5 /* AvatarSelectionView.swift */; };
 		FD013090296B554900C4B6B5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD01308F296B554900C4B6B5 /* Assets.xcassets */; };
@@ -27,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2B8F80212987978C00127128 /* MerchantView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantView.swift; sourceTree = "<group>"; };
 		FD013088296B554800C4B6B5 /* GamifiedToDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GamifiedToDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD01308B296B554800C4B6B5 /* GamifiedToDoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamifiedToDoApp.swift; sourceTree = "<group>"; };
 		FD01308D296B554800C4B6B5 /* AvatarSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarSelectionView.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 				FDEE2CE3298303B40024CD7E /* Overview */,
 				FDEE2CE4298303DF0024CD7E /* ToDoDetails */,
 				FD01308D296B554800C4B6B5 /* AvatarSelectionView.swift */,
+				2B8F80212987978C00127128 /* MerchantView.swift */,
 				FD61BC68296C8D54008D7DA1 /* Modules */,
 				FD01308F296B554900C4B6B5 /* Assets.xcassets */,
 				FD013091296B554900C4B6B5 /* Preview Content */,
@@ -210,6 +213,7 @@
 				FD61BC7A296E8A3F008D7DA1 /* ToDoDetailsView.swift in Sources */,
 				FD01308C296B554800C4B6B5 /* GamifiedToDoApp.swift in Sources */,
 				FD61BC6C296C8DA6008D7DA1 /* Award.swift in Sources */,
+				2B8F80222987978C00127128 /* MerchantView.swift in Sources */,
 				FDEE2CDC297F060D0024CD7E /* FilterSheet.swift in Sources */,
 				FD61BC61296B57B1008D7DA1 /* ContentView.swift in Sources */,
 				FD61BC6E296C8DB2008D7DA1 /* Task.swift in Sources */,

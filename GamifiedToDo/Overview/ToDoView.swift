@@ -39,9 +39,9 @@ struct ToDoView: View {
                     .frame(width: shadeAreaWidth)
                     .offset(y:5)
                 
-                //award
-                MiddleView()
-                    .frame(width: shadeAreaWidth, height: 70)
+                //                //award
+                //                MiddleView()
+                //                    .frame(width: shadeAreaWidth, height: 70)
                 
                 //list of todos
                 BottomToDoView(selectedCategory: selectedCategory, selectedTags: selectedTags)
@@ -65,15 +65,17 @@ struct HeaderToDoView: View {
     
     var body: some View {
         HStack {
-            AvatarView(avatar: dataModel.user.avatar)
-                .frame(width:80, height:80)
-                .background(.yellow.opacity(0.2))
+            //            AvatarView(avatar: dataModel.user.avatar)
+            //                .frame(width:80, height:80)
+            //                .background(.yellow.opacity(0.2))
             
+
             VStack (alignment: .leading, spacing: 10){
                 Text("\(Date().greetings()) \(dataModel.user.name)!")
                 Text(Date().today())
                     .font(.system(size: 10))
             }
+            
             Spacer()
             
             //sort button
@@ -120,70 +122,68 @@ struct HeaderToDoView: View {
 ///It displays today's todo completion status, when 100% today's todos are completed, the status shows 100% and there is a firework animation to celebrate it.
 ///It also displays user's total coins.
 ///
-struct MiddleView: View {
-    @EnvironmentObject var dataModel : DataModel
-    var body: some View {
-        ZStack {
-            Color(middleViewBackgroundColor)
-            HStack {
-                HStack (spacing:0){
-                    Text("Today's completion")
-                        .foregroundColor(.white)
-                        .font(.system(size:12))
-                        .padding()
-                    ZStack {
-                        //track circle
-                        Circle()
-                            .stroke(.white.opacity(0.3),
-                                    style: StrokeStyle(lineWidth: 10))
-                            .frame(width: statusCircleHeight, height: statusCircleHeight)
-                        
-                        //Animation circle
-                        Circle()
-                            .trim(from:0, to: dataModel.userToDoCompletionStatus)
-                            .stroke(.yellow,
-                                    style: StrokeStyle(lineWidth: 10))
-                            .rotationEffect(.init(degrees: -90))
-                            .animation(Animation.linear(duration:0.8), value: dataModel.userToDoCompletionStatus)
-                            .frame(width: statusCircleHeight, height: statusCircleHeight)
-                        
-                        
-                        Text( String(format: "%.1f", dataModel.userToDoCompletionStatus * 100))
-                            .foregroundColor(.white)
-                            .font(.system(size:14))
-                    }
-                }
-                Spacer()
-                HStack (spacing: 0) {
-                    Image("Coin")
-                        .resizable()
-                        .frame(width: 25, height: 25)
-                    
-                    Text(String(format: "coin %i", dataModel.user.award.coin))
-                        .foregroundColor(.white)
-                        .font(.system(size:18))
-                        .padding(.trailing, 10)
-                        .padding(.leading, 5)
-                }
-            }
-            
-            //fireworks animation
-            if dataModel.userToDoCompletionStatus == 1.0 {
-                Circle()
-                    .fill(Color.blue)
-                    .frame(width: 12, height: 12)
-                    .modifier(ParticlesModifier())
-                    .offset(x: -100, y : -50)
-                
-                Circle()
-                    .fill(Color.red)
-                    .frame(width: 12, height: 12)
-                    .modifier(ParticlesModifier())
-                    .offset(x: 60, y : 70)
-            }
-        }
-    }
-}
+//struct MiddleView: View {
+//    @EnvironmentObject var dataModel : DataModel
+//    var body: some View {
+//        ZStack {
+//            Color(middleViewBackgroundColor)
+//            HStack {
+//                HStack (spacing:0){
+//                    Text("Today's completion")
+//                        .foregroundColor(.white)
+//                        .font(.system(size:12))
+//                        .padding()
+//                    ZStack {
+//                        //track circle
+//                        Circle()
+//                            .stroke(.white.opacity(0.3),
+//                                    style: StrokeStyle(lineWidth: 10))
+//                            .frame(width: statusCircleHeight, height: statusCircleHeight)
+//
+//                        //Animation circle
+//                        Circle()
+//                            .trim(from:0, to: dataModel)
+//                            .stroke(.yellow,
+//                                    style: StrokeStyle(lineWidth: 10))
+//                            .rotationEffect(.init(degrees: -90))
+//                            .animation(Animation.linear(duration:0.8), value: dataModel)
+//                            .frame(width: statusCircleHeight, height: statusCircleHeight)
+//
+//
+//                        Text( String(format: "%.1f", dataModel * 100))
+//                            .foregroundColor(.white)
+//                            .font(.system(size:14))
+//                    }
+
+//  Spacer()
+//                HStack (spacing: 0) {
+//                    Image("Coin")
+//                        .resizable()
+//                        .frame(width: 25, height: 25)
+//
+//                    Text(String(format: "coin %i", dataModel.user as! CVarArg))
+//                        .foregroundColor(.white)
+//                        .font(.system(size:18))
+//                        .padding(.trailing, 10)
+//                        .padding(.leading, 5)
+//                }
+
+
+//            //fireworks animation
+//            if dataModel.userToDoCompletionStatus == 1.0 {
+//                Circle()
+//                    .fill(Color.blue)
+//                    .frame(width: 12, height: 12)
+//                    .modifier(ParticlesModifier())
+//                    .offset(x: -100, y : -50)
+//
+//                Circle()
+//                    .fill(Color.red)
+//                    .frame(width: 12, height: 12)
+//                    .modifier(ParticlesModifier())
+//                    .offset(x: 60, y : 70)
+//            }
+
 
 ///
 ///This views displays a list of todos for ToDoView.
@@ -312,7 +312,7 @@ struct StatusCircle : View {
                     Circle()
                         .stroke(.white.opacity(0.3),
                                 style: StrokeStyle(lineWidth: 30))
-                    //Andimation circle
+                    //Animation circle
                     Circle()
                         .trim(from:0, to: percent)
                         .stroke(.yellow,
@@ -328,52 +328,52 @@ struct StatusCircle : View {
     }
 }
 
-///This view presetns a firework effect
+///This view presents a firework effect
 ///Firework effect comes from this post:
 ///https://betterprogramming.pub/creating-confetti-particle-effects-using-swiftui-afda4240de6b
-struct FireworkParticlesGeometryEffect : GeometryEffect {
-    var time : Double
-    var speed = Double.random(in: 20 ... 200)
-    var direction = Double.random(in: -Double.pi ...  Double.pi)
-    
-    var animatableData: Double {
-        get { time }
-        set { time = newValue }
-    }
-    func effectValue(size: CGSize) -> ProjectionTransform {
-        let xTranslation = speed * cos(direction) * time
-        let yTranslation = speed * sin(direction) * time
-        let affineTranslation =  CGAffineTransform(translationX: xTranslation, y: yTranslation)
-        return ProjectionTransform(affineTranslation)
-    }
-}
+//struct FireworkParticlesGeometryEffect : GeometryEffect {
+//    var time : Double
+//    var speed = Double.random(in: 20 ... 200)
+//    var direction = Double.random(in: -Double.pi ...  Double.pi)
+//
+//    var animatableData: Double {
+//        get { time }
+//        set { time = newValue }
+//    }
+//    func effectValue(size: CGSize) -> ProjectionTransform {
+//        let xTranslation = speed * cos(direction) * time
+//        let yTranslation = speed * sin(direction) * time
+//        let affineTranslation =  CGAffineTransform(translationX: xTranslation, y: yTranslation)
+//        return ProjectionTransform(affineTranslation)
+//    }
+//}
 
 ///
 ///This view works together with FireworkParticlesGeometryEffect to present a firework effect on the entire screen
 ///The code comes from this post:
 ///https://betterprogramming.pub/creating-confetti-particle-effects-using-swiftui-afda4240de6b
-struct ParticlesModifier: ViewModifier {
-    @State var time = 0.0
-    @State var scale = 0.1
-    let duration = 5.0
-    func body(content: Content) -> some View {
-        ZStack {
-            ForEach(0..<80, id: \.self) { index in
-                content
-                    .hueRotation(Angle(degrees: time * 80))
-                    .scaleEffect(scale)
-                    .modifier(FireworkParticlesGeometryEffect(time: time))
-                    .opacity(((duration-time) / duration))
-            }
-        }
-        .onAppear {
-            withAnimation (.easeOut(duration: duration)) {
-                self.time = duration
-                self.scale = 1.0
-            }
-        }
-    }
-}
+//struct ParticlesModifier: ViewModifier {
+//    @State var time = 0.0
+//    @State var scale = 0.1
+//    let duration = 5.0
+//    func body(content: Content) -> some View {
+//        ZStack {
+//            ForEach(0..<80, id: \.self) { index in
+//                content
+//                    .hueRotation(Angle(degrees: time * 80))
+//                    .scaleEffect(scale)
+//                    .modifier(FireworkParticlesGeometryEffect(time: time))
+//                    .opacity(((duration-time) / duration))
+//            }
+//        }
+//        .onAppear {
+//            withAnimation (.easeOut(duration: duration)) {
+//                self.time = duration
+//                self.scale = 1.0
+//            }
+//        }
+//    }
+//}
 
 struct ToDoView_Previews: PreviewProvider {
     static var previews: some View {
