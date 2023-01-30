@@ -9,18 +9,14 @@
 /* Begin PBXBuildFile section */
 		2B8F80222987978C00127128 /* MerchantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8F80212987978C00127128 /* MerchantView.swift */; };
 		FD01308C296B554800C4B6B5 /* GamifiedToDoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD01308B296B554800C4B6B5 /* GamifiedToDoApp.swift */; };
-		FD01308E296B554800C4B6B5 /* AvatarSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD01308D296B554800C4B6B5 /* AvatarSelectionView.swift */; };
 		FD013090296B554900C4B6B5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD01308F296B554900C4B6B5 /* Assets.xcassets */; };
 		FD013093296B554900C4B6B5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD013092296B554900C4B6B5 /* Preview Assets.xcassets */; };
 		FD61BC61296B57B1008D7DA1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD61BC60296B57B1008D7DA1 /* ContentView.swift */; };
 		FD61BC63296B5808008D7DA1 /* Overview.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD61BC62296B5808008D7DA1 /* Overview.swift */; };
 		FD61BC65296B5E69008D7DA1 /* ToDoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD61BC64296B5E69008D7DA1 /* ToDoView.swift */; };
 		FD61BC6A296C8D98008D7DA1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD61BC69296C8D98008D7DA1 /* User.swift */; };
-		FD61BC6C296C8DA6008D7DA1 /* Award.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD61BC6B296C8DA6008D7DA1 /* Award.swift */; };
 		FD61BC6E296C8DB2008D7DA1 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD61BC6D296C8DB2008D7DA1 /* Task.swift */; };
-		FD61BC72296D28AC008D7DA1 /* Rules.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD61BC71296D28AC008D7DA1 /* Rules.swift */; };
 		FD61BC74296E10DC008D7DA1 /* CheckToDoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD61BC73296E10DC008D7DA1 /* CheckToDoView.swift */; };
-		FD61BC78296E62F1008D7DA1 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = FD61BC77296E62F0008D7DA1 /* README.md */; };
 		FD61BC7A296E8A3F008D7DA1 /* ToDoDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD61BC79296E8A3F008D7DA1 /* ToDoDetailsView.swift */; };
 		FD61BC80296FAEE5008D7DA1 /* DateSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD61BC7F296FAEE5008D7DA1 /* DateSelectionView.swift */; };
 		FDEE2CDC297F060D0024CD7E /* FilterSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDEE2CDB297F060D0024CD7E /* FilterSheet.swift */; };
@@ -31,18 +27,14 @@
 		2B8F80212987978C00127128 /* MerchantView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantView.swift; sourceTree = "<group>"; };
 		FD013088296B554800C4B6B5 /* GamifiedToDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GamifiedToDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD01308B296B554800C4B6B5 /* GamifiedToDoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamifiedToDoApp.swift; sourceTree = "<group>"; };
-		FD01308D296B554800C4B6B5 /* AvatarSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarSelectionView.swift; sourceTree = "<group>"; };
 		FD01308F296B554900C4B6B5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FD013092296B554900C4B6B5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		FD61BC60296B57B1008D7DA1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		FD61BC62296B5808008D7DA1 /* Overview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Overview.swift; sourceTree = "<group>"; };
 		FD61BC64296B5E69008D7DA1 /* ToDoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoView.swift; sourceTree = "<group>"; };
 		FD61BC69296C8D98008D7DA1 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		FD61BC6B296C8DA6008D7DA1 /* Award.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Award.swift; sourceTree = "<group>"; };
 		FD61BC6D296C8DB2008D7DA1 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
-		FD61BC71296D28AC008D7DA1 /* Rules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rules.swift; sourceTree = "<group>"; };
 		FD61BC73296E10DC008D7DA1 /* CheckToDoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckToDoView.swift; sourceTree = "<group>"; };
-		FD61BC77296E62F0008D7DA1 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		FD61BC79296E8A3F008D7DA1 /* ToDoDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoDetailsView.swift; sourceTree = "<group>"; };
 		FD61BC7F296FAEE5008D7DA1 /* DateSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSelectionView.swift; sourceTree = "<group>"; };
 		FDEE2CDB297F060D0024CD7E /* FilterSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSheet.swift; sourceTree = "<group>"; };
@@ -79,12 +71,10 @@
 		FD01308A296B554800C4B6B5 /* GamifiedToDo */ = {
 			isa = PBXGroup;
 			children = (
-				FD61BC77296E62F0008D7DA1 /* README.md */,
 				FD01308B296B554800C4B6B5 /* GamifiedToDoApp.swift */,
 				FD61BC60296B57B1008D7DA1 /* ContentView.swift */,
 				FDEE2CE3298303B40024CD7E /* Overview */,
 				FDEE2CE4298303DF0024CD7E /* ToDoDetails */,
-				FD01308D296B554800C4B6B5 /* AvatarSelectionView.swift */,
 				2B8F80212987978C00127128 /* MerchantView.swift */,
 				FD61BC68296C8D54008D7DA1 /* Modules */,
 				FD01308F296B554900C4B6B5 /* Assets.xcassets */,
@@ -105,9 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				FD61BC69296C8D98008D7DA1 /* User.swift */,
-				FD61BC6B296C8DA6008D7DA1 /* Award.swift */,
 				FD61BC6D296C8DB2008D7DA1 /* Task.swift */,
-				FD61BC71296D28AC008D7DA1 /* Rules.swift */,
 				FDEE2CDF2980D1A70024CD7E /* DataModel.swift */,
 			);
 			path = Modules;
@@ -191,7 +179,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FD61BC78296E62F1008D7DA1 /* README.md in Resources */,
 				FD013093296B554900C4B6B5 /* Preview Assets.xcassets in Resources */,
 				FD013090296B554900C4B6B5 /* Assets.xcassets in Resources */,
 			);
@@ -206,19 +193,16 @@
 			files = (
 				FD61BC80296FAEE5008D7DA1 /* DateSelectionView.swift in Sources */,
 				FD61BC63296B5808008D7DA1 /* Overview.swift in Sources */,
-				FD01308E296B554800C4B6B5 /* AvatarSelectionView.swift in Sources */,
 				FD61BC74296E10DC008D7DA1 /* CheckToDoView.swift in Sources */,
 				FD61BC65296B5E69008D7DA1 /* ToDoView.swift in Sources */,
 				FDEE2CE02980D1A70024CD7E /* DataModel.swift in Sources */,
 				FD61BC7A296E8A3F008D7DA1 /* ToDoDetailsView.swift in Sources */,
 				FD01308C296B554800C4B6B5 /* GamifiedToDoApp.swift in Sources */,
-				FD61BC6C296C8DA6008D7DA1 /* Award.swift in Sources */,
 				2B8F80222987978C00127128 /* MerchantView.swift in Sources */,
 				FDEE2CDC297F060D0024CD7E /* FilterSheet.swift in Sources */,
 				FD61BC61296B57B1008D7DA1 /* ContentView.swift in Sources */,
 				FD61BC6E296C8DB2008D7DA1 /* Task.swift in Sources */,
 				FD61BC6A296C8D98008D7DA1 /* User.swift in Sources */,
-				FD61BC72296D28AC008D7DA1 /* Rules.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
