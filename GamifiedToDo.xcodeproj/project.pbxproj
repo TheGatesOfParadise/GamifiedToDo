@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B2477E7298D91790036543C /* Reward.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2477E6298D91790036543C /* Reward.swift */; };
 		2B8F80222987978C00127128 /* MerchantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8F80212987978C00127128 /* MerchantView.swift */; };
 		FD01308C296B554800C4B6B5 /* GamifiedToDoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD01308B296B554800C4B6B5 /* GamifiedToDoApp.swift */; };
 		FD013090296B554900C4B6B5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD01308F296B554900C4B6B5 /* Assets.xcassets */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2B2477E6298D91790036543C /* Reward.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reward.swift; sourceTree = "<group>"; };
 		2B8F80212987978C00127128 /* MerchantView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantView.swift; sourceTree = "<group>"; };
 		FD013088296B554800C4B6B5 /* GamifiedToDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GamifiedToDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD01308B296B554800C4B6B5 /* GamifiedToDoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamifiedToDoApp.swift; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 				FD61BC69296C8D98008D7DA1 /* User.swift */,
 				FD61BC6D296C8DB2008D7DA1 /* Task.swift */,
 				FDEE2CDF2980D1A70024CD7E /* DataModel.swift */,
+				2B2477E6298D91790036543C /* Reward.swift */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -197,6 +200,7 @@
 				FD61BC65296B5E69008D7DA1 /* ToDoView.swift in Sources */,
 				FDEE2CE02980D1A70024CD7E /* DataModel.swift in Sources */,
 				FD61BC7A296E8A3F008D7DA1 /* ToDoDetailsView.swift in Sources */,
+				2B2477E7298D91790036543C /* Reward.swift in Sources */,
 				FD01308C296B554800C4B6B5 /* GamifiedToDoApp.swift in Sources */,
 				2B8F80222987978C00127128 /* MerchantView.swift in Sources */,
 				FDEE2CDC297F060D0024CD7E /* FilterSheet.swift in Sources */,
