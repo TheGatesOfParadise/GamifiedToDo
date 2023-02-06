@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2B2477E7298D91790036543C /* Reward.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2477E6298D91790036543C /* Reward.swift */; };
+		2B2477E7298D91790036543C /* Award.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2477E6298D91790036543C /* Award.swift */; };
 		2B8F80222987978C00127128 /* MerchantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8F80212987978C00127128 /* MerchantView.swift */; };
-		FD01308C296B554800C4B6B5 /* GamifiedToDoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD01308B296B554800C4B6B5 /* GamifiedToDoApp.swift */; };
+		FD01308C296B554800C4B6B5 /* unit6App.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD01308B296B554800C4B6B5 /* unit6App.swift */; };
 		FD013090296B554900C4B6B5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD01308F296B554900C4B6B5 /* Assets.xcassets */; };
 		FD013093296B554900C4B6B5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD013092296B554900C4B6B5 /* Preview Assets.xcassets */; };
 		FD61BC61296B57B1008D7DA1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD61BC60296B57B1008D7DA1 /* ContentView.swift */; };
@@ -25,10 +25,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2B2477E6298D91790036543C /* Reward.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reward.swift; sourceTree = "<group>"; };
+		2B2477E6298D91790036543C /* Award.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Award.swift; sourceTree = "<group>"; };
 		2B8F80212987978C00127128 /* MerchantView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantView.swift; sourceTree = "<group>"; };
-		FD013088296B554800C4B6B5 /* GamifiedToDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GamifiedToDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		FD01308B296B554800C4B6B5 /* GamifiedToDoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamifiedToDoApp.swift; sourceTree = "<group>"; };
+		FD013088296B554800C4B6B5 /* unit6.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = unit6.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FD01308B296B554800C4B6B5 /* unit6App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = unit6App.swift; sourceTree = "<group>"; };
 		FD01308F296B554900C4B6B5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FD013092296B554900C4B6B5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		FD61BC60296B57B1008D7DA1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -57,7 +57,7 @@
 		FD01307F296B554800C4B6B5 = {
 			isa = PBXGroup;
 			children = (
-				FD01308A296B554800C4B6B5 /* GamifiedToDo */,
+				FD01308A296B554800C4B6B5 /* unit6 */,
 				FD013089296B554800C4B6B5 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -65,15 +65,15 @@
 		FD013089296B554800C4B6B5 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				FD013088296B554800C4B6B5 /* GamifiedToDo.app */,
+				FD013088296B554800C4B6B5 /* unit6.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		FD01308A296B554800C4B6B5 /* GamifiedToDo */ = {
+		FD01308A296B554800C4B6B5 /* unit6 */ = {
 			isa = PBXGroup;
 			children = (
-				FD01308B296B554800C4B6B5 /* GamifiedToDoApp.swift */,
+				FD01308B296B554800C4B6B5 /* unit6App.swift */,
 				FD61BC60296B57B1008D7DA1 /* ContentView.swift */,
 				FDEE2CE3298303B40024CD7E /* Overview */,
 				FDEE2CE4298303DF0024CD7E /* ToDoDetails */,
@@ -82,7 +82,7 @@
 				FD01308F296B554900C4B6B5 /* Assets.xcassets */,
 				FD013091296B554900C4B6B5 /* Preview Content */,
 			);
-			path = GamifiedToDo;
+			path = unit6;
 			sourceTree = "<group>";
 		};
 		FD013091296B554900C4B6B5 /* Preview Content */ = {
@@ -99,7 +99,7 @@
 				FD61BC69296C8D98008D7DA1 /* User.swift */,
 				FD61BC6D296C8DB2008D7DA1 /* Task.swift */,
 				FDEE2CDF2980D1A70024CD7E /* DataModel.swift */,
-				2B2477E6298D91790036543C /* Reward.swift */,
+				2B2477E6298D91790036543C /* Award.swift */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -127,9 +127,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		FD013087296B554800C4B6B5 /* GamifiedToDo */ = {
+		FD013087296B554800C4B6B5 /* unit6 */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = FD013096296B554900C4B6B5 /* Build configuration list for PBXNativeTarget "GamifiedToDo" */;
+			buildConfigurationList = FD013096296B554900C4B6B5 /* Build configuration list for PBXNativeTarget "unit6" */;
 			buildPhases = (
 				FD013084296B554800C4B6B5 /* Sources */,
 				FD013085296B554800C4B6B5 /* Frameworks */,
@@ -139,9 +139,9 @@
 			);
 			dependencies = (
 			);
-			name = GamifiedToDo;
+			name = unit6;
 			productName = GamifiedToDo;
-			productReference = FD013088296B554800C4B6B5 /* GamifiedToDo.app */;
+			productReference = FD013088296B554800C4B6B5 /* unit6.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -159,7 +159,7 @@
 					};
 				};
 			};
-			buildConfigurationList = FD013083296B554800C4B6B5 /* Build configuration list for PBXProject "GamifiedToDo" */;
+			buildConfigurationList = FD013083296B554800C4B6B5 /* Build configuration list for PBXProject "unit6" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -172,7 +172,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				FD013087296B554800C4B6B5 /* GamifiedToDo */,
+				FD013087296B554800C4B6B5 /* unit6 */,
 			);
 		};
 /* End PBXProject section */
@@ -200,8 +200,8 @@
 				FD61BC65296B5E69008D7DA1 /* ToDoView.swift in Sources */,
 				FDEE2CE02980D1A70024CD7E /* DataModel.swift in Sources */,
 				FD61BC7A296E8A3F008D7DA1 /* ToDoDetailsView.swift in Sources */,
-				2B2477E7298D91790036543C /* Reward.swift in Sources */,
-				FD01308C296B554800C4B6B5 /* GamifiedToDoApp.swift in Sources */,
+				2B2477E7298D91790036543C /* Award.swift in Sources */,
+				FD01308C296B554800C4B6B5 /* unit6App.swift in Sources */,
 				2B8F80222987978C00127128 /* MerchantView.swift in Sources */,
 				FDEE2CDC297F060D0024CD7E /* FilterSheet.swift in Sources */,
 				FD61BC61296B57B1008D7DA1 /* ContentView.swift in Sources */,
@@ -334,7 +334,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"GamifiedToDo/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"unit6/Preview Content\"";
 				DEVELOPMENT_TEAM = H9MDNA28G3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -363,7 +363,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"GamifiedToDo/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"unit6/Preview Content\"";
 				DEVELOPMENT_TEAM = H9MDNA28G3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -388,7 +388,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		FD013083296B554800C4B6B5 /* Build configuration list for PBXProject "GamifiedToDo" */ = {
+		FD013083296B554800C4B6B5 /* Build configuration list for PBXProject "unit6" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FD013094296B554900C4B6B5 /* Debug */,
@@ -397,7 +397,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		FD013096296B554900C4B6B5 /* Build configuration list for PBXNativeTarget "GamifiedToDo" */ = {
+		FD013096296B554900C4B6B5 /* Build configuration list for PBXNativeTarget "unit6" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FD013097296B554900C4B6B5 /* Debug */,

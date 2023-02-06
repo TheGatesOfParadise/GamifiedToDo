@@ -2,7 +2,7 @@
 import SwiftUI
 
 @main
-struct GamifiedToDoApp: App {
+struct unit6View: App {
     var body: some Scene {
         WindowGroup {
             ContentView()

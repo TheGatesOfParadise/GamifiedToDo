@@ -1,6 +1,6 @@
 //
 //  MerchantView.swift
-//  GamifiedToDo
+//  unit6
 //
 //  Created by Scarlett Ruan on 1/30/23.
 //
