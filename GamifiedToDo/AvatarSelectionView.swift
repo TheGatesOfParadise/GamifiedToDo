@@ -6,6 +6,7 @@
 ///If user has enough coins to buy the part, the part is enabled.   For those avatar part that user can't afford, the image is disabled.
 ///
 import SwiftUI
+import AVFoundation
 
 let iconWidth = 60.0
 let body_width = 25.0
