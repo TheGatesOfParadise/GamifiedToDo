@@ -4,12 +4,14 @@
 ///This view presents 2 tab views. One for ToDo list, one for Award.
 ///
 import SwiftUI
+import AVFoundation
 
 struct Overview: View {
     
     @State var selectedTab = "TODos"
         
     var body: some View {
+        NavigationView {
         ZStack {
             TabView (selection: $selectedTab){
                 Group {
@@ -18,7 +20,7 @@ struct Overview: View {
                             Label("To Do's", systemImage: "checkmark.square.fill")
                         }
                         .tag("TODos")
-                    MerchantView()
+                    MerchantView(selectedPart: .head)
                         .tabItem {
                             Label("Award", systemImage: "gift.fill")
                         }
@@ -29,6 +31,7 @@ struct Overview: View {
             }
             .tint(Color(middleViewBackgroundColor))
         }
+    }
     }
 }
 

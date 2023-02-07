@@ -1,7 +1,15 @@
 {
   "images" : [
     {
+<<<<<<< Updated upstream
       "filename" : "mack and melange.png",
+=======
+<<<<<<<< HEAD:unit6/Assets.xcassets/cats/image/figure_4.imageset/Contents.json
+      "filename" : "conductor whiskers.png",
+========
+      "filename" : "mack and melange.png",
+>>>>>>>> f88bdbe13447966002363038853cb2fb99dcc7e7:GamifiedToDo/Assets.xcassets/cats/image/figure_6.imageset/Contents.json
+>>>>>>> Stashed changes
       "idiom" : "universal",
       "scale" : "1x"
     },

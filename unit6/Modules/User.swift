@@ -9,15 +9,15 @@ import Foundation
 ///Represents a User entity
 class User : ObservableObject, Codable  {
     @Published var name: String
-  //  @Published var avatar: Avatar
- //   @Published var award: Award
+    @Published var cat: Cat
+    @Published var award: Award
     @Published var toDoList: [Todo] = [Todo]()
     
     ///Adding Codable conformance for @Published properties
     ///https://www.hackingwithswift.com/books/ios-swiftui/adding-codable-conformance-for-published-properties
     enum CodingKeys: CodingKey {
         case name
-        case avatar
+        case cat
         case award
         case toDoList
     }
@@ -26,8 +26,8 @@ class User : ObservableObject, Codable  {
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         name = try container.decode(String.self, forKey: .name)
-      //  avatar = try container.decode(Avatar.self, forKey: .avatar)
-     //   award = try container.decode(Award.self, forKey: .award)
+        cat = try container.decode(Cat.self, forKey: .cat)
+        award = try container.decode(Award.self, forKey: .award)
         toDoList = try container.decode([Todo].self, forKey: .toDoList)
     }
     
@@ -35,17 +35,17 @@ class User : ObservableObject, Codable  {
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(name, forKey: .name)
-    //    try container.encode(avatar, forKey: .avatar)
-     //   try container.encode(award, forKey: .award)
+        try container.encode(cat, forKey: .cat)
+        try container.encode(award, forKey: .award)
         try container.encode(toDoList, forKey: .toDoList)
     }
     
     
     ///initializer
-    init(name: String, toDoList: [Todo]) {
+    init(name: String, cat: Cat, award: Award, toDoList: [Todo]) {
         self.name = name
-      //  self.avatar = avatar
-     //   self.award = award
+        self.cat = cat
+        self.award = award
         self.toDoList = toDoList
     }
     
@@ -62,9 +62,9 @@ class User : ObservableObject, Codable  {
         dateComponent.day = 10
         let tenDaysFromToday = Calendar.current.date(byAdding: dateComponent, to: currentDate)
         
-        return User(name: "Adams",
-                  //  avatar: Avatar.getSampleAvatar(),
-                 //   award: Award(coin:10),
+        return User(name: "Adam",
+                    cat: Cat.getSampleCat(),
+                    award: Award(coin:10),
                     toDoList: [Todo(title: "Unit5 MVP",
                                     difficulty: .hard,
                                     notes: "gamified todos",

@@ -1,7 +1,19 @@
 {
   "images" : [
     {
+<<<<<<< Updated upstream
       "filename" : "Gozer.jpg",
+=======
+<<<<<<< Updated upstream:GamifiedToDo/Assets.xcassets/cats/image/figure_4.imageset/Contents.json
+      "filename" : "conductor whiskers.png",
+=======
+<<<<<<<< HEAD:unit6/Assets.xcassets/cats/image/figure_1.imageset/Contents.json
+      "filename" : "apricot.png",
+========
+      "filename" : "Gozer.jpg",
+>>>>>>>> f88bdbe13447966002363038853cb2fb99dcc7e7:unit6/Assets.xcassets/cats/icons/Gozer.imageset/Contents.json
+>>>>>>> Stashed changes:unit6/Assets.xcassets/cats/icons/Gozer.imageset/Contents.json
+>>>>>>> Stashed changes
       "idiom" : "universal",
       "scale" : "1x"
     },
