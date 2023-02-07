@@ -2,13 +2,19 @@
   "images" : [
     {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
       "filename" : "Pickles.jpg",
 =======
+=======
+>>>>>>> Stashed changes
 <<<<<<<< HEAD:unit6/Assets.xcassets/cats/icons/head_2.imageset/Contents.json
       "filename" : "Chocola.jpg",
 ========
       "filename" : "Pickles.jpg",
 >>>>>>>> f88bdbe13447966002363038853cb2fb99dcc7e7:unit6/Assets.xcassets/cats/icons/Pickles.imageset/Contents.json
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
       "idiom" : "universal",
       "scale" : "1x"

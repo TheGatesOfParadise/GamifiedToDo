@@ -2,13 +2,19 @@
   "images" : [
     {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
       "filename" : "Melange.jpg",
 =======
+=======
+>>>>>>> Stashed changes
 <<<<<<<< HEAD:unit6/Assets.xcassets/cats/image/figure_5.imageset/Contents.json
       "filename" : "hermeowne.png",
 ========
       "filename" : "Melange.jpg",
 >>>>>>>> f88bdbe13447966002363038853cb2fb99dcc7e7:unit6/Assets.xcassets/cats/icons/Melange.imageset/Contents.json
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
       "idiom" : "universal",
       "scale" : "1x"
