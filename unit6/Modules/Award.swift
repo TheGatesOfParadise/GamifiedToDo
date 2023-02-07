@@ -4,8 +4,11 @@
 //
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 //  Created by Scarlett Ruan on 2/3/23.
 =======
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 <<<<<<< HEAD
@@ -14,6 +17,9 @@
 //  Created by Scarlett Ruan on 2/3/23.
 >>>>>>> f88bdbe13447966002363038853cb2fb99dcc7e7
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
@@ -23,7 +29,10 @@ import Foundation
 
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 <<<<<<< HEAD
@@ -73,6 +82,9 @@ enum CatType: String, CaseIterable, Codable {
 =======
 >>>>>>> f88bdbe13447966002363038853cb2fb99dcc7e7
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
