@@ -7,8 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+<<<<<<< Updated upstream:unit6.xcodeproj/project.pbxproj
 		2B2477E7298D91790036543C /* Award.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2477E6298D91790036543C /* Award.swift */; };
 		2B8F80222987978C00127128 /* MerchantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8F80212987978C00127128 /* MerchantView.swift */; };
+=======
+<<<<<<< HEAD
+		2B4A615029917946003CB4AC /* Award.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4A614F29917946003CB4AC /* Award.swift */; };
+		2B4A615229917EB4003CB4AC /* Rules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4A615129917EB3003CB4AC /* Rules.swift */; };
+		2B4A615629919540003CB4AC /* PlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4A615529919540003CB4AC /* PlayView.swift */; };
+		2B8F80222987978C00127128 /* MerchantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8F80212987978C00127128 /* MerchantView.swift */; };
+		2BDF7DC32991A80E00D4EEFE /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BDF7DC12991A80600D4EEFE /* AVFoundation.framework */; };
+=======
+		2B2477E7298D91790036543C /* Award.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2477E6298D91790036543C /* Award.swift */; };
+		2B8F80222987978C00127128 /* MerchantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8F80212987978C00127128 /* MerchantView.swift */; };
+>>>>>>> f88bdbe13447966002363038853cb2fb99dcc7e7
+>>>>>>> Stashed changes:GamifiedToDo.xcodeproj/project.pbxproj
 		FD01308C296B554800C4B6B5 /* unit6App.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD01308B296B554800C4B6B5 /* unit6App.swift */; };
 		FD013090296B554900C4B6B5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD01308F296B554900C4B6B5 /* Assets.xcassets */; };
 		FD013093296B554900C4B6B5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD013092296B554900C4B6B5 /* Preview Assets.xcassets */; };
@@ -25,8 +38,21 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+<<<<<<< Updated upstream:unit6.xcodeproj/project.pbxproj
 		2B2477E6298D91790036543C /* Award.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Award.swift; sourceTree = "<group>"; };
 		2B8F80212987978C00127128 /* MerchantView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantView.swift; sourceTree = "<group>"; };
+=======
+<<<<<<< HEAD
+		2B4A614F29917946003CB4AC /* Award.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Award.swift; sourceTree = "<group>"; };
+		2B4A615129917EB3003CB4AC /* Rules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rules.swift; sourceTree = "<group>"; };
+		2B4A615529919540003CB4AC /* PlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayView.swift; sourceTree = "<group>"; };
+		2B8F80212987978C00127128 /* MerchantView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantView.swift; sourceTree = "<group>"; };
+		2BDF7DC12991A80600D4EEFE /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+=======
+		2B2477E6298D91790036543C /* Award.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Award.swift; sourceTree = "<group>"; };
+		2B8F80212987978C00127128 /* MerchantView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantView.swift; sourceTree = "<group>"; };
+>>>>>>> f88bdbe13447966002363038853cb2fb99dcc7e7
+>>>>>>> Stashed changes:GamifiedToDo.xcodeproj/project.pbxproj
 		FD013088296B554800C4B6B5 /* unit6.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = unit6.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD01308B296B554800C4B6B5 /* unit6App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = unit6App.swift; sourceTree = "<group>"; };
 		FD01308F296B554900C4B6B5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -48,17 +74,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2BDF7DC32991A80E00D4EEFE /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2BDF7DC02991A80500D4EEFE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2BDF7DC12991A80600D4EEFE /* AVFoundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		FD01307F296B554800C4B6B5 = {
 			isa = PBXGroup;
 			children = (
 				FD01308A296B554800C4B6B5 /* unit6 */,
 				FD013089296B554800C4B6B5 /* Products */,
+				2BDF7DC02991A80500D4EEFE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -78,6 +114,7 @@
 				FDEE2CE3298303B40024CD7E /* Overview */,
 				FDEE2CE4298303DF0024CD7E /* ToDoDetails */,
 				2B8F80212987978C00127128 /* MerchantView.swift */,
+				2B4A615529919540003CB4AC /* PlayView.swift */,
 				FD61BC68296C8D54008D7DA1 /* Modules */,
 				FD01308F296B554900C4B6B5 /* Assets.xcassets */,
 				FD013091296B554900C4B6B5 /* Preview Content */,
@@ -99,7 +136,16 @@
 				FD61BC69296C8D98008D7DA1 /* User.swift */,
 				FD61BC6D296C8DB2008D7DA1 /* Task.swift */,
 				FDEE2CDF2980D1A70024CD7E /* DataModel.swift */,
+<<<<<<< Updated upstream:unit6.xcodeproj/project.pbxproj
 				2B2477E6298D91790036543C /* Award.swift */,
+=======
+<<<<<<< HEAD
+				2B4A614F29917946003CB4AC /* Award.swift */,
+				2B4A615129917EB3003CB4AC /* Rules.swift */,
+=======
+				2B2477E6298D91790036543C /* Award.swift */,
+>>>>>>> f88bdbe13447966002363038853cb2fb99dcc7e7
+>>>>>>> Stashed changes:GamifiedToDo.xcodeproj/project.pbxproj
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -197,10 +243,20 @@
 				FD61BC80296FAEE5008D7DA1 /* DateSelectionView.swift in Sources */,
 				FD61BC63296B5808008D7DA1 /* Overview.swift in Sources */,
 				FD61BC74296E10DC008D7DA1 /* CheckToDoView.swift in Sources */,
+				2B4A615629919540003CB4AC /* PlayView.swift in Sources */,
 				FD61BC65296B5E69008D7DA1 /* ToDoView.swift in Sources */,
 				FDEE2CE02980D1A70024CD7E /* DataModel.swift in Sources */,
+				2B4A615229917EB4003CB4AC /* Rules.swift in Sources */,
+				2B4A615029917946003CB4AC /* Award.swift in Sources */,
 				FD61BC7A296E8A3F008D7DA1 /* ToDoDetailsView.swift in Sources */,
+<<<<<<< Updated upstream:unit6.xcodeproj/project.pbxproj
 				2B2477E7298D91790036543C /* Award.swift in Sources */,
+=======
+<<<<<<< HEAD
+=======
+				2B2477E7298D91790036543C /* Award.swift in Sources */,
+>>>>>>> f88bdbe13447966002363038853cb2fb99dcc7e7
+>>>>>>> Stashed changes:GamifiedToDo.xcodeproj/project.pbxproj
 				FD01308C296B554800C4B6B5 /* unit6App.swift in Sources */,
 				2B8F80222987978C00127128 /* MerchantView.swift in Sources */,
 				FDEE2CDC297F060D0024CD7E /* FilterSheet.swift in Sources */,
